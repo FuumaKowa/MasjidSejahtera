@@ -6,9 +6,6 @@ document.querySelectorAll('[data-goal]').forEach(b=>b.addEventListener('click',(
 let stage=0;
 function selectStage(index){stage=(index+model.stages.length)%model.stages.length;const s=model.stages[stage];document.querySelectorAll('[data-stage]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.stage)===stage)));document.querySelector('#stage-number').textContent='Peringkat '+(stage+1)+':';document.querySelector('#stage-title').textContent=s.title;document.querySelector('#stage-description').textContent=s.description;}
 document.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>selectStage(Number(b.dataset.stage))));document.querySelector('[data-stage-prev]').addEventListener('click',()=>selectStage(stage-1));document.querySelector('[data-stage-next]').addEventListener('click',()=>selectStage(stage+1));
-const walkLinks=[...document.querySelectorAll('.walk-nav a')];
-const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting)walkLinks.forEach(a=>{if(a.hash==='#'+entry.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});},{rootMargin:'-20% 0px -55% 0px'});
-walkLinks.forEach(a=>{const el=document.querySelector(a.hash);if(el)observer.observe(el);});
 let ticking=false;const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 function updateScroll(){const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;header.classList.toggle('scrolled',y>80);document.querySelector('.header-progress').style.transform=`scaleX(${max>0?Math.min(1,y/max):0})`;if(!reduced.matches&&y<innerHeight*1.4)document.querySelector('.arrival-background img').style.transform=`scale(1.03) translateY(${Math.min(y*.12,120)}px)`;ticking=false;}
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(updateScroll);}},{passive:true});updateScroll();
