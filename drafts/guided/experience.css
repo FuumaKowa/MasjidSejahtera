@@ -42,7 +42,7 @@
 
 
 /* PDF sequence: concentric three-city framework */
-.framework-section{background:#eaf0f4;color:#0d2742;padding-top:88px;padding-bottom:96px}
+.framework-section{background:#eaf0f4;color:#0d2742;padding:88px 6% 96px}
 .framework-section>.section-top{margin-bottom:26px}
 .framework-section>h2{text-align:center;color:#11365a;font-size:clamp(36px,5vw,66px);line-height:1.08;margin:0 auto 42px;max-width:900px}
 .framework-section>h2 em{font-style:normal;color:#087e5a}
