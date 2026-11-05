@@ -40,3 +40,55 @@
 
 .sahabat-experience{color:var(--ink)}.sahabat-experience .chapter-mark{color:#74613a}.sahabat-heading>p{color:#405349}
 
+
+/* PDF sequence: concentric three-city framework */
+.framework-section{background:#eaf0f4;color:#0d2742;padding-top:88px;padding-bottom:96px}
+.framework-section>.section-top{margin-bottom:26px}
+.framework-section>h2{text-align:center;color:#11365a;font-size:clamp(36px,5vw,66px);line-height:1.08;margin:0 auto 42px;max-width:900px}
+.framework-section>h2 em{font-style:normal;color:#087e5a}
+.three-cities-layout{display:grid;grid-template-columns:minmax(480px,1.2fr) minmax(300px,.8fr);gap:48px;align-items:center;max-width:1320px;margin:auto}
+.three-cities-graphic{width:min(100%,650px);aspect-ratio:1;margin:auto;position:relative;display:grid;place-items:center}
+.city-ring{position:absolute;border:7px solid #c6a04e;border-radius:50%;display:flex;justify-content:center;transition:box-shadow .25s,filter .25s,transform .25s}
+.ring-maqdis{width:100%;height:100%;background:#f8f3dd;color:#102b44}
+.ring-madinah{width:64%;height:64%;top:18%;background:#07845d;color:#fff}
+.ring-mekah{width:38%;height:38%;top:31%;background:#173b5b;color:#fff}
+.city-label{position:absolute;display:flex;flex-direction:column;text-align:center;line-height:1.15;pointer-events:none}
+.city-label strong{font-size:clamp(15px,1.8vw,25px);font-weight:750;letter-spacing:.01em}
+.city-label span{font-size:clamp(12px,1.3vw,18px)}
+.label-maqdis{top:7%;left:0;right:0;color:#102b44}
+.label-madinah{top:10%;left:0;right:0;color:#fff}
+.label-mekah{inset:50% 0 auto;transform:translateY(-50%);color:#fff}
+.city-ring[data-active="true"]{box-shadow:0 0 0 6px #d8bd72,0 18px 40px #173b5b20;z-index:2}
+.city-focus-cards{display:grid;gap:18px;position:relative}
+.city-focus-cards:before{content:"";position:absolute;left:-48px;top:12%;bottom:12%;width:2px;background:#c6a04e}
+.city-focus{position:relative;z-index:1;width:100%;min-height:120px;border:2px solid #c6a04e;border-radius:12px;background:#fff;color:#102b44;text-align:left;padding:20px 24px;display:flex;flex-direction:column;justify-content:center;gap:13px;cursor:pointer;box-shadow:0 8px 22px #102b440d;transition:transform .2s,background .2s,color .2s,box-shadow .2s}
+.city-focus:before{content:"";position:absolute;left:-50px;top:50%;width:48px;height:2px;background:#c6a04e}
+.city-focus strong{font-size:clamp(16px,1.35vw,20px);line-height:1.2}
+.city-focus span{font-size:clamp(15px,1.2vw,18px);line-height:1.45}
+.city-focus[aria-pressed="true"]{background:#173b5b;color:#fff;box-shadow:0 14px 30px #173b5b2b;transform:translateX(4px)}
+.city-focus:focus-visible{outline:4px solid #d7b960;outline-offset:4px}
+/* Source page 8 transition and source page 9 portfolio diagram */
+.sahabat-experience{background:linear-gradient(90deg,#092b37e8,#0b2c37a8),url("../../assets/experience/courtyard-arrival.jpg") center 46%/cover no-repeat}
+.sahabat-introduction{max-width:1280px;margin:0 auto 76px;padding:54px clamp(24px,5vw,72px);border:1px solid #d0bd7b;border-radius:20px;background:#0e2c38a6;backdrop-filter:blur(3px)}
+.sahabat-introduction .chapter-mark{color:#e0c774}
+.sahabat-introduction h2{max-width:950px;font-size:clamp(36px,5.5vw,72px);line-height:1.04;margin:20px 0;color:#fff}
+.sahabat-introduction p{max-width:850px;font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:#f2efdf;margin:22px 0 0}
+.sahabat-heading{grid-template-columns:.75fr 1.6fr;margin-top:0}
+/* PDF page 10 mosque functions infographic */
+.functions-section{display:grid;grid-template-columns:1fr;gap:36px;background:#f6f8f7;padding:94px 7% 100px;color:#0e2943}
+.functions-title{text-align:center;max-width:900px;margin:0 auto}
+.functions-title .overline{justify-content:center;color:#a27d28}
+.functions-title h2{font-size:clamp(36px,5vw,62px);line-height:1.08;color:#12395e}
+.functions-title p{font-size:clamp(17px,1.6vw,21px);line-height:1.5;color:#334f67;margin:22px auto 0}
+.function-arcade{max-width:1280px;width:100%;margin:0 auto;filter:drop-shadow(0 16px 22px #112f4510)}
+.arcade-roof{min-height:142px;border:2px solid #c6a04e;border-radius:190px 190px 10px 10px;background:#183e5e;color:#fff0be;box-shadow:none}
+.arcade-roof svg{color:#f1d987}
+.arcade-roof>i{background:#c6a04e}
+.function-columns{gap:0;background:#f7f6ee;border-inline:1px solid #a5bdaf;border-bottom:1px solid #a5bdaf}
+.function-column{min-height:180px;padding:38px 12px 20px;border-color:#a5bdaf;color:#12395e}
+.function-column:before{border-color:#a5bdaf;border-top:1px solid #a5bdaf;border-radius:80px 80px 0 0;background:#eef1e8}
+.function-column>span{color:#0a805b}
+.function-column h3{font-size:clamp(16px,1.6vw,22px);color:#12395e}
+.function-column small{font-size:13px;color:#476074}
+@media(max-width:1100px){.three-cities-layout{grid-template-columns:1fr;gap:38px}.three-cities-graphic{width:min(100%,560px)}.city-focus-cards{max-width:620px;width:100%;margin:auto}.city-focus-cards:before{display:none}.city-focus:before{display:none}.city-focus{min-height:100px}.function-columns{grid-template-columns:repeat(2,minmax(0,1fr))}.function-column:last-child{grid-column:1/-1}.arcade-roof{min-height:112px;border-radius:130px 130px 8px 8px}}
+@media(max-width:560px){.framework-section{padding:68px 20px 74px}.framework-section>h2{font-size:34px;margin-bottom:28px}.three-cities-layout{gap:28px}.three-cities-graphic{width:100%;max-width:410px}.city-ring{border-width:5px}.city-label strong{font-size:12px}.city-label span{font-size:10px}.city-focus{padding:17px 18px}.city-focus strong{font-size:16px}.city-focus span{font-size:15px}.sahabat-introduction{padding:32px 22px;margin-bottom:52px}.sahabat-heading{display:block}.sahabat-heading h2{margin-top:20px}.functions-section{padding:68px 20px 75px}.function-columns{grid-template-columns:1fr}.function-column:last-child{grid-column:auto}.function-column{min-height:145px}.arcade-roof{min-height:96px;gap:12px}.arcade-roof strong{font-size:18px}}

@@ -9,3 +9,8 @@ document.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',
 let ticking=false;const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 function updateScroll(){const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;header.classList.toggle('scrolled',y>80);document.querySelector('.header-progress').style.transform=`scaleX(${max>0?Math.min(1,y/max):0})`;if(!reduced.matches&&y<innerHeight*1.4)document.querySelector('.arrival-background img').style.transform=`scale(1.03) translateY(${Math.min(y*.12,120)}px)`;ticking=false;}
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(updateScroll);}},{passive:true});updateScroll();
+
+const cityFocus=document.querySelectorAll('[data-focus-city]');
+const cityRings=document.querySelectorAll('[data-city]');
+function selectCity(city){cityFocus.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.focusCity===city)));cityRings.forEach(ring=>{ring.dataset.active=String(ring.dataset.city===city);ring.setAttribute('aria-pressed',String(ring.dataset.city===city));});}
+cityFocus.forEach(button=>button.addEventListener('click',()=>selectCity(button.dataset.focusCity)));
