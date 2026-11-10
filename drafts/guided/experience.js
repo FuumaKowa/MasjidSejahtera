@@ -1,5 +1,11 @@
 const model=JSON.parse(document.querySelector('#experience-data').textContent);
 const header=document.querySelector('.site-header');
+const menuToggle=document.querySelector('#menu-toggle');
+const mobileMenu=document.querySelector('#mobile-menu');
+function setMenuOpen(open){header.classList.toggle('menu-open',open);menuToggle.setAttribute('aria-expanded',String(open));}
+menuToggle.addEventListener('click',()=>setMenuOpen(menuToggle.getAttribute('aria-expanded')!=='true'));
+mobileMenu.addEventListener('click',event=>{if(event.target.closest('a'))setMenuOpen(false);});
+addEventListener('keydown',event=>{if(event.key==='Escape')setMenuOpen(false);});
 let goal=0;
 function selectGoal(index){goal=(index+model.objectives.length)%model.objectives.length;const g=model.objectives[goal];document.querySelectorAll('[data-goal]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.goal)===goal)));document.querySelector('#goal-number').textContent='0'+(goal+1);document.querySelector('#goal-title').textContent=g.title;document.querySelector('#goal-text').textContent=g.description;}
 document.querySelectorAll('[data-goal]').forEach(b=>b.addEventListener('click',()=>selectGoal(Number(b.dataset.goal))));document.querySelector('[data-goal-prev]').addEventListener('click',()=>selectGoal(goal-1));document.querySelector('[data-goal-next]').addEventListener('click',()=>selectGoal(goal+1));
