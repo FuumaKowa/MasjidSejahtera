@@ -147,6 +147,6 @@ span.overline,.chapter-mark{display:none!important}
 }
 
 /* Updated Nabawi logo: transparent, scaled for header and footer */
-.site-header .brand img{width:116px;height:66px;object-fit:contain;background:transparent}
-footer .brand img{width:132px;height:76px;object-fit:contain;background:transparent}
-@media(max-width:560px){.site-header .brand img{width:104px;height:60px}footer .brand img{width:126px;height:72px}}
+.site-header .brand img{width:164px;height:88px;object-fit:contain;background:transparent}
+footer .brand img{width:168px;height:132px;object-fit:contain;background:transparent}
+@media(max-width:560px){.site-header .brand img{width:150px;height:74px}footer .brand img{width:150px;height:120px}}
