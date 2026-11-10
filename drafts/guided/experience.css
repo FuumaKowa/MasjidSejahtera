@@ -305,3 +305,24 @@ footer .brand img{width:168px;height:132px;object-fit:contain;background:transpa
 .invitation h2{color:var(--pdf-navy)}
 @media(max-width:1000px){.capability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.capability:nth-child(2):after{display:none}}
 @media(max-width:560px){.capability-grid{grid-template-columns:1fr}.capability:not(:last-child):after{content:"↓";right:calc(50% - 8px);top:auto;bottom:-20px;transform:none}.capability:nth-child(2):after{display:block}}
+
+/* Keyline call-to-action, recolored for the Masjid Sejahtera palette */
+.fancy{position:relative;display:inline-flex;align-items:center;justify-content:center;float:none;margin:0;padding:12px 16px;border:1px solid var(--pdf-gold);border-radius:2px;background:transparent;color:var(--pdf-navy);font-size:13px;font-weight:700;letter-spacing:.05em;text-align:center;text-decoration:none;text-transform:uppercase;overflow:hidden;transition:background .28s,color .28s,border-color .28s;box-sizing:border-box}
+.fancy:before{content:"";position:absolute;left:12px;top:50%;width:22px;height:2px;background:var(--pdf-gold);transform:translateY(-50%);transform-origin:center;transition:width .28s,background .28s}
+.fancy .text{display:block;padding-left:28px;color:var(--pdf-navy);font-size:1em;line-height:1.35;text-align:left;text-transform:uppercase;text-decoration:none;transition:color .28s,padding .28s}
+.fancy .top-key,.fancy .bottom-key-1,.fancy .bottom-key-2{position:absolute;height:2px;background:var(--paper);transition:width .3s,left .3s,right .3s}
+.fancy .top-key{top:-2px;left:10px;width:22px}.fancy .bottom-key-1{right:25px;bottom:-2px;width:22px}.fancy .bottom-key-2{right:8px;bottom:-2px;width:9px}
+.fancy:hover,.fancy:focus-visible{background:var(--pdf-navy);border-color:var(--pdf-navy);color:#fff8e8}
+.fancy:hover:before,.fancy:focus-visible:before{width:14px;background:var(--pdf-gold)}
+.fancy:hover .text,.fancy:focus-visible .text{padding-left:22px;color:#fff8e8}
+.fancy:hover .top-key,.fancy:focus-visible .top-key{left:-2px;width:0}.fancy:hover .bottom-key-1,.fancy:hover .bottom-key-2,.fancy:focus-visible .bottom-key-1,.fancy:focus-visible .bottom-key-2{right:0;width:0}
+.site-header .nav-link.fancy{padding:9px 12px;border-radius:2px;border-color:var(--pdf-gold);background:transparent;color:#fff8e8;box-shadow:none;font-size:12px}
+.site-header .nav-link.fancy .text{color:inherit}
+.site-header .nav-link.fancy:hover,.site-header .nav-link.fancy:focus-visible{background:var(--pdf-navy);border-color:var(--pdf-gold);color:#fff8e8;transform:translateY(-1px)}
+.site-header.scrolled .nav-link.fancy{background:transparent;color:var(--pdf-navy)}
+.site-header.scrolled .nav-link.fancy .text{color:inherit}
+.site-header.scrolled .nav-link.fancy:hover,.site-header.scrolled .nav-link.fancy:focus-visible{background:var(--pdf-navy);border-color:var(--pdf-navy);color:#fff8e8}
+.invitation .button.fancy{background:transparent;color:var(--pdf-navy)}
+.invitation .button.fancy .text{color:inherit}
+.invitation .button.fancy:hover,.invitation .button.fancy:focus-visible{background:var(--pdf-navy);color:#fff8e8}
+@media(max-width:800px){.site-header #mobile-menu a.fancy{display:inline-flex;width:max-content;max-width:100%;margin:8px 0;border-bottom:1px solid var(--pdf-gold)}}
