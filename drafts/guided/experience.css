@@ -145,3 +145,8 @@ span.overline,.chapter-mark{display:none!important}
 .ams-flow small{font-size:11px;line-height:1.3}
 .ams-image{width:60px;height:60px;margin-left:6px;border-width:2px}
 }
+
+/* Updated Nabawi logo: transparent, scaled for header and footer */
+.site-header .brand img{width:116px;height:66px;object-fit:contain;background:transparent}
+footer .brand img{width:132px;height:76px;object-fit:contain;background:transparent}
+@media(max-width:560px){.site-header .brand img{width:104px;height:60px}footer .brand img{width:126px;height:72px}}
