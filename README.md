@@ -1,7 +1,7 @@
 # Masjid Sejahtera
 
-The public BM landing page for the Masjid Sejahtera digital presentation.
+The public homepage is BM-first and follows the 13-page sequence in `Model_Masjid_Sejahtera_Edit.pdf`.
 
-This repository contains the homepage and the assets it needs. It is a static site. For Cloudflare Pages, use no build command and set the output directory to `.`.
+Page 1 uses the approved mosque-photo cover with wording from the PDF. Pages 2–13 display the corresponding source artwork, including the original eight-portfolio Sahabat Masjid diagram. Page images open in a larger view. The E-Masjid link opens `https://bmc.masjidsejahtera.com/`.
 
-Core model text is based on `Model_Masjid_Sejahtera_Edit.pdf`. The 10 Sahabat categories are from the separate 10-category infographic supplied with the project.
+This is a static site for Cloudflare Pages. Use no build command and set the output directory to `.`.
