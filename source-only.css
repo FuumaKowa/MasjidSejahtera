@@ -290,7 +290,8 @@ button:focus-visible,a:focus-visible{outline:3px solid #e7c65e;outline-offset:4p
 @media(prefers-reduced-motion:reduce){.city-glyph{transition:none}}
 
 /* Reference pages: section-by-section presentation with source-inspired diagrams. */
-html{scroll-snap-type:y proximity;scroll-padding-top:var(--header)}
+html{scroll-snap-type:y proximity;scroll-padding-top:0}
+.page{scroll-margin-top:0}
 .cover,.page,.closing-cta{scroll-snap-align:start;scroll-snap-stop:always}
 .site-footer{scroll-snap-align:end}
 .page{min-height:100svh}
