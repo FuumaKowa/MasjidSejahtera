@@ -55,7 +55,7 @@ addEventListener('scroll', updateProgress, { passive: true });
 addEventListener('resize', updateProgress);
 updateProgress();
 
-const referenceSections = ['kota-suci', 'impak', 'objektif', 'portfolio', 'fungsi', 'aliran']
+const referenceSections = ['kota-suci', 'impak', 'objektif', 'portfolio', 'fungsi', 'sahabat', 'aliran']
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 if ('IntersectionObserver' in window) {
