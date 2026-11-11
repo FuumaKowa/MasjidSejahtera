@@ -69,6 +69,27 @@ if ('IntersectionObserver' in window) {
   referenceSections.forEach((section) => section.classList.add('is-visible'));
 }
 
+const impactVisual = document.querySelector('#impak .impact-visual');
+if (impactVisual) {
+  const highlightLayer = (key, active) => {
+    impactVisual.querySelectorAll(`[data-layer="${key}"]`).forEach((item) => item.classList.toggle('is-hover', active));
+  };
+  impactVisual.querySelectorAll('[data-layer]').forEach((item) => {
+    item.addEventListener('pointerenter', () => highlightLayer(item.dataset.layer, true));
+    item.addEventListener('pointerleave', () => highlightLayer(item.dataset.layer, false));
+    item.addEventListener('focus', () => highlightLayer(item.dataset.layer, true));
+    item.addEventListener('blur', () => highlightLayer(item.dataset.layer, false));
+    if (item.getAttribute('role') === 'button') {
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          item.click();
+        }
+      });
+    }
+  });
+}
+
 let snapLocked = false;
 const snapToSection = (event) => {
   if (snapLocked) { event.preventDefault(); return; }
@@ -281,3 +302,4 @@ if (objectiveNetwork && objectiveSvg) {
     card.addEventListener('blur', () => setVertex(index, false));
   });
 }
+
