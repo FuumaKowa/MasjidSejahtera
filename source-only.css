@@ -478,3 +478,15 @@ html{scroll-snap-type:y proximity}
   #objektif .objective-card span{font-size:16px;}
 }
 @media(prefers-reduced-motion:reduce){#objektif .objective-links{stroke-dashoffset:0;transition:none}#objektif .objective-vertex{transition:none}}
+
+/* Reveal Page 4's paths, vertices and cards in sequence when it enters view. */
+#objektif .objective-card{opacity:0;translate:0 18px;}
+#objektif.is-visible .objective-card{animation:objective-card-arrive .62s cubic-bezier(.2,.7,.2,1) var(--card-delay) both;}
+#objektif .obj-top{--card-delay:120ms}#objektif .obj-right{--card-delay:280ms}#objektif .obj-low-right{--card-delay:440ms}#objektif .obj-low-left{--card-delay:600ms}#objektif .obj-left{--card-delay:760ms}
+#objektif .objective-vertex{opacity:0;}
+#objektif.is-visible .objective-vertex{animation:objective-node-arrive .44s cubic-bezier(.2,.7,.2,1) var(--node-delay) both,objective-node-glow 2.6s ease-in-out calc(var(--node-delay) + .48s) infinite;}
+#objektif .objective-vertex:nth-of-type(3){--node-delay:240ms}#objektif .objective-vertex:nth-of-type(4){--node-delay:400ms}#objektif .objective-vertex:nth-of-type(5){--node-delay:560ms}#objektif .objective-vertex:nth-of-type(6){--node-delay:720ms}#objektif .objective-vertex:nth-of-type(7){--node-delay:880ms}
+@keyframes objective-card-arrive{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+@keyframes objective-node-arrive{from{opacity:0;scale:.35}to{opacity:1;scale:1}}
+@keyframes objective-node-glow{50%{filter:drop-shadow(0 0 4px #c5a34d)}}
+@media(prefers-reduced-motion:reduce){#objektif .objective-card,#objektif .objective-vertex{opacity:1;translate:none;scale:1;animation:none!important}}
