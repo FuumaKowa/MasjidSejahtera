@@ -446,47 +446,46 @@ html{scroll-snap-type:y proximity}
 }
 @media(prefers-reduced-motion:reduce){#portfolio .portfolio-sector{opacity:1;transform:none;transition:none}#portfolio .portfolio-slice{stroke-dashoffset:0;transition:none}#portfolio .portfolio-halo{animation:none}}
 
-/* Page 4: five objectives arranged on the source's pentagon and star paths. */
+/* Page 4: exact five-point geometry with individually drawn edges and card leaders. */
 #objektif{background:radial-gradient(ellipse at 50% 44%,#f9f7ee 0,#edf3ef 60%,#e5eceb 100%)}
 #objektif .page-inner{width:min(100%,1320px)}
 #objektif h2{text-align:left;margin-left:clamp(0px,2vw,28px);font-size:clamp(30px,4vw,50px)}
-#objektif .objective-network{position:relative;width:min(100%,1160px);height:min(58vh,600px);min-height:420px;margin:38px auto 0;}
+#objektif .objective-network{--diagram-height:min(56svh,560px);position:relative;width:min(100%,1120px,calc(var(--diagram-height)*2));height:auto;aspect-ratio:2/1;min-height:0;margin:52px auto 0;overflow:visible;}
 #objektif .objective-constellation{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-#objektif .objective-pentagon{fill:#087b6010;stroke:#c5a34d;stroke-width:.65;stroke-linejoin:round;}
-#objektif .objective-links{fill:none;stroke:#078360;stroke-width:.52;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:280;stroke-dashoffset:280;transition:stroke-dashoffset 1.8s cubic-bezier(.2,.7,.2,1);}
-#objektif.is-visible .objective-links{stroke-dashoffset:0;}
-#objektif .objective-vertex{transform-box:fill-box;transform-origin:center;transition:transform .25s ease,filter .25s ease;}
-#objektif .objective-vertex.hot{transform:scale(1.45);filter:drop-shadow(0 0 2px #c5a34d);}
-#objektif .objective-card{z-index:2;width:23%;min-height:118px;padding:clamp(18px,1.5vw,22px);gap:7px;border:1px solid #078360;border-top:5px solid var(--gold);border-radius:3px 22px 3px 3px;background:#fffdf7;color:var(--navy);box-shadow:0 12px 26px #102f4d15;text-align:center;transform:translate(-50%,-50%);}
-#objektif .objective-card strong{font-size:clamp(15px,1.5vw,20px);line-height:1.18;}
-#objektif .objective-card span{font-size:clamp(13px,1.28vw,17px);font-weight:550;line-height:1.36;}
+#objektif .objective-pentagon{fill:#087b6009;stroke:#c5a34d;stroke-width:3.2;stroke-linejoin:round;}
+#objektif .objective-pentagon{opacity:0;transition:opacity .45s ease 1.2s;}
+#objektif.is-visible .objective-pentagon{opacity:1;}
+#objektif .objective-line{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--line-length);stroke-dashoffset:var(--line-length);transition:stroke-dashoffset .68s cubic-bezier(.2,.7,.2,1) var(--line-delay);}
+#objektif .objective-outline{stroke:#c5a34d;stroke-width:3.2;}
+#objektif .objective-starline{stroke:#078360;stroke-width:2.8;}
+#objektif .objective-leader{stroke:#9b792e;stroke-width:2.2;}
+#objektif.is-visible .objective-line{stroke-dashoffset:0;}
+#objektif .objective-vertex{opacity:0;transform-box:fill-box;transform-origin:center;transition:transform .25s ease,filter .25s ease;}
+#objektif.is-visible .objective-vertex{animation:objective-node-arrive .4s cubic-bezier(.2,.7,.2,1) var(--node-delay) both,objective-node-glow 2.6s ease-in-out calc(var(--node-delay) + .5s) infinite;}
+#objektif .objective-vertex.hot{transform:scale(1.45);filter:drop-shadow(0 0 3px #c5a34d);}
+#objektif .objective-card{z-index:2;width:27%;min-height:112px;padding:clamp(15px,1.35vw,19px);gap:7px;border:1px solid #078360;border-top:5px solid var(--gold);border-radius:3px 22px 3px 3px;background:#fffdf7;color:var(--navy);box-shadow:0 12px 26px #102f4d15;text-align:center;transform:translate(-50%,-50%);opacity:0;translate:0 16px;}
+#objektif.is-visible .objective-card{animation:objective-card-arrive .6s cubic-bezier(.2,.7,.2,1) var(--card-delay) both;}
+#objektif .objective-card strong{font-size:clamp(14px,1.35vw,19px);line-height:1.18;}
+#objektif .objective-card span{font-size:clamp(12px,1.15vw,16px);font-weight:550;line-height:1.35;}
 #objektif .objective-card:hover,#objektif .objective-card[aria-pressed=true]{transform:translate(-50%,-50%) translateY(-5px) scale(1.035);background:#f7f2df;border-color:var(--gold);box-shadow:0 18px 34px #102f4d24;}
-#objektif .obj-top{left:50%;top:18%;width:31%;padding:14px 16px;}
-#objektif .obj-right{left:87%;top:38%;}
-#objektif .obj-low-right{left:70%;top:87%;}
-#objektif .obj-low-left{left:30%;top:87%;}
-#objektif .obj-left{left:13%;top:38%;}
+#objektif .obj-top{left:50%;top:4%;width:31%;--card-delay:1.85s;}
+#objektif .obj-right{left:84%;top:40.7%;--card-delay:2.05s;}
+#objektif .obj-low-right{left:70%;top:89%;width:30%;--card-delay:2.25s;}
+#objektif .obj-low-left{left:30%;top:89%;width:30%;--card-delay:2.45s;}
+#objektif .obj-left{left:16%;top:40.7%;--card-delay:2.65s;}
+@keyframes objective-card-arrive{from{opacity:0;translate:0 16px}to{opacity:1;translate:0 0}}
+@keyframes objective-node-arrive{from{opacity:0;scale:.25}to{opacity:1;scale:1}}
+@keyframes objective-node-glow{50%{filter:drop-shadow(0 0 5px #c5a34d)}}
 @media(max-width:800px){
   #objektif.page{padding-top:calc(var(--header) + 34px);padding-bottom:48px;}
   #objektif h2{margin-left:0;text-align:left;font-size:clamp(29px,7.5vw,39px);}
-  #objektif .objective-network{height:auto;min-height:0;display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px;}
-  #objektif .objective-constellation{position:static;order:-1;width:min(76vw,320px);height:auto;aspect-ratio:1;margin:0 auto 10px;}
-  #objektif .objective-links{stroke-dashoffset:0;}
+  #objektif .objective-network{display:grid;grid-template-columns:1fr;gap:12px;width:min(100%,520px);height:auto;aspect-ratio:auto;margin-top:22px;}
+  #objektif .objective-constellation{position:relative;grid-column:1;order:-1;width:100%;height:auto;aspect-ratio:2/1;margin:0 auto 10px;}
+  #objektif .objective-leader{display:none;}
   #objektif .objective-card{position:relative;inset:auto!important;width:100%;min-height:100px;padding:17px 18px;transform:none;text-align:left;border-radius:3px 22px 3px 3px;}
+  #objektif .obj-top{--card-delay:1.85s}#objektif .obj-right{--card-delay:2.05s}#objektif .obj-low-right{--card-delay:2.25s}#objektif .obj-low-left{--card-delay:2.45s}#objektif .obj-left{--card-delay:2.65s}
   #objektif .objective-card:hover,#objektif .objective-card[aria-pressed=true]{transform:translateX(4px);}
   #objektif .objective-card strong{font-size:18px;}
   #objektif .objective-card span{font-size:16px;}
 }
-@media(prefers-reduced-motion:reduce){#objektif .objective-links{stroke-dashoffset:0;transition:none}#objektif .objective-vertex{transition:none}}
-
-/* Reveal Page 4's paths, vertices and cards in sequence when it enters view. */
-#objektif .objective-card{opacity:0;translate:0 18px;}
-#objektif.is-visible .objective-card{animation:objective-card-arrive .62s cubic-bezier(.2,.7,.2,1) var(--card-delay) both;}
-#objektif .obj-top{--card-delay:120ms}#objektif .obj-right{--card-delay:280ms}#objektif .obj-low-right{--card-delay:440ms}#objektif .obj-low-left{--card-delay:600ms}#objektif .obj-left{--card-delay:760ms}
-#objektif .objective-vertex{opacity:0;}
-#objektif.is-visible .objective-vertex{animation:objective-node-arrive .44s cubic-bezier(.2,.7,.2,1) var(--node-delay) both,objective-node-glow 2.6s ease-in-out calc(var(--node-delay) + .48s) infinite;}
-#objektif .objective-vertex:nth-of-type(3){--node-delay:240ms}#objektif .objective-vertex:nth-of-type(4){--node-delay:400ms}#objektif .objective-vertex:nth-of-type(5){--node-delay:560ms}#objektif .objective-vertex:nth-of-type(6){--node-delay:720ms}#objektif .objective-vertex:nth-of-type(7){--node-delay:880ms}
-@keyframes objective-card-arrive{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
-@keyframes objective-node-arrive{from{opacity:0;scale:.35}to{opacity:1;scale:1}}
-@keyframes objective-node-glow{50%{filter:drop-shadow(0 0 4px #c5a34d)}}
-@media(prefers-reduced-motion:reduce){#objektif .objective-card,#objektif .objective-vertex{opacity:1;translate:none;scale:1;animation:none!important}}
+@media(prefers-reduced-motion:reduce){#objektif .objective-line{stroke-dashoffset:0;transition:none}#objektif .objective-card,#objektif .objective-vertex{opacity:1;translate:none;scale:1;animation:none!important}}
