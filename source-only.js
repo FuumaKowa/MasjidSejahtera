@@ -220,3 +220,48 @@ if (portfolioSvg && portfolioCards) {
   });
 }
 
+const objectiveNetwork = document.querySelector('#objektif .objective-network');
+const objectiveSvg = objectiveNetwork?.querySelector('.objective-constellation');
+if (objectiveNetwork && objectiveSvg) {
+  const svgNs = 'http://www.w3.org/2000/svg';
+  const points = [[50, 33], [74.7, 42], [65.3, 71], [34.7, 71], [25.3, 42]];
+  const pointString = (indices) => indices.map((index) => points[index].join(',')).join(' ');
+  const pentagon = document.createElementNS(svgNs, 'polygon');
+  pentagon.setAttribute('class', 'objective-pentagon');
+  pentagon.setAttribute('points', pointString([0, 1, 2, 3, 4]));
+  objectiveSvg.append(pentagon);
+
+  const links = document.createElementNS(svgNs, 'polyline');
+  links.setAttribute('class', 'objective-links');
+  links.setAttribute('points', pointString([0, 2, 4, 1, 3, 0]));
+  objectiveSvg.append(links);
+
+  const starPoints = (cx, cy, outer, inner) => Array.from({ length: 10 }, (_, index) => {
+    const angle = -Math.PI / 2 + index * Math.PI / 5;
+    const radius = index % 2 ? inner : outer;
+    return `${(cx + radius * Math.cos(angle)).toFixed(2)},${(cy + radius * Math.sin(angle)).toFixed(2)}`;
+  }).join(' ');
+  points.forEach(([x, y], index) => {
+    const marker = document.createElementNS(svgNs, 'g');
+    marker.setAttribute('class', 'objective-vertex');
+    marker.dataset.index = String(index);
+    const circle = document.createElementNS(svgNs, 'circle');
+    circle.setAttribute('cx', x); circle.setAttribute('cy', y); circle.setAttribute('r', '3.8');
+    circle.setAttribute('fill', index % 2 ? '#078360' : '#102f4d');
+    circle.setAttribute('stroke', '#c5a34d'); circle.setAttribute('stroke-width', '.8');
+    const star = document.createElementNS(svgNs, 'polygon');
+    star.setAttribute('points', starPoints(x, y, 2.15, .95));
+    star.setAttribute('fill', '#f0d37a');
+    marker.append(circle, star);
+    objectiveSvg.append(marker);
+  });
+
+  const cards = [...objectiveNetwork.querySelectorAll('.objective-card')];
+  const setVertex = (index, active) => objectiveSvg.querySelector(`[data-index="${index}"]`)?.classList.toggle('hot', active);
+  cards.forEach((card, index) => {
+    card.addEventListener('pointerenter', () => setVertex(index, true));
+    card.addEventListener('pointerleave', () => setVertex(index, false));
+    card.addEventListener('focus', () => setVertex(index, true));
+    card.addEventListener('blur', () => setVertex(index, false));
+  });
+}
