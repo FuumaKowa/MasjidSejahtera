@@ -224,17 +224,32 @@ const objectiveNetwork = document.querySelector('#objektif .objective-network');
 const objectiveSvg = objectiveNetwork?.querySelector('.objective-constellation');
 if (objectiveNetwork && objectiveSvg) {
   const svgNs = 'http://www.w3.org/2000/svg';
-  const points = [[50, 33], [74.7, 42], [65.3, 71], [34.7, 71], [25.3, 42]];
-  const pointString = (indices) => indices.map((index) => points[index].join(',')).join(' ');
-  const pentagon = document.createElementNS(svgNs, 'polygon');
-  pentagon.setAttribute('class', 'objective-pentagon');
-  pentagon.setAttribute('points', pointString([0, 1, 2, 3, 4]));
-  objectiveSvg.append(pentagon);
+  const center = [600, 300];
+  const radius = 180;
+  const points = Array.from({ length: 5 }, (_, index) => {
+    const angle = (-90 + index * 72) * Math.PI / 180;
+    return [center[0] + radius * Math.cos(angle), center[1] + radius * Math.sin(angle)];
+  });
+  const addLine = (from, to, className, delay) => {
+    const path = document.createElementNS(svgNs, 'path');
+    path.setAttribute('class', `objective-line ${className}`);
+    path.setAttribute('d', `M${from[0].toFixed(2)} ${from[1].toFixed(2)}L${to[0].toFixed(2)} ${to[1].toFixed(2)}`);
+    objectiveSvg.append(path);
+    path.style.setProperty('--line-length', path.getTotalLength().toFixed(2));
+    path.style.setProperty('--line-delay', `${delay}ms`);
+  };
 
-  const links = document.createElementNS(svgNs, 'polyline');
-  links.setAttribute('class', 'objective-links');
-  links.setAttribute('points', pointString([0, 2, 4, 1, 3, 0]));
-  objectiveSvg.append(links);
+  const fill = document.createElementNS(svgNs, 'polygon');
+  fill.setAttribute('class', 'objective-pentagon');
+  fill.setAttribute('points', points.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(' '));
+  objectiveSvg.append(fill);
+
+  points.forEach((point, index) => addLine(point, points[(index + 1) % points.length], 'objective-outline', index * 110));
+  [[0, 2], [2, 4], [4, 1], [1, 3], [3, 0]].forEach(([from, to], index) => {
+    addLine(points[from], points[to], 'objective-starline', 560 + index * 110);
+  });
+  const leaderEnds = [[600, 88], [846, 244.37], [840, 452], [360, 452], [354, 244.37]];
+  points.forEach((point, index) => addLine(point, leaderEnds[index], 'objective-leader', 1120 + index * 110));
 
   const starPoints = (cx, cy, outer, inner) => Array.from({ length: 10 }, (_, index) => {
     const angle = -Math.PI / 2 + index * Math.PI / 5;
@@ -245,12 +260,13 @@ if (objectiveNetwork && objectiveSvg) {
     const marker = document.createElementNS(svgNs, 'g');
     marker.setAttribute('class', 'objective-vertex');
     marker.dataset.index = String(index);
+    marker.style.setProperty('--node-delay', `${950 + index * 130}ms`);
     const circle = document.createElementNS(svgNs, 'circle');
-    circle.setAttribute('cx', x); circle.setAttribute('cy', y); circle.setAttribute('r', '3.8');
+    circle.setAttribute('cx', x); circle.setAttribute('cy', y); circle.setAttribute('r', '13');
     circle.setAttribute('fill', index % 2 ? '#078360' : '#102f4d');
-    circle.setAttribute('stroke', '#c5a34d'); circle.setAttribute('stroke-width', '.8');
+    circle.setAttribute('stroke', '#c5a34d'); circle.setAttribute('stroke-width', '2.2');
     const star = document.createElementNS(svgNs, 'polygon');
-    star.setAttribute('points', starPoints(x, y, 2.15, .95));
+    star.setAttribute('points', starPoints(x, y, 7.3, 3.2));
     star.setAttribute('fill', '#f0d37a');
     marker.append(circle, star);
     objectiveSvg.append(marker);
