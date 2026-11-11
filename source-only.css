@@ -491,7 +491,7 @@ html{scroll-snap-type:y proximity}
 @media(prefers-reduced-motion:reduce){#objektif .objective-line{stroke-dashoffset:0;transition:none}#objektif .objective-card,#objektif .objective-vertex{opacity:1;translate:none;scale:1;animation:none!important}}
 
 /* Page 3: Three Cities of Impact */
-#impak.page{display:flex;align-items:center;padding-top:calc(var(--header) + clamp(16px,2.6vh,28px));padding-bottom:clamp(18px,3vh,32px);background:linear-gradient(135deg,#edf2f5 0%,#f8f6ed 52%,#e8f1ed 100%)}
+#impak.page{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:calc(var(--header) + clamp(16px,2.6vh,28px));padding-bottom:clamp(18px,3vh,32px);background:linear-gradient(135deg,#edf2f5 0%,#f8f6ed 52%,#e8f1ed 100%)}
 #impak .page-inner{max-width:1480px}
 #impak h2{font-size:clamp(30px,4.1vw,58px);max-width:1020px}
 #impak .impact-visual{position:relative;width:min(100%,1245px);height:auto;aspect-ratio:1245/700;margin:clamp(12px,2vh,22px) auto 0;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
@@ -522,7 +522,7 @@ html{scroll-snap-type:y proximity}
 #impak .impact-card-madinah{left:84.5%;top:63%;width:22%}
 #impak .impact-card-mekah{left:16.2%;top:58%;width:21%}
 @media(max-width:800px){
-  #impak.page{align-items:flex-start;padding-top:calc(var(--header) + 24px);padding-bottom:34px}
+  #impak.page{align-items:flex-start;justify-content:flex-start;padding-top:calc(var(--header) + 24px);padding-bottom:34px}
   #impak h2{font-size:clamp(31px,7vw,46px)}
   #impak .impact-visual{display:grid;width:min(100%,620px);height:auto;aspect-ratio:auto;grid-template-columns:1fr;gap:12px;margin-top:22px}
   #impak .impact-svg{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:1245/700;grid-row:1}
