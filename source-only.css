@@ -211,10 +211,7 @@ button:focus-visible,a:focus-visible{outline:3px solid #e7c65e;outline-offset:4p
 .inner-ring{left:32%;top:32%;width:36%;height:36%;padding:0;border:4px solid #c5a34d;background:#123858;color:#fff;justify-content:center}
 .city-ring>span{display:flex;flex-direction:column;align-items:center}
 .city-ring.is-active{filter:drop-shadow(0 0 10px #c5a34d99);transform:scale(1.025)}
-.cover-mark span:first-child{position:relative}
-.cover-mark span:first-child::before{content:"۞";position:absolute;top:-.37em;left:50%;transform:translateX(-50%);font-size:.28em;color:#f5dc94}
-.arabic-mark span:first-child{position:relative}
-.arabic-mark span:first-child::before{content:"۞";position:absolute;top:-.3em;left:50%;transform:translateX(-50%);font-size:.28em;color:#bd9b46}
+
 @media(max-width:700px){
 .outer-ring{inset:0;width:100%;height:100%;padding-top:7%;border-width:4px}
 .middle-ring{left:17.5%;top:17.5%;width:65%;height:65%;padding-top:7%;border-width:3px}
