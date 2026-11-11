@@ -402,3 +402,47 @@ html{scroll-snap-type:y proximity}
 }
 @media(prefers-reduced-motion:reduce){#fungsi .function-line{stroke-dashoffset:0;animation:none;transition:none}#fungsi .function-halo{animation:none}}
 
+/* Page 9: eight interactive portfolio sectors around the Masjid Sejahtera hub. */
+#portfolio{background:radial-gradient(ellipse at 50% 45%,#e1ebe7 0,#f2f5f7 68%)}
+#portfolio.page{padding-top:calc(var(--header) + clamp(22px,3vw,38px));padding-bottom:clamp(24px,3vw,40px)}
+#portfolio h2{font-size:clamp(30px,3.2vw,42px);line-height:1.08}
+#portfolio .title-sub{margin-top:8px;font-size:clamp(15px,1.4vw,19px)}
+#portfolio .portfolio-wheel{display:block;max-width:100%;margin:16px auto 0;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+#portfolio .portfolio-svg{display:block;width:min(58svh,100%);max-width:620px;height:auto;margin:0 auto;overflow:visible}
+#portfolio .portfolio-sector{opacity:0;transform:scale(.965);transform-box:fill-box;transform-origin:center;transition:opacity .5s ease var(--sector-delay),transform .5s cubic-bezier(.2,.7,.2,1) var(--sector-delay)}
+#portfolio.is-visible .portfolio-sector{opacity:1;transform:scale(1)}
+#portfolio .portfolio-slice{stroke:#c5a34d;stroke-width:3.5;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;transition:stroke-dashoffset .85s cubic-bezier(.2,.7,.2,1) calc(150ms + var(--sector-delay)),fill .25s,filter .25s}
+#portfolio.is-visible .portfolio-slice{stroke-dashoffset:0}
+#portfolio .portfolio-sector:hover,#portfolio .portfolio-sector.is-active{transform:scale(1.035)}
+#portfolio .portfolio-sector:hover .portfolio-slice,#portfolio .portfolio-sector.is-active .portfolio-slice{fill:#b18b35;filter:drop-shadow(0 0 8px #c5a34d9c);stroke:#f3da8d;stroke-width:5}
+#portfolio .portfolio-sector:focus-visible{outline:none}
+#portfolio .portfolio-sector:focus-visible .portfolio-slice{stroke:#f5d880;stroke-width:7;filter:drop-shadow(0 0 8px #c5a34d9c)}
+#portfolio .portfolio-label,#portfolio .portfolio-name,#portfolio .portfolio-description,#portfolio .portfolio-hub-title,#portfolio .portfolio-hub-subtitle{font-family:Inter,"Aptos",Arial,sans-serif;text-anchor:middle;pointer-events:none}
+#portfolio .portfolio-label{fill:#f0d37a;font-size:13px;font-weight:750;letter-spacing:.07em}
+#portfolio .portfolio-name{fill:#fffdf7;font-size:18px;font-weight:800}
+#portfolio .portfolio-description{fill:#fffdf7;font-size:12px;font-weight:600}
+#portfolio .portfolio-halo{fill:#fffdf7;stroke:#d8bc65;stroke-width:4;animation:portfolio-ring 3.2s ease-in-out infinite}
+#portfolio .portfolio-core{fill:#102f4d;stroke:#fffdf7;stroke-width:7}
+#portfolio .portfolio-hub-title{fill:#fffdf7;font-size:17px;font-weight:800}
+#portfolio .portfolio-hub-divider{fill:none;stroke:#c5a34d;stroke-width:2}
+#portfolio .portfolio-hub-subtitle{fill:#f0d37a;font-size:10px;font-weight:750;letter-spacing:.08em}
+#portfolio .portfolio-cards{display:none}
+#portfolio .portfolio-note{max-width:900px;margin:4px auto 0;padding:0 12px;text-align:center}
+@keyframes portfolio-ring{50%{stroke-width:6;opacity:.78}}
+@media(max-width:700px){
+#portfolio.page{padding-top:calc(var(--header) + 20px);padding-bottom:24px}
+#portfolio h2{font-size:clamp(28px,7.6vw,36px)}
+#portfolio .portfolio-wheel{margin-top:24px}
+#portfolio .portfolio-svg{display:none}
+#portfolio .portfolio-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#portfolio .portfolio-card{min-height:108px;padding:12px 9px;border:1px solid #dec26c;border-top:4px solid #dec26c;border-radius:4px 24px 4px 4px;background:#087b60;color:#fffdf7;box-shadow:0 7px 18px #102f4d1c;text-align:center;transition:transform .25s,background .25s,color .25s,box-shadow .25s}
+#portfolio .portfolio-card:nth-child(4n+2),#portfolio .portfolio-card:nth-child(4n+3){background:#102f4d}
+#portfolio .portfolio-card strong{color:#f0d37a;font-size:11px;letter-spacing:.06em}
+#portfolio .portfolio-card b{margin-top:3px;font-size:clamp(15px,4.2vw,20px);line-height:1.15}
+#portfolio .portfolio-card span{margin-top:6px;font-size:12px;line-height:1.3}
+#portfolio .portfolio-card:hover,#portfolio .portfolio-card.is-active{transform:translateY(-3px);background:#b18b35;color:#102f4d;box-shadow:0 12px 24px #102f4d28}
+#portfolio .portfolio-card.is-active strong{color:#102f4d}
+#portfolio .portfolio-note{margin-top:18px;text-align:left}
+}
+@media(prefers-reduced-motion:reduce){#portfolio .portfolio-sector{opacity:1;transform:none;transition:none}#portfolio .portfolio-slice{stroke-dashoffset:0;transition:none}#portfolio .portfolio-halo{animation:none}}
+
