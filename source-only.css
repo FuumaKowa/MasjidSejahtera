@@ -489,3 +489,48 @@ html{scroll-snap-type:y proximity}
   #objektif .objective-card span{font-size:16px;}
 }
 @media(prefers-reduced-motion:reduce){#objektif .objective-line{stroke-dashoffset:0;transition:none}#objektif .objective-card,#objektif .objective-vertex{opacity:1;translate:none;scale:1;animation:none!important}}
+
+/* Page 3: Three Cities of Impact */
+#impak.page{padding-top:calc(var(--header) + clamp(16px,2.6vh,28px));padding-bottom:clamp(18px,3vh,32px);background:linear-gradient(135deg,#edf2f5 0%,#f8f6ed 52%,#e8f1ed 100%)}
+#impak .page-inner{max-width:1480px}
+#impak h2{font-size:clamp(30px,4.1vw,58px);max-width:1020px}
+#impak .impact-visual{position:relative;width:min(100%,1245px);height:auto;aspect-ratio:1245/700;margin:clamp(12px,2vh,22px) auto 0;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+#impak.is-visible .impact-visual{opacity:1;transform:none}
+#impak .impact-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#impak .impact-ring{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:filter .3s ease,stroke-width .3s ease,fill .3s ease;outline:none}
+#impak .impact-ring-maqdis{transform:scale(.93);opacity:0;animation:impact-ring-arrive .65s cubic-bezier(.18,.72,.23,1) .12s forwards}
+#impak .impact-ring-madinah{transform:scale(.88);opacity:0;animation:impact-ring-arrive .62s cubic-bezier(.18,.72,.23,1) .38s forwards}
+#impak .impact-ring-mekah{transform:scale(.78);opacity:0;animation:impact-ring-arrive .58s cubic-bezier(.18,.72,.23,1) .64s forwards}
+@keyframes impact-ring-arrive{to{transform:scale(1);opacity:1}}
+#impak .impact-ring:hover,#impak .impact-ring:focus-visible,#impak .impact-ring.is-hover,#impak .impact-ring.is-active{filter:drop-shadow(0 0 9px #c5a34d9c);stroke-width:8}
+#impak .impact-ring-madinah:hover,#impak .impact-ring-madinah:focus-visible,#impak .impact-ring-madinah.is-hover,#impak .impact-ring-madinah.is-active,#impak .impact-ring-mekah:hover,#impak .impact-ring-mekah:focus-visible,#impak .impact-ring-mekah.is-hover,#impak .impact-ring-mekah.is-active{stroke-width:6}
+#impak .impact-title{font:700 27px Inter,Aptos,Arial,sans-serif;fill:#102f4d}
+#impak .impact-subtitle{font:600 20px Inter,Aptos,Arial,sans-serif;fill:#102f4d}
+#impak .impact-title-middle,#impak .impact-subtitle-middle,#impak .impact-title-inner,#impak .impact-subtitle-inner{fill:#fffdf7}
+#impak .impact-title-inner{font-size:24px}.impact-subtitle-inner{font-size:18px}
+#impak .impact-leaders{pointer-events:none}
+#impak .impact-leader{fill:none;stroke:#c5a34d;stroke-width:2.5;stroke-linecap:round;transition:stroke-width .25s,filter .25s,stroke .25s}
+#impak .impact-leader.is-hover,#impak .impact-leader.is-active{stroke:#078360;stroke-width:4;filter:drop-shadow(0 0 4px #c5a34d99)}
+#impak .impact-dot{fill:#c5a34d;stroke:#fffdf7;stroke-width:2}
+#impak .impact-orbit{transform-box:view-box;transform-origin:615px 400px;animation:impact-orbit-spin 80s linear infinite;opacity:.8;pointer-events:none}
+@keyframes impact-orbit-spin{to{transform:rotate(360deg)}}
+#impak .impact-callout{position:absolute;z-index:2;display:flex;flex-direction:column;gap:10px;justify-content:center;min-height:112px;padding:16px 19px;border:1px solid #c5a34d;border-radius:3px 22px 3px 3px;background:#fffdf7ec;color:#102f4d;text-align:left;box-shadow:0 9px 24px #102f4d16;cursor:pointer;transform:translate(-50%,-50%);transition:background .25s,box-shadow .25s,border-color .25s,translate .25s}
+#impak .impact-callout strong{font-size:clamp(15px,1.28vw,19px);line-height:1.18;color:#102f4d}
+#impak .impact-callout span{font-size:clamp(14px,1.16vw,17px);line-height:1.38}
+#impak .impact-callout:hover,#impak .impact-callout:focus-visible,#impak .impact-callout.is-hover,#impak .impact-callout.is-active{background:#fff9e7;border-color:#078360;box-shadow:0 12px 30px #102f4d20;translate:0 -3px;outline:none}
+#impak .impact-card-maqdis{left:84.5%;top:26%;width:22%}
+#impak .impact-card-madinah{left:84.5%;top:63%;width:22%}
+#impak .impact-card-mekah{left:16.2%;top:58%;width:21%}
+@media(max-width:800px){
+  #impak.page{padding-top:calc(var(--header) + 24px);padding-bottom:34px}
+  #impak h2{font-size:clamp(31px,7vw,46px)}
+  #impak .impact-visual{display:grid;width:min(100%,620px);height:auto;aspect-ratio:auto;grid-template-columns:1fr;gap:12px;margin-top:22px}
+  #impak .impact-svg{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:1245/700;grid-row:1}
+  #impak .impact-leaders{display:none}
+  #impak .impact-callout{position:relative;inset:auto;width:100%;min-height:unset;padding:16px 18px;transform:none;translate:none;gap:7px}
+  #impak .impact-card-maqdis{grid-row:2}#impak .impact-card-madinah{grid-row:3}#impak .impact-card-mekah{grid-row:4}
+  #impak .impact-callout strong{font-size:17px}#impak .impact-callout span{font-size:16px;line-height:1.45}
+}
+@media(max-width:420px){#impak .impact-title{font-size:30px}#impak .impact-subtitle{font-size:23px}#impak .impact-title-inner{font-size:32px}#impak .impact-subtitle-inner{font-size:24px}}
+@media(prefers-reduced-motion:reduce){#impak .impact-visual{opacity:1;transform:none;transition:none}#impak .impact-ring-maqdis,#impak .impact-ring-madinah,#impak .impact-ring-mekah{opacity:1;transform:none;animation:none}#impak .impact-orbit{animation:none}}
+
