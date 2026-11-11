@@ -41,12 +41,16 @@ button{color:inherit}
 .city-glyph{display:none;place-items:center;width:64px;height:64px;border:1px solid #f0d27d;border-radius:50%;font-family:"Noto Naskh Arabic","Amiri",serif;font-size:42px;color:#f5d881}
 .city-item strong,.city-item em{display:block}.city-item strong{font-size:clamp(24px,3vw,39px);line-height:1.05}.city-item em{margin-top:6px;font-style:normal;font-weight:650;font-size:clamp(15px,1.55vw,21px);color:#e4e9e7}
 .city-orbit{display:grid;place-items:center;width:82px;height:82px;border:2px solid #e2c468;border-radius:50%;font-size:53px;color:#f7dfa0;background:radial-gradient(circle,#087b61,#123a56);box-shadow:0 0 0 5px #ffffff28}
-.impact-layout{display:grid;grid-template-columns:minmax(190px,1fr) minmax(400px,1.65fr) minmax(220px,1fr);align-items:center;gap:clamp(24px,4vw,60px);margin:44px auto 0;max-width:1340px}
+.impact-layout{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(190px,1fr) minmax(400px,1.65fr) minmax(220px,1fr);align-items:center;gap:clamp(24px,4vw,60px);margin:44px auto 0;max-width:1340px}
 .impact-callouts{display:grid;gap:20px}
-.impact-callout{display:flex;flex-direction:column;gap:14px;justify-content:center;min-height:130px;padding:20px 23px;border:1px solid var(--gold);border-radius:8px;background:#fffdf8;color:#1b2731;text-align:left;box-shadow:0 10px 24px #102f4d0d;cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.impact-callout{position:relative;z-index:3;display:flex;flex-direction:column;gap:14px;justify-content:center;min-height:130px;padding:20px 23px;border:1px solid var(--gold);border-radius:8px;background:#fffdf8;color:#1b2731;text-align:left;box-shadow:0 10px 24px #102f4d0d;cursor:pointer;transition:transform .2s,background .2s,color .2s}
 .impact-callout strong{font-size:clamp(16px,1.4vw,20px)}.impact-callout span{font-size:clamp(15px,1.35vw,19px);line-height:1.38}
 .impact-callout:hover,.impact-callout.is-active{transform:translateY(-3px);background:#fff8df}
 .three-cities{display:grid;place-items:center;aspect-ratio:1}
+.three-cities{position:relative;z-index:1}
+.impact-connectors{position:absolute;inset:0;z-index:2;width:100%;height:100%;overflow:visible;pointer-events:none}
+.impact-connectors>path{fill:none;stroke:#a58538;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke-width .2s,filter .2s}
+.impact-layout:has([data-layer="mekah"].is-active) .arrow-mekah,.impact-layout:has([data-layer="maqdis"].is-active) .arrow-maqdis,.impact-layout:has([data-layer="madinah"].is-active) .arrow-madinah{stroke-width:4;filter:drop-shadow(0 0 4px #c5a34d99)}
 .city-ring{display:grid;place-items:start center;border-radius:50%;font-weight:600;text-align:center;transition:filter .25s,transform .25s;cursor:pointer}
 .outer-ring{width:100%;height:100%;padding-top:8%;border:6px solid #c5a34d;background:#f7f2dc;color:#121d24}
 .outer-ring>span:first-child{display:flex;flex-direction:column}.outer-ring strong{font-size:clamp(22px,2.35vw,34px)}.outer-ring em{font-style:normal;font-size:clamp(16px,1.75vw,24px)}
@@ -165,7 +169,7 @@ button:focus-visible,a:focus-visible{outline:3px solid #e7c65e;outline-offset:4p
 .city-item{grid-template-columns:52px 1fr 54px;gap:12px;min-height:106px;padding:15px 13px;border-radius:7px 30px 7px 7px}
 .city-glyph{display:grid;width:48px;height:48px;font-size:31px}.city-item{grid-template-columns:52px 1fr 54px}.city-item strong{font-size:24px}.city-item em{font-size:14px}.city-orbit{width:46px;height:46px;font-size:29px}
 .city-item::before,.city-item::after{display:none}
-.impact-layout{display:flex;flex-direction:column;margin-top:28px;gap:20px}.impact-callout{width:100%;min-height:100px}.three-cities{width:min(90vw,430px)}
+.impact-layout{display:flex;flex-direction:column;margin-top:28px;gap:20px}.impact-callout{width:100%;min-height:100px}.impact-connectors{display:none}.three-cities{width:min(90vw,430px)}
 .outer-ring{border-width:4px;padding-top:7%}.middle-ring{border-width:3px}.inner-ring{border-width:3px}.outer-ring strong{font-size:18px}.outer-ring em{font-size:13px}.middle-ring strong{font-size:17px}.middle-ring em{font-size:12px}.inner-ring strong{font-size:15px}.inner-ring em{font-size:12px}
 .impact-callouts{width:100%}
 .objective-network{height:auto;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;padding:0}
