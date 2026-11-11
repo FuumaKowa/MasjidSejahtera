@@ -12,7 +12,7 @@ button{color:inherit}
 .menu-toggle{display:none}
 .cover{position:relative;isolation:isolate;min-height:100svh;display:flex;align-items:flex-end;padding:clamp(104px,14vh,150px) clamp(24px,8vw,130px) clamp(85px,10vh,120px);overflow:hidden;color:var(--white);background:var(--deep)}
 .cover-image,.cover-shade{position:absolute;z-index:-1;inset:0}
-.cover-image{background:center 45%/cover no-repeat url("assets/experience/courtyard-arrival.png");transform:scale(1.02)}
+.cover-image{background:center 45%/cover no-repeat url("assets/experience/courtyard-arrival.jpg");transform:scale(1.02)}
 .cover-shade{background:linear-gradient(90deg,#071f20ee 0%,#092a2bc7 38%,#092a2b20 88%),linear-gradient(0deg,#071f20b8,transparent 58%)}
 .cover-copy{max-width:1000px}.cover h1{max-width:1100px;margin:0;font-size:clamp(52px,9.5vw,144px);font-weight:560;line-height:.97;letter-spacing:-.065em;text-wrap:balance;color:#fffdf3}
 .cover-tagline{margin:28px 0 0;font-size:clamp(17px,2vw,25px);line-height:1.48;font-weight:520}
