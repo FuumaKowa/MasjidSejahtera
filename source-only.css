@@ -264,3 +264,11 @@ button:focus-visible,a:focus-visible{outline:3px solid #e7c65e;outline-offset:4p
 
 .cover h1{font-size:clamp(48px,6.4vw,112px)}
 @media(max-width:700px){.cover h1{font-size:clamp(43px,11.5vw,72px)}}
+
+/* Keep Arabic glyphs inside their medallions and distinguish hover from the selected state. */
+.city-glyph{overflow:hidden;line-height:1;padding:0 5px 4px;font-size:36px;transition:transform .24s ease,background .24s ease,box-shadow .24s ease}
+.city-item.is-active{transform:none;border-color:#ffe29a;box-shadow:0 0 0 3px #e4c56e38,0 12px 30px #102f4d24;filter:saturate(1.08)}
+.city-item:hover{transform:translateY(-7px) scale(1.015);border-color:#ffe29a;box-shadow:0 18px 38px #102f4d40;filter:saturate(1.2)}
+.city-item:hover .city-glyph{transform:scale(1.1) rotate(-7deg);background:#f0d47a22;box-shadow:0 0 0 5px #e0bf6733}
+@media(max-width:700px){.city-glyph{font-size:27px;padding:0 3px 3px}}
+@media(prefers-reduced-motion:reduce){.city-glyph{transition:none}}
