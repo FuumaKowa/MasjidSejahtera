@@ -54,3 +54,42 @@ const updateProgress = () => {
 addEventListener('scroll', updateProgress, { passive: true });
 addEventListener('resize', updateProgress);
 updateProgress();
+
+const referenceSections = ['kota-suci', 'impak', 'objektif', 'portfolio', 'fungsi', 'aliran']
+  .map((id) => document.getElementById(id))
+  .filter(Boolean);
+if ('IntersectionObserver' in window) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('is-visible');
+    });
+  }, { threshold: 0.18 });
+  referenceSections.forEach((section) => sectionObserver.observe(section));
+} else {
+  referenceSections.forEach((section) => section.classList.add('is-visible'));
+}
+
+let snapLocked = false;
+const snapToSection = (event) => {
+  if (snapLocked) { event.preventDefault(); return; }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || innerWidth < 701) return;
+  if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+  if (event.deltaY < 24 || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+  const current = [...document.querySelectorAll('.cover, .page, .closing-cta')]
+    .reduce((closest, section) => {
+      const distance = Math.abs(section.getBoundingClientRect().top - parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop || 0));
+      return !closest || distance < closest.distance ? { section, distance } : closest;
+    }, null);
+  if (!current) return;
+  const sections = [...document.querySelectorAll('.cover, .page, .closing-cta')];
+  const index = sections.indexOf(current.section);
+  const next = sections[index + (event.deltaY > 0 ? 1 : -1)];
+  if (next) {
+    event.preventDefault();
+    snapLocked = true;
+    next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => { snapLocked = false; }, 850);
+  }
+};
+addEventListener('wheel', snapToSection, { passive: false });
+
