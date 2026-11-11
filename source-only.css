@@ -264,3 +264,6 @@ button:focus-visible,a:focus-visible{outline:3px solid #e7c65e;outline-offset:4p
 
 @font-face{font-family:Amiri;src:url('assets/fonts/Amiri-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
 .cover-mark,.arabic-mark,.city-glyph{font-family:Amiri,serif;font-weight:700}
+
+.cover h1{font-size:clamp(48px,6.4vw,112px)}
+@media(max-width:700px){.cover h1{font-size:clamp(43px,11.5vw,72px)}}
