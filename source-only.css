@@ -590,3 +590,10 @@ html{scroll-snap-type:y proximity}
 #penutup.page{background-color:#113a38;background-image:radial-gradient(ellipse at 82% 18%,#c5a34d35,transparent 34%),radial-gradient(ellipse at 16% 92%,#0783605c,transparent 44%),repeating-linear-gradient(45deg,transparent 0 64px,#fffdf70d 65px 66px,transparent 67px 128px),repeating-linear-gradient(-45deg,transparent 0 64px,#c5a34d12 65px 66px,transparent 67px 128px),linear-gradient(135deg,#102f4d,#123e37 72%,#075e49)}
 #penutup.page h2{color:#fffdf5}
 #penutup .closing-geometry{opacity:.5;background-image:linear-gradient(90deg,#ffffff00 49.8%,#e4cc8340 50%,#ffffff00 50.2%),linear-gradient(0deg,#ffffff00 49.8%,#e4cc8340 50%,#ffffff00 50.2%)}
+
+
+/* Slow, palette-matched aurora and lattice, adapted from the supplied idea. */
+:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::before{content:"";position:absolute;inset:-24%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 20% 30%,rgba(7,131,96,.19) 0%,rgba(7,131,96,0) 58%),radial-gradient(ellipse at 80% 48%,rgba(197,163,77,.18) 0%,rgba(197,163,77,0) 62%),radial-gradient(ellipse at 50% 82%,rgba(16,47,77,.13) 0%,rgba(16,47,77,0) 60%);animation:sejahtera-aurora-drift 38s ease-in-out infinite alternate}
+:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.14;background:repeating-linear-gradient(45deg,transparent 0 48px,rgba(16,47,77,.075) 49px 50px,transparent 51px 96px),repeating-linear-gradient(-45deg,transparent 0 58px,rgba(197,163,77,.07) 59px 60px,transparent 61px 118px);mask-image:radial-gradient(ellipse at center,#000 32%,transparent 96%)}
+@keyframes sejahtera-aurora-drift{from{transform:translate3d(-1.1%,-.6%,0) scale(1)}to{transform:translate3d(1.1%,.6%,0) scale(1.05)}}
+@media(prefers-reduced-motion:reduce){:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::before{animation:none}}
