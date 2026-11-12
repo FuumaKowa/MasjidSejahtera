@@ -6,7 +6,7 @@ menuButton.addEventListener('click', () => {
   navigation.classList.toggle('is-open', open);
 });
 navigation.addEventListener('click', (event) => {
-  if (!event.target.closest('a')) return;
+  if (!event.target.closest('a, button')) return;
   menuButton.setAttribute('aria-expanded', 'false');
   navigation.classList.remove('is-open');
 });
@@ -303,3 +303,28 @@ if (objectiveNetwork && objectiveSvg) {
   });
 }
 
+
+const registrationDialog = document.getElementById('registration-dialog');
+const registrationForm = document.getElementById('registration-form');
+const registrationStatus = document.getElementById('registration-status');
+let registrationTrigger = null;
+document.querySelectorAll('[data-open-registration]').forEach((trigger) => {
+  trigger.addEventListener('click', () => {
+    registrationTrigger = trigger;
+    registrationStatus.hidden = true;
+    registrationDialog.showModal();
+    document.getElementById('registration-name').focus();
+  });
+});
+document.querySelectorAll('[data-close-registration]').forEach((button) => {
+  button.addEventListener('click', () => registrationDialog.close());
+});
+registrationDialog.addEventListener('click', (event) => {
+  if (event.target === registrationDialog) registrationDialog.close();
+});
+registrationDialog.addEventListener('close', () => registrationTrigger?.focus());
+registrationForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  registrationForm.reset();
+  registrationStatus.hidden = false;
+});
