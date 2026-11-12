@@ -597,3 +597,5 @@ html{scroll-snap-type:y proximity}
 :is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.14;background:repeating-linear-gradient(45deg,transparent 0 48px,rgba(16,47,77,.075) 49px 50px,transparent 51px 96px),repeating-linear-gradient(-45deg,transparent 0 58px,rgba(197,163,77,.07) 59px 60px,transparent 61px 118px);mask-image:radial-gradient(ellipse at center,#000 32%,transparent 96%)}
 @keyframes sejahtera-aurora-drift{from{transform:translate3d(-1.1%,-.6%,0) scale(1)}to{transform:translate3d(1.1%,.6%,0) scale(1.05)}}
 @media(prefers-reduced-motion:reduce){:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::before{animation:none}}
+
+html,body{max-width:100%;overflow-x:clip}
