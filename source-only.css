@@ -367,7 +367,7 @@ html{scroll-snap-type:y proximity}
 .stage-co h3{margin:0 0 8px;color:var(--navy);font-weight:800;font-size:clamp(15px,1.6vw,20px);line-height:1.28}
 .stage-co p{margin:0;color:#536b7e;font-size:clamp(13px,1.3vw,16px);line-height:1.45}
 .stage-num{display:none}
-@media(max-width:800px){
+@media(max-width:700px){
 .stage-page{padding-top:calc(var(--header) + 36px)}
 .stage-page .stage-heading{font-size:clamp(29px,8vw,42px)}
 .aliran-diagram{margin-top:28px}
@@ -599,3 +599,24 @@ html{scroll-snap-type:y proximity}
 @keyframes sejahtera-grid-shift{0%{background-position:50% 50%,0% 0%,0% 0%}100%{background-position:50% 50%,-22% -22%,-22% -22%}}
 @media(prefers-reduced-motion:reduce){:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::before,:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::after{animation:none}}
 html,body{max-width:100%;overflow-x:clip}
+
+/* Narrow-screen layouts retain the diagram language and give touch content room. */
+@media(max-width:700px){
+  .page{padding-inline:clamp(16px,5vw,22px);padding-bottom:42px}
+  .page-inner{width:100%}
+  .page h2{font-size:clamp(30px,8.4vw,40px);line-height:1.08;letter-spacing:-.035em;text-wrap:balance}
+  .page .title-sub{font-size:17px;line-height:1.42}
+  .impact-layout{gap:16px}
+  .impact-callout{min-height:92px;padding:16px 17px}
+  .objective-network{gap:14px}
+  .objective-card{min-height:108px;padding:16px 18px}
+  #portfolio .portfolio-card{min-height:132px;padding:13px 10px}
+  #portfolio .portfolio-card b{font-size:clamp(16px,4.6vw,20px)}
+  #portfolio .portfolio-card span{font-size:14px;line-height:1.35}
+  #fungsi .function-map>svg{position:relative;inset:auto;grid-column:1/-1;display:block;width:min(100%,360px);height:auto;aspect-ratio:16/9;margin:0 auto 4px}
+  .stage-cols{position:relative;gap:28px;padding-block:8px}
+  .stage-cols::before{content:"";position:absolute;z-index:0;left:22px;top:28px;bottom:28px;width:3px;border-radius:3px;background:linear-gradient(180deg,#102f4d 0%,#c5a34d 34%,#078360 68%,#075e49 100%)}
+  .stage-co{z-index:1;padding-bottom:4px}
+  .stage-num{box-shadow:0 0 0 4px #c5a34d,0 0 0 7px #fffdf7}
+  .site-footer{padding-inline:18px}
+}
