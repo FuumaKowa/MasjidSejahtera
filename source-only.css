@@ -620,3 +620,19 @@ html,body{max-width:100%;overflow-x:clip}
   .stage-num{box-shadow:0 0 0 4px #c5a34d,0 0 0 7px #fffdf7}
   .site-footer{padding-inline:18px}
 }
+
+/* Page 10: a compact mobile map with the five function areas grouped around it. */
+@media(max-width:700px){
+  #fungsi.page{scroll-margin-top:var(--header);padding-top:24px}
+  #fungsi h2{max-width:100%;margin:0 0 2px;font-size:clamp(30px,8vw,38px);line-height:1.08}
+  #fungsi .function-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+  #fungsi .function-map>svg{width:clamp(140px,42vw,180px);margin-bottom:2px}
+  #fungsi .function-node{display:grid;place-items:center;min-height:82px;padding:12px 10px;border-width:1px;border-top-width:4px;border-radius:4px 20px 4px 4px;font-size:clamp(15px,4.2vw,17px);line-height:1.22;box-shadow:0 6px 16px #102f4d16}
+  #fungsi .function-knowledge{order:1}
+  #fungsi .function-worship{order:2}
+  #fungsi .function-education{order:3;grid-column:1/-1;justify-self:center;width:min(100%,58%)}
+  #fungsi .function-consensus{order:4}
+  #fungsi .function-economy{order:5}
+  #fungsi .function-node:hover,#fungsi .function-node[aria-pressed=true]{transform:translateY(-2px)!important}
+  #fungsi .function-caption{grid-column:1/-1;margin-top:4px;padding:13px 14px;text-align:center;font-size:15px;line-height:1.4}
+}
