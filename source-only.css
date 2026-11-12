@@ -583,6 +583,7 @@ html{scroll-snap-type:y proximity}
 #teras-maqdis.page{background-color:#dce6eb;background-image:radial-gradient(ellipse at 88% 12%,#c5a34d25,transparent 36%),radial-gradient(ellipse at 8% 92%,#102f4d1a,transparent 40%),repeating-linear-gradient(135deg,transparent 0 66px,#102f4d08 67px 68px,transparent 69px 138px),linear-gradient(135deg,#e3ebed,#d7e3e7 57%,#e8e3d1)}
 #portfolio.page{background-color:#16433e;background-image:radial-gradient(ellipse at 50% 0%,#c5a34d22,transparent 43%),radial-gradient(ellipse at 2% 95%,#07836055,transparent 42%),repeating-linear-gradient(45deg,transparent 0 54px,#ffffff0b 55px 56px,transparent 57px 108px),repeating-linear-gradient(-45deg,transparent 0 54px,#c5a34d10 55px 56px,transparent 57px 108px),linear-gradient(135deg,#163b48,#174c3d)}
 #portfolio.page h2{color:#fffdf5}
+#portfolio.page .title-sub{color:#eadcae}
 #portfolio .portfolio-note{color:#f3e8c8}
 #fungsi.page{background-color:#dfe9e5;background-image:radial-gradient(ellipse at 50% 28%,#ffffff6b,transparent 38%),radial-gradient(ellipse at 94% 96%,#07836022,transparent 40%),repeating-linear-gradient(45deg,transparent 0 60px,#102f4d08 61px 62px,transparent 63px 124px),linear-gradient(135deg,#e4ece8,#d6e5e0)}
 #aliran.page{background-color:#e1e8dc;background-image:radial-gradient(ellipse at 50% 100%,#c5a34d28,transparent 40%),radial-gradient(ellipse at 3% 12%,#0783601a,transparent 38%),repeating-linear-gradient(-45deg,transparent 0 62px,#102f4d08 63px 64px,transparent 65px 126px),linear-gradient(130deg,#e7ecdd,#d8e5dc)}
