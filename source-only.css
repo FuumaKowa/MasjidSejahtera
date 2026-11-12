@@ -598,5 +598,5 @@ html{scroll-snap-type:y proximity}
 @keyframes sejahtera-aurora-drift{0%{transform:translate3d(-4%,-2%,0) scale(1);background-position:0% 0%,100% 0%,50% 100%,0% 0%;filter:saturate(1.08) brightness(.96)}50%{transform:translate3d(0,0,0) scale(1.04);background-position:-10% -5%,5% 10%,0% 15%,0% 0%;filter:saturate(1.32) brightness(1.16)}100%{transform:translate3d(4%,2%,0) scale(1.1);background-position:5% 10%,-10% -5%,15% 0%,0% 0%;filter:saturate(1.18) brightness(1)}}
 @keyframes sejahtera-grid-shift{0%{background-position:50% 50%,0% 0%,0% 0%}100%{background-position:50% 50%,-50% -50%,-50% -50%}}
 @keyframes sejahtera-aurora-pulse{0%{opacity:.22}50%{opacity:.4}100%{opacity:.25}}
-@media(prefers-reduced-motion:reduce){:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::before,:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::after{animation:none}}
+@media(prefers-reduced-motion:reduce){:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::before,:is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::after{animation:none}}
 html,body{max-width:100%;overflow-x:clip}
