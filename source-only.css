@@ -767,3 +767,7 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:700px){
   #fungsi.page{background-position:center,center top;background-size:cover,auto 150%}
 }
+
+#fungsi.page{
+  background-image:linear-gradient(rgba(235,239,231,.92),rgba(235,239,231,.92)),url("assets/experience/courtyard-arrival.jpg")!important;
+}
