@@ -101,8 +101,16 @@ document.addEventListener('click', (event) => {
   if (functionNode) {
     const nodes = [...functionRoot.querySelectorAll('.function-node')];
     const lines = [...functionRoot.querySelectorAll('.function-line')];
-    const index = nodes.indexOf(functionNode);
-    selectDiagramItems([...nodes,...lines],[functionNode,lines[index]],nodes);
+    const lineIndexByNode = {
+      'function-knowledge': 0,
+      'function-economy': 4,
+      'function-worship': 1,
+      'function-consensus': 3,
+      'function-education': 2
+    };
+    const nodeKey = [...functionNode.classList].find((name) => Object.hasOwn(lineIndexByNode, name));
+    const line = lines[lineIndexByNode[nodeKey]];
+    selectDiagramItems([...nodes,...lines],[functionNode,line],nodes);
     return;
   }
   const stageControl = event.target.closest('#aliran .stage-node,#aliran .stage-co');
