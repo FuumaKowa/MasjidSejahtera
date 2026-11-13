@@ -855,3 +855,5 @@ html,body{max-width:100%;overflow-x:clip}
  #teras-madinah .outcome-card::after{top:calc(-1 * var(--connector-distance) - 3.5px);left:calc(50% - 3.5px);animation-name:connector-light-y}
  #teras-maqdis .maqdis-outcome::before,#teras-maqdis .maqdis-outcome::after{display:none}
 }
+/* Extend page 6 programme connectors to the centered focus circle on tablets. */
+@media(max-width:1050px) and (min-width:701px){#teras-madinah .program-stack button{--connector-distance:calc(clamp(24px,4vw,58px) + clamp(0px,calc(22vw - 176px),55px))}#teras-madinah .program-stack button::after{right:calc(-1 * var(--connector-distance));width:var(--connector-distance)}}
