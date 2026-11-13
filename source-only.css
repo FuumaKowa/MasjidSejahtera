@@ -744,8 +744,8 @@ html,body{max-width:100%;overflow-x:clip}
 #portfolio .portfolio-role-group h3{color:#fffdf5}
 
 /* Page 10 uses the shared courtyard background; keep its diagram animations. */
-#fungsi.page{background-color:#e9eee6;background-image:linear-gradient(135deg,#e9eee6,#e9eee6)}
-#fungsi.page::before{content:"";display:block;position:absolute;inset:-56px;z-index:0;pointer-events:none;background:url("assets/experience/courtyard-arrival.jpg") center 42%/cover no-repeat;filter:blur(180px);opacity:.035;transform:scale(1.18);animation:none}
+#fungsi.page{background-color:#e9eee6;background-image:linear-gradient(135deg,#e9eee6 0%,#e7eee7 48%,#e8eee6 100%)}
+#fungsi.page::before{content:"";display:block;position:absolute;inset:-30%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 20% 24%,rgba(7,131,96,.09),transparent 58%),radial-gradient(ellipse at 82% 76%,rgba(197,163,77,.07),transparent 62%);opacity:1;filter:none;transform:none;animation:none}
 #fungsi.is-visible .function-line{animation:function-line-glow 3s linear infinite 1.8s}
 #fungsi .function-halo{animation:function-halo-pulse 3s infinite}
 
