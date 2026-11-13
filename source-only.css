@@ -961,3 +961,14 @@ html,body{max-width:100%;overflow-x:clip}
 /* Preserve contrast for the Sahabat Masjid title over the shared light courtyard image. */
 #sahabat.page-sahabat-intro h2{color:#102f4d!important}
 #sahabat.page-sahabat-intro p{color:#075e49!important}
+
+
+/* Darken editorial text over the shared pale courtyard backdrop. */
+#portfolio.page h2{color:#102f4d!important}
+#portfolio.page .portfolio-title-accent{color:#075e49!important}
+#portfolio.page .portfolio-lead{color:#173a4e!important}
+#portfolio.page .portfolio-role-group h3{color:#102f4d!important}
+#portfolio.page .portfolio-role-group.sel h3{color:#075e49!important}
+#dimensi.page h2{color:#102f4d!important}
+#dimensi.page p{color:#075e49!important}
+#penutup.page h2{color:#102f4d!important}
