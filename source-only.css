@@ -956,3 +956,8 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:700px){
  #kota-suci.page,#impak.page,#objektif.page,#teras-iman.page,#teras-madinah.page,#teras-maqdis.page,#sahabat.page,#portfolio.page,#fungsi.page,#aliran.page,#dimensi.page,#penutup.page{background-attachment:scroll,scroll!important}
 }
+
+
+/* Preserve contrast for the Sahabat Masjid title over the shared light courtyard image. */
+#sahabat.page-sahabat-intro h2{color:#102f4d!important}
+#sahabat.page-sahabat-intro p{color:#075e49!important}
