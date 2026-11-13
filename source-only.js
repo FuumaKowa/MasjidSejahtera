@@ -57,6 +57,65 @@ if (functionRoot && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     functionFlowParticles.push(particle);
   });
 }
+
+const flowMotionReduced = matchMedia('(prefers-reduced-motion: reduce)');
+const flowDiagrams = [
+  {root:document.querySelector('#teras-madinah .muafakat-flow'),cards:'#teras-madinah .program-stack button',focus:'#teras-madinah .muafakat-focus',outcome:'#teras-madinah .outcome-card',group:'#teras-madinah .program-group-label',color:'gold'},
+  {root:document.querySelector('#teras-maqdis .maqdis-flow'),cards:'#teras-maqdis .maqdis-programs button',focus:'#teras-maqdis .maqdis-focus',outcome:'#teras-maqdis .maqdis-outcome',group:'#teras-maqdis .mosque-glyph',color:'green'}
+];
+const flowSvgNS='http://www.w3.org/2000/svg';
+function flowPoint(element,rootBox,edge,yRatio){
+ const box=element.getBoundingClientRect();
+ const x=edge==='right'?box.right-rootBox.left:edge==='left'?box.left-rootBox.left:box.left-rootBox.left+box.width/2;
+ const y=box.top-rootBox.top+box.height*(yRatio == null ? 0.5 : yRatio);
+ return {x:x,y:y};
+}
+function flowCurve(start,end,bend){
+ const dx=end.x-start.x,sign=dx<0?-1:1,reach=Math.max(18,Math.abs(dx)*(bend||.58));
+ return 'M '+start.x+' '+start.y+' C '+(start.x+sign*reach)+' '+start.y+', '+(end.x-sign*reach)+' '+end.y+', '+end.x+' '+end.y;
+}
+function setupFlowDiagram(spec){
+ if(!spec.root)return;
+ const root=spec.root,svg=document.createElementNS(flowSvgNS,'svg');
+ svg.setAttribute('class','flow-connectors');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('preserveAspectRatio','none');
+ root.insertBefore(svg,root.firstChild);
+ let sequence=0;
+ function addPath(d,tone,programIndex,shared){
+  const path=document.createElementNS(flowSvgNS,'path'),id='flow-route-'+(root.closest('#teras-madinah')?'madinah':'maqdis')+'-'+sequence;
+  path.setAttribute('id',id);path.setAttribute('d',d);path.setAttribute('class','flow-link flow-link--'+tone);path.dataset.routeId=id;
+  if(programIndex!=null)path.dataset.programIndex=String(programIndex);if(shared)path.dataset.shared='true';svg.append(path);
+  if(!flowMotionReduced.matches){
+   const particle=document.createElementNS(flowSvgNS,'circle');particle.setAttribute('class','flow-particle');particle.setAttribute('r','3.2');particle.setAttribute('aria-hidden','true');
+   if(programIndex!=null)particle.dataset.programIndex=String(programIndex);
+   const motion=document.createElementNS(flowSvgNS,'animateMotion');motion.setAttribute('dur',(4.2+(sequence%3)*.35)+'s');motion.setAttribute('begin',((sequence%7)*.28)+'s');motion.setAttribute('repeatCount','indefinite');
+   const mpath=document.createElementNS(flowSvgNS,'mpath');mpath.setAttribute('href','#'+id);mpath.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#'+id);motion.append(mpath);particle.append(motion);svg.append(particle);
+  }
+  sequence+=1;return path;
+ }
+ function draw(){
+  const rect=root.getBoundingClientRect();if(rect.width<1||rect.height<1)return;
+  if(matchMedia('(max-width: 700px)').matches){svg.replaceChildren();return}
+  svg.setAttribute('viewBox','0 0 '+rect.width+' '+rect.height);svg.replaceChildren();sequence=0;
+  const cards=[...document.querySelectorAll(spec.cards)],focus=document.querySelector(spec.focus),outcome=document.querySelector(spec.outcome),group=document.querySelector(spec.group);
+  if(!cards.length||!focus||!outcome||!group)return;
+  const cardBoxes=cards.map(card=>card.getBoundingClientRect()),mids=cardBoxes.map(box=>box.top-rect.top+box.height/2),minY=Math.min(...mids),maxY=Math.max(...mids);
+  const groupBox=group.getBoundingClientRect(),cardLeft=Math.min(...cardBoxes.map(box=>box.left-rect.left)),trunkX=(groupBox.right-rect.left+cardLeft)/2,groupMid=groupBox.top-rect.top+groupBox.height/2;
+  addPath(flowCurve(flowPoint(group,rect,'right',.5),{x:trunkX,y:groupMid},.62),'gold',null,true);
+  addPath('M '+trunkX+' '+minY+' L '+trunkX+' '+maxY,'gold',null,true);
+  cards.forEach((card,index)=>addPath(flowCurve({x:trunkX,y:mids[index]},flowPoint(card,rect,'left',.5),.7),'gold',index,false));
+  const focusBox=focus.getBoundingClientRect(),cx=focusBox.left-rect.left+focusBox.width/2,cy=focusBox.top-rect.top+focusBox.height/2,radius=Math.min(focusBox.width,focusBox.height)/2;
+  cards.forEach((card,index)=>{
+   const start=flowPoint(card,rect,'right',.5),t=cards.length===1?0:(index/(cards.length-1)-.5)*1.04,yOffset=t*radius;
+   const end={x:cx-Math.sqrt(Math.max(0,radius*radius-yOffset*yOffset)),y:cy+yOffset};
+   addPath(flowCurve(start,end,.58),spec.color,index,false);
+  });
+  addPath(flowCurve(flowPoint(focus,rect,'right',.5),flowPoint(outcome,rect,'left',.5),.62),spec.color,null,true);
+ }
+ draw();if(window.ResizeObserver)new ResizeObserver(draw).observe(root);window.addEventListener('resize',draw,{passive:true});
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+}
+flowDiagrams.forEach(setupFlowDiagram);
+
 const stageNodes = [...document.querySelectorAll('#aliran .stage-node')];
 const stageColumns = [...document.querySelectorAll('#aliran .stage-co')];
 stageNodes.forEach((node, index) => {
@@ -103,7 +162,13 @@ document.addEventListener('click', (event) => {
   if (programme) {
     const root = programme.closest('.program-steps,.program-stack,.maqdis-programs');
     const cards = [...root.querySelectorAll('button')];
-    selectDiagramItems(cards,[programme],cards);
+    const section=programme.closest('#teras-madinah,#teras-maqdis');
+    const svg=section&&section.querySelector('.flow-connectors');
+    if(svg&&!matchMedia('(max-width: 700px)').matches){
+      const index=cards.indexOf(programme),routes=[...svg.querySelectorAll('.flow-link[data-program-index]')],particles=[...svg.querySelectorAll('.flow-particle[data-program-index]')];
+      const linked=[...routes,...particles].filter(route=>Number(route.dataset.programIndex)===index);
+      selectDiagramItems([...cards,...routes,...particles],[programme,...linked],cards);
+    }else selectDiagramItems(cards,[programme],cards);
     return;
   }
   const roleCard = event.target.closest('#portfolio .portfolio-role-card');

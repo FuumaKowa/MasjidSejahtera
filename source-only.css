@@ -857,3 +857,67 @@ html,body{max-width:100%;overflow-x:clip}
 }
 /* Extend page 6 programme connectors to the centered focus circle on tablets. */
 @media(max-width:1050px) and (min-width:701px){#teras-madinah .program-stack button{--connector-distance:calc(clamp(24px,4vw,58px) + clamp(0px,calc(22vw - 176px),55px))}#teras-madinah .program-stack button::after{right:calc(-1 * var(--connector-distance));width:var(--connector-distance)}}
+
+
+/* Teras pages: source-style hierarchy and connected programme diagrams. */
+#teras-iman .page-inner>h2,#teras-madinah .page-inner>h2,#teras-maqdis .page-inner>h2{text-align:center;max-width:none}
+.teras-heading{display:block;color:var(--navy);font-size:clamp(34px,5.2vw,68px);line-height:1.05;letter-spacing:.005em;text-transform:uppercase}
+.teras-subtitle{display:block;margin-top:10px;color:#078360;font:400 clamp(23px,3vw,40px)/1.2 Georgia,serif;letter-spacing:0}
+#teras-iman .result-ribbon{max-width:1100px;margin:38px auto 22px;text-align:center;padding:18px 48px;clip-path:polygon(1.5% 0,98.5% 0,100% 50%,98.5% 100%,1.5% 100%,0 50%)}
+#teras-iman .focus-hex{margin:28px auto 36px}
+#teras-iman .focus-hex strong::after{content:"";display:block;width:min(280px,100%);height:1px;margin:10px auto 0;background:#c5a34d}
+#teras-iman .program-flow{max-width:1100px;margin:0 auto;padding-inline:24px}
+#teras-iman .program-steps button:not(:last-child)::after{content:"";width:clamp(18px,3vw,42px);height:2px;right:calc(clamp(18px,3vw,42px)*-1);background:#c5a34d}
+#teras-iman .program-steps button:not(:last-child)::before{z-index:2}
+#teras-iman .page-inner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:-24px;top:clamp(128px,18vh,220px);bottom:clamp(70px,9vh,104px);border-left:2px solid #c5a34d;opacity:.9}
+#teras-iman .program-flow::before{content:"";position:absolute;left:-24px;top:50%;width:24px;height:2px;background:#c5a34d;pointer-events:none}
+#teras-madinah .muafakat-flow{width:min(calc(100% - 140px),1240px);max-width:1240px;grid-template-columns:1.12fr .9fr .82fr;gap:clamp(30px,4vw,58px);margin:48px auto 0}
+#teras-madinah .program-stack{position:relative;z-index:1}
+#teras-madinah .program-group-label{position:absolute;display:block;top:50%;left:-136px;width:122px;transform:translateY(-50%);color:#102f4d;font-size:clamp(12px,1.1vw,15px);font-weight:800;line-height:1.25;text-align:right;letter-spacing:.04em}
+#teras-madinah .program-stack button{z-index:1}
+#teras-madinah .muafakat-focus,#teras-madinah .outcome-card{z-index:1}
+#teras-maqdis .maqdis-flow{position:relative;margin-top:48px}
+#teras-maqdis .maqdis-flow>div{position:relative;z-index:1}
+.flow-connectors{position:absolute;inset:0;z-index:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.flow-link{fill:none;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;opacity:.9;transition:stroke .22s,stroke-width .22s,opacity .22s,filter .22s}
+.flow-link--gold{stroke:#c5a34d}
+.flow-link--green{stroke:#078360}
+.flow-link.sel{stroke:#f3d06b!important;stroke-width:4;opacity:1;filter:drop-shadow(0 0 4px #fff3c4) drop-shadow(0 0 8px #c5a34d)}
+.flow-link--green.sel{stroke:#30b98f!important;filter:drop-shadow(0 0 4px #dbfff1) drop-shadow(0 0 8px #078360)}
+.flow-link.dm{opacity:.22!important;filter:saturate(.4)}
+.flow-particle{fill:#fff9dc;stroke:#e2bc55;stroke-width:.5;opacity:.98;filter:drop-shadow(0 0 2px #fff7d0) drop-shadow(0 0 6px #e4bd55);pointer-events:none}
+.flow-particle.sel{fill:#f7d76e;filter:drop-shadow(0 0 3px #fff9dc) drop-shadow(0 0 9px #e8bf46)}
+.flow-particle.dm{opacity:.16!important;filter:none}
+@media(min-width:701px){
+#teras-madinah .program-stack button::after,#teras-madinah .outcome-card::before,#teras-madinah .outcome-card::after,#teras-maqdis .maqdis-programs button::after,#teras-maqdis .maqdis-programs button::before,#teras-maqdis .maqdis-outcome::before,#teras-maqdis .maqdis-outcome::after{display:none!important}
+#teras-madinah .muafakat-flow>*:not(.flow-connectors),#teras-maqdis .maqdis-flow>*:not(.flow-connectors){position:relative;z-index:1}
+}
+@media(max-width:1050px) and (min-width:701px){
+#teras-madinah .muafakat-flow{width:min(calc(100% - 110px),860px);max-width:860px;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px}
+#teras-madinah .program-stack{grid-row:span 2}
+#teras-madinah .program-group-label{left:-120px;width:104px}
+#teras-maqdis .maqdis-flow{margin-top:36px}
+}
+@media(max-width:700px){
+#teras-iman .page-inner::before,#teras-iman .program-flow::before{display:none}
+#teras-iman .result-ribbon{margin:26px 0 18px;padding:15px 26px}
+#teras-iman .focus-hex{margin:22px auto 28px}
+#teras-iman .program-flow{padding-inline:14px}
+#teras-iman .program-steps{grid-template-columns:1fr;gap:18px}
+#teras-iman .program-steps button:not(:last-child)::after{display:none}
+#teras-madinah .muafakat-flow{width:100%;max-width:none;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:28px}
+#teras-madinah .program-stack{grid-row:auto}
+#teras-madinah .program-group-label{position:static;display:block;width:auto;margin:0 0 12px;transform:none;text-align:left;font-size:14px}
+#teras-madinah .muafakat-focus{width:min(100%,330px);justify-self:center}
+#teras-madinah .outcome-card{min-height:0}
+#teras-maqdis .maqdis-flow{grid-template-columns:minmax(0,1fr);gap:18px;margin-top:26px}
+#teras-maqdis .mosque-glyph{justify-self:start;align-items:flex-start;font-size:14px}
+#teras-maqdis .mosque-glyph svg{display:none}
+#teras-maqdis .maqdis-focus{width:min(100%,340px);justify-self:center}
+#teras-maqdis .maqdis-outcome{min-height:0}
+.flow-connectors{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+.flow-link,.flow-particle{transition:none!important;animation:none!important}
+.flow-particle{display:none!important}
+}
