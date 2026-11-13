@@ -933,3 +933,26 @@ html,body{max-width:100%;overflow-x:clip}
  #teras-iman .program-flow::after{content:"";position:absolute;left:-24px;top:calc(50% + 15px);width:48px;height:2px;background:var(--gold);pointer-events:none}
 }
 @media(max-width:700px){#teras-iman .program-flow::after{display:none}}
+
+
+/* Use the Page 1 courtyard image as the quiet shared backdrop for every content page. */
+#kota-suci.page,#impak.page,#objektif.page,#teras-iman.page,#teras-madinah.page,#teras-maqdis.page,#sahabat.page,#portfolio.page,#fungsi.page,#aliran.page,#dimensi.page,#penutup.page{
+ background-color:#e9eee6!important;
+ background-image:linear-gradient(rgba(233,238,230,.84),rgba(233,238,230,.84)),url("assets/experience/courtyard-arrival.jpg")!important;
+ background-position:center,center 45%!important;
+ background-size:cover,cover!important;
+ background-repeat:no-repeat,no-repeat!important;
+ background-attachment:fixed,fixed!important;
+}
+#sahabat.page .sahabat-photo,#sahabat.page .sahabat-shade{display:none!important}
+.site-footer{
+ background-color:#092b26!important;
+ background-image:linear-gradient(rgba(9,43,38,.9),rgba(9,43,38,.9)),url("assets/experience/courtyard-arrival.jpg")!important;
+ background-position:center,center 45%!important;
+ background-size:cover,cover!important;
+ background-repeat:no-repeat,no-repeat!important;
+ background-attachment:scroll,scroll!important;
+}
+@media(max-width:700px){
+ #kota-suci.page,#impak.page,#objektif.page,#teras-iman.page,#teras-madinah.page,#teras-maqdis.page,#sahabat.page,#portfolio.page,#fungsi.page,#aliran.page,#dimensi.page,#penutup.page{background-attachment:scroll,scroll!important}
+}
