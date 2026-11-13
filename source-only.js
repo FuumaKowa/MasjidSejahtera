@@ -34,7 +34,29 @@ const cityItems = [...document.querySelectorAll('#kota-suci .city-item')];
 const impactRoot = document.getElementById('impak');
 const objectiveRoot = document.getElementById('objektif');
 const portfolioRoot = document.querySelector('#portfolio .portfolio-role-map');
+
 const functionRoot = document.getElementById('fungsi');
+const functionLines = [...(functionRoot?.querySelectorAll('.function-line') || [])];
+const functionFlowParticles = [];
+if (functionRoot && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const svg = functionRoot.querySelector('.function-map > svg');
+  const svgNs = 'http://www.w3.org/2000/svg';
+  functionLines.forEach((line, index) => {
+    const particle = document.createElementNS(svgNs, 'circle');
+    particle.setAttribute('class', 'function-flow-particle');
+    particle.dataset.connectorIndex = String(index);
+    particle.setAttribute('r', '1.25');
+    particle.setAttribute('aria-hidden', 'true');
+    const motion = document.createElementNS(svgNs, 'animateMotion');
+    motion.setAttribute('dur', `${3.2 + (index % 3) * 0.3}s`);
+    motion.setAttribute('begin', `${index * 0.35}s`);
+    motion.setAttribute('repeatCount', 'indefinite');
+    motion.setAttribute('path', line.getAttribute('d'));
+    particle.append(motion);
+    svg?.append(particle);
+    functionFlowParticles.push(particle);
+  });
+}
 const stageNodes = [...document.querySelectorAll('#aliran .stage-node')];
 const stageColumns = [...document.querySelectorAll('#aliran .stage-co')];
 stageNodes.forEach((node, index) => {
@@ -100,7 +122,7 @@ document.addEventListener('click', (event) => {
   const functionNode = event.target.closest('#fungsi .function-node');
   if (functionNode) {
     const nodes = [...functionRoot.querySelectorAll('.function-node')];
-    const lines = [...functionRoot.querySelectorAll('.function-line')];
+    const lines = functionLines;
     const lineIndexByNode = {
       'function-knowledge': 0,
       'function-economy': 4,
@@ -109,8 +131,10 @@ document.addEventListener('click', (event) => {
       'function-education': 2
     };
     const nodeKey = [...functionNode.classList].find((name) => Object.hasOwn(lineIndexByNode, name));
-    const line = lines[lineIndexByNode[nodeKey]];
-    selectDiagramItems([...nodes,...lines],[functionNode,line],nodes);
+    const lineIndex = lineIndexByNode[nodeKey];
+    const line = lines[lineIndex];
+    const particle = functionFlowParticles[lineIndex];
+    selectDiagramItems([...nodes,...lines,...functionFlowParticles],[functionNode,line,particle],nodes);
     return;
   }
   const stageControl = event.target.closest('#aliran .stage-node,#aliran .stage-co');

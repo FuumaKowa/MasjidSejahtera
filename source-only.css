@@ -808,3 +808,43 @@ html,body{max-width:100%;overflow-x:clip}
 }
 #fungsi .function-line.sel{stroke:#f7d76e!important;stroke-width:2.6;stroke-dashoffset:0!important;opacity:1!important;filter:drop-shadow(0 0 3px #fff6cc) drop-shadow(0 0 10px #e8bf46) drop-shadow(0 0 18px #c5a34d);animation:function-line-selected-glow 1.5s ease-in-out infinite!important}
 @media(prefers-reduced-motion:reduce){#fungsi .function-line.sel{animation:none!important;stroke-width:2.8!important;filter:drop-shadow(0 0 3px #fff6cc) drop-shadow(0 0 14px #e8bf46)!important}}
+
+/* Connector travel lights: pages 5–7 and 10. */
+@keyframes connector-light-x{0%{opacity:0;transform:translate(0,-50%) scale(.6)}14%{opacity:1;transform:translate(0,-50%) scale(1)}84%{opacity:1;transform:translate(var(--connector-distance),-50%) scale(.92)}100%{opacity:0;transform:translate(var(--connector-distance),-50%) scale(.55)}}
+@keyframes connector-light-y{0%{opacity:0;transform:translate(0,0) scale(.6)}14%{opacity:1;transform:translate(0,0) scale(1)}84%{opacity:1;transform:translate(0,var(--connector-distance)) scale(.92)}100%{opacity:0;transform:translate(0,var(--connector-distance)) scale(.55)}}
+@keyframes connector-light-page5-x{0%{opacity:0;transform:translate(calc(-1 * var(--connector-distance)),-50%) scale(.6)}14%{opacity:1;transform:translate(calc(-1 * var(--connector-distance)),-50%) scale(1)}84%{opacity:1;transform:translate(0,-50%) scale(.92)}100%{opacity:0;transform:translate(0,-50%) scale(.55)}}
+@keyframes connector-light-page5-y{0%{opacity:0;transform:translateY(calc(-1 * var(--connector-distance))) scale(.6)}14%{opacity:1;transform:translateY(calc(-1 * var(--connector-distance))) scale(1)}84%{opacity:1;transform:translateY(0) scale(.92)}100%{opacity:0;transform:translateY(0) scale(.55)}}
+#teras-iman .program-steps{--connector-distance:clamp(18px,3vw,42px);gap:var(--connector-distance)}
+#teras-iman .program-steps button:not(:last-child){overflow:visible}
+#teras-iman .program-steps button:not(:last-child)::before,#teras-madinah .program-stack button::before,#teras-maqdis .maqdis-programs button::before,#teras-madinah .outcome-card::after,#teras-maqdis .maqdis-outcome::after{content:"";position:absolute;z-index:2;width:7px;height:7px;border-radius:50%;background:#fff9dc;box-shadow:0 0 4px 2px #fff2b9,0 0 11px 4px #e4bd55;pointer-events:none;opacity:0}
+#teras-iman .program-steps button:not(:last-child)::before{right:calc(-1 * var(--connector-distance));top:50%;animation:connector-light-page5-x 3.4s ease-in-out infinite}
+#teras-iman .program-steps button:nth-child(2)::before{animation-delay:.34s}
+#teras-iman .program-steps button:nth-child(3)::before{animation-delay:.68s}
+#teras-madinah .muafakat-flow{--connector-distance:clamp(24px,4vw,58px);gap:var(--connector-distance)}
+#teras-madinah .program-stack button::before,#teras-maqdis .maqdis-programs button::before{right:-3px;top:50%;animation:connector-light-x 3.4s ease-in-out infinite}
+#teras-madinah .program-stack button:nth-child(2)::before,#teras-maqdis .maqdis-programs button:nth-child(2)::before{animation-delay:.34s}
+#teras-madinah .program-stack button:nth-child(3)::before,#teras-maqdis .maqdis-programs button:nth-child(3)::before{animation-delay:.68s}
+#teras-madinah .program-stack button:nth-child(4)::before,#teras-maqdis .maqdis-programs button:nth-child(4)::before{animation-delay:1.02s}
+#teras-madinah .outcome-card{position:relative;overflow:visible;--connector-distance:clamp(24px,4vw,58px)}
+#teras-madinah .outcome-card::before,#teras-maqdis .maqdis-outcome::before{content:"";position:absolute;z-index:0;top:50%;left:calc(-1 * var(--connector-distance));width:var(--connector-distance);height:2px;background:#c5a34d;pointer-events:none}
+#teras-madinah .outcome-card::after,#teras-maqdis .maqdis-outcome::after{top:calc(50% - 3.5px);left:calc(-1 * var(--connector-distance) - 3.5px);animation:connector-light-x 3.4s ease-in-out infinite 1.2s}
+#teras-maqdis .maqdis-flow{--connector-distance:clamp(16px,3vw,42px);gap:var(--connector-distance)}
+#teras-maqdis .maqdis-outcome{position:relative;overflow:visible;--connector-distance:clamp(16px,3vw,42px)}
+#fungsi .function-flow-particle{fill:#fff9dc;stroke:#c5a34d;stroke-width:.18;filter:drop-shadow(0 0 1px #fff9dc) drop-shadow(0 0 3px #e4bd55);opacity:0;pointer-events:none}
+#fungsi.is-visible .function-flow-particle{opacity:1;transition:opacity .45s 1.8s}
+#fungsi .function-flow-particle.sel{fill:#f7d76e;opacity:1;filter:drop-shadow(0 0 2px #fff9dc) drop-shadow(0 0 7px #e8bf46)}
+#fungsi .function-flow-particle.dm{opacity:.12!important;filter:none}
+@media(max-width:700px){
+ #teras-iman .program-steps{--connector-distance:10px}
+ #teras-iman .program-steps button:not(:last-child)::before{right:calc(50% - 3.5px);top:auto;bottom:calc(-1 * var(--connector-distance));animation:connector-light-page5-y 3.4s ease-in-out infinite}
+ #teras-madinah .muafakat-flow{--connector-distance:18px}
+ #teras-madinah .program-stack button,#teras-maqdis .maqdis-programs button{--connector-distance:12px}
+ #teras-madinah .program-stack button::before,#teras-maqdis .maqdis-programs button::before{top:auto;right:calc(50% - 3.5px);bottom:-3px;animation-name:connector-light-y}
+ #teras-madinah .outcome-card,#teras-maqdis .maqdis-outcome{--connector-distance:20px}
+ #teras-madinah .outcome-card::before,#teras-maqdis .maqdis-outcome::before{top:calc(-1 * var(--connector-distance));left:calc(50% - 1px);width:2px;height:var(--connector-distance)}
+ #teras-madinah .outcome-card::after,#teras-maqdis .maqdis-outcome::after{top:calc(-1 * var(--connector-distance) - 3.5px);left:calc(50% - 3.5px);animation-name:connector-light-y}
+}
+@media(prefers-reduced-motion:reduce){
+ #teras-iman .program-steps button:not(:last-child)::before,#teras-madinah .program-stack button::before,#teras-maqdis .maqdis-programs button::before,#teras-madinah .outcome-card::after,#teras-maqdis .maqdis-outcome::after,#fungsi .function-flow-particle{display:none!important;animation:none!important;transition:none!important}
+ #fungsi .function-line,#fungsi .function-halo{animation:none!important;transition:none!important;stroke-dashoffset:0!important}
+}
