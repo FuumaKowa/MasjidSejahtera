@@ -921,3 +921,6 @@ html,body{max-width:100%;overflow-x:clip}
 .flow-link,.flow-particle{transition:none!important;animation:none!important}
 .flow-particle{display:none!important}
 }
+
+/* Keep the three teras headings visible on direct links as well as scroll entry. */
+#teras-iman .page-inner>h2,#teras-madinah .page-inner>h2,#teras-maqdis .page-inner>h2{opacity:1;transform:none}
