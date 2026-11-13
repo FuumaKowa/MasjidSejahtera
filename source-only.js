@@ -119,7 +119,7 @@ document.addEventListener('keydown',(event) => {
     clearDiagramSelection();
     return;
   }
-  if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('#aliran .stage-node,#aliran .stage-co')) {
+  if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('#aliran .stage-node,#aliran .stage-co,#objektif .objective-vertex')) {
     event.preventDefault();
     event.target.click();
   }
@@ -182,9 +182,13 @@ const setCurrentNav = (group) => document.querySelectorAll('.main-nav a').forEac
   else link.removeAttribute('aria-current');
 });
 if ('IntersectionObserver' in window) {
-  const navObserver = new IntersectionObserver((entries) => {
-    const activeEntry = entries.filter((entry) => entry.isIntersecting).sort((a,b) => b.intersectionRatio-a.intersectionRatio)[0];
-    if (activeEntry) setCurrentNav(navTargets.find((item) => item.section === activeEntry.target)?.group || null);
+  const navObserver = new IntersectionObserver(() => {
+    const top = innerHeight * .38;
+    const bottom = innerHeight * .62;
+    const current = navTargets.map((item) => ({ ...item, rect: item.section.getBoundingClientRect() }))
+      .filter((item) => item.rect.top < bottom && item.rect.bottom > top)
+      .sort((a,b) => Math.min(b.rect.bottom,bottom)-Math.max(b.rect.top,top) - (Math.min(a.rect.bottom,bottom)-Math.max(a.rect.top,top)))[0];
+    setCurrentNav(current?.group || null);
   }, { rootMargin: '-38% 0px -38% 0px', threshold: 0 });
   navTargets.forEach((item) => navObserver.observe(item.section));
 }
