@@ -739,3 +739,6 @@ html,body{max-width:100%;overflow-x:clip}
   :is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#sahabat,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page,
   #hubungi.closing-cta{background-attachment:scroll,scroll}
 }
+
+#portfolio .portfolio-title-accent{color:#e8d28d}
+#portfolio .portfolio-role-group h3{color:#fffdf5}
