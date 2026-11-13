@@ -796,3 +796,7 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Page 10: keep the shared lattice without the radial vignette. */
 #fungsi.page{background-color:#e9eee6!important;background-image:linear-gradient(180deg,rgba(239,242,232,.985) 0%,rgba(239,242,232,.985) 100%),url("assets/experience/courtyard-arrival.jpg")!important;background-position:center,center -50%!important;background-size:cover,auto 235%!important;background-repeat:no-repeat!important;background-attachment:fixed!important}#fungsi.page::before,#fungsi.page::after{display:none!important;content:none!important;animation:none!important}#aliran.page{background-color:#e9eee6!important;background-image:linear-gradient(180deg,rgba(239,242,232,.985) 0%,rgba(239,242,232,.985) 100%),url("assets/experience/courtyard-arrival.jpg")!important;background-position:center,center -50%!important;background-size:cover,auto 235%!important;background-repeat:no-repeat!important;background-attachment:fixed!important}#aliran.page::before,#aliran.page::after{display:none!important;content:none!important;animation:none!important}
+
+/* Keep selected impact callouts anchored at their diagram coordinates. */
+#impak .impact-callout.sel{transform:translate(-50%,-50%);translate:0 -3px;border-color:#e4c56e;background:#fff8e0;box-shadow:0 0 0 3px #c5a34d66,0 16px 34px #102f4d25}
+@media(max-width:800px){#impak .impact-callout.sel{transform:none;translate:0 -3px}}
