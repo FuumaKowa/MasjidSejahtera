@@ -800,3 +800,11 @@ html,body{max-width:100%;overflow-x:clip}
 /* Keep selected impact callouts anchored at their diagram coordinates. */
 #impak .impact-callout.sel{transform:translate(-50%,-50%);translate:0 -3px;border-color:#e4c56e;background:#fff8e0;box-shadow:0 0 0 3px #c5a34d66,0 16px 34px #102f4d25}
 @media(max-width:800px){#impak .impact-callout.sel{transform:none;translate:0 -3px}}
+
+/* Make the selected Page 10 connector visibly glow and pulse. */
+@keyframes function-line-selected-glow{
+  0%,100%{stroke-width:2.2;filter:drop-shadow(0 0 2px #fff6cc) drop-shadow(0 0 7px #e8bf46) drop-shadow(0 0 12px #c5a34d)}
+  50%{stroke-width:3;filter:drop-shadow(0 0 4px #fff7d2) drop-shadow(0 0 12px #f1c94f) drop-shadow(0 0 22px #d6ad3f)}
+}
+#fungsi .function-line.sel{stroke:#f7d76e!important;stroke-width:2.6!important;stroke-dashoffset:0!important;opacity:1!important;filter:drop-shadow(0 0 3px #fff6cc) drop-shadow(0 0 10px #e8bf46) drop-shadow(0 0 18px #c5a34d)!important;animation:function-line-selected-glow 1.5s ease-in-out infinite!important}
+@media(prefers-reduced-motion:reduce){#fungsi .function-line.sel{animation:none!important;stroke-width:2.8!important;filter:drop-shadow(0 0 3px #fff6cc) drop-shadow(0 0 14px #e8bf46)!important}}
