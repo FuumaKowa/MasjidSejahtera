@@ -930,6 +930,6 @@ html,body{max-width:100%;overflow-x:clip}
 @media(min-width:701px){
  #teras-iman .page-inner::before{display:none}
  #teras-iman .program-flow::before{left:-24px;top:63px;bottom:24px;width:0;height:auto;border-left:2px solid var(--gold);background:none}
- #teras-iman .program-flow::after{content:"";position:absolute;left:-24px;top:calc(50% + 19px);width:24px;height:2px;background:var(--gold);pointer-events:none}
+ #teras-iman .program-flow::after{content:"";position:absolute;left:-24px;top:calc(50% + 15px);width:48px;height:2px;background:var(--gold);pointer-events:none}
 }
 @media(max-width:700px){#teras-iman .program-flow::after{display:none}}
