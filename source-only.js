@@ -10,42 +10,121 @@ navigation.addEventListener('click', (event) => {
   menuButton.setAttribute('aria-expanded', 'false');
   navigation.classList.remove('is-open');
 });
-document.addEventListener('click', (event) => {
-  const city = event.target.closest('.city-item');
-  if (city) {
-    document.querySelectorAll('.city-item').forEach((item) => {
-      const active = item === city;
-      item.classList.toggle('is-active', active);
-      item.setAttribute('aria-pressed', String(active));
-    });
-  }
 
-  const layer = event.target.closest('[data-layer]');
-  if (layer) {
-    const activeLayer = layer.dataset.layer;
-    document.querySelectorAll('[data-layer]').forEach((item) => {
-      const active = item.dataset.layer === activeLayer;
-      item.classList.toggle('is-active', active);
-      if (item.hasAttribute('aria-pressed')) item.setAttribute('aria-pressed', String(active));
-    });
-  }
-
-  const control = event.target.closest('button[aria-pressed]');
-  if (control && !control.matches('.city-item,[data-layer]')) {
-    const group = control.closest('.objective-network,.program-steps,.program-stack,.maqdis-programs,.portfolio-wheel,.function-map,.stage-list');
-    if (group) {
-      group.querySelectorAll('button[aria-pressed]').forEach((item) => {
-        const active = item === control;
-        item.setAttribute('aria-pressed', String(active));
-        item.classList.toggle('is-active', active);
-      });
-    } else {
-      const active = control.getAttribute('aria-pressed') !== 'true';
-      control.setAttribute('aria-pressed', String(active));
-      control.classList.toggle('is-active', active);
-    }
+let selectedControls = [];
+const clearDiagramSelection = () => {
+  document.querySelectorAll('.sel,.dm').forEach((item) => item.classList.remove('sel','dm'));
+  selectedControls.forEach((item) => item.setAttribute('aria-pressed','false'));
+  selectedControls = [];
+};
+const selectDiagramItems = (allItems, selectedItems, controls = []) => {
+  const all = [...new Set(allItems.filter(Boolean))];
+  const hits = [...new Set(selectedItems.filter(Boolean))];
+  const alreadySelected = hits.length > 0 && hits.every((item) => item.classList.contains('sel'));
+  clearDiagramSelection();
+  if (alreadySelected) return;
+  all.forEach((item) => {
+    item.classList.add(hits.includes(item) ? 'sel' : 'dm');
+    item.classList.toggle('is-active', hits.includes(item));
+  });
+  selectedControls = controls.filter(Boolean);
+  selectedControls.forEach((item) => item.setAttribute('aria-pressed', String(hits.includes(item))));
+};
+const cityItems = [...document.querySelectorAll('#kota-suci .city-item')];
+const impactRoot = document.getElementById('impak');
+const objectiveRoot = document.getElementById('objektif');
+const portfolioRoot = document.querySelector('#portfolio .portfolio-role-map');
+const functionRoot = document.getElementById('fungsi');
+const stageNodes = [...document.querySelectorAll('#aliran .stage-node')];
+const stageColumns = [...document.querySelectorAll('#aliran .stage-co')];
+stageNodes.forEach((node, index) => {
+  const column = stageColumns[index];
+  const label = column?.innerText.replace(/\\s+/g,' ').trim() || 'Peringkat';
+  node.dataset.stageIndex = String(index);
+  node.setAttribute('role','button');
+  node.setAttribute('tabindex','0');
+  node.setAttribute('aria-label',label);
+  node.setAttribute('aria-pressed','false');
+  if (column) {
+    column.dataset.stageIndex = String(index);
+    column.setAttribute('role','button');
+    column.setAttribute('tabindex','0');
+    column.setAttribute('aria-pressed','false');
+    column.setAttribute('aria-label',label);
   }
 });
+document.addEventListener('click', (event) => {
+  const city = event.target.closest('#kota-suci .city-item');
+  if (city) {
+    selectDiagramItems(cityItems,[city],cityItems);
+    return;
+  }
+  const layer = event.target.closest('#impak [data-layer]');
+  if (layer) {
+    const items = [...impactRoot.querySelectorAll('[data-layer]')];
+    const linked = items.filter((item) => item.dataset.layer === layer.dataset.layer);
+    selectDiagramItems(items,linked,linked.filter((item) => item.matches('button,[role="button"]')));
+    return;
+  }
+  const objectiveCard = event.target.closest('#objektif .objective-card');
+  const objectiveVertex = event.target.closest('#objektif .objective-vertex');
+  if (objectiveCard || objectiveVertex) {
+    const cards = [...objectiveRoot.querySelectorAll('.objective-card')];
+    const vertices = [...objectiveRoot.querySelectorAll('.objective-vertex')];
+    const selected = objectiveCard || cards[Number(objectiveVertex.dataset.index)];
+    const index = cards.indexOf(selected);
+    const vertex = vertices[index];
+    selectDiagramItems([...cards,...vertices],[selected,vertex],cards);
+    return;
+  }
+  const programme = event.target.closest('#teras-iman .program-steps button,#teras-madinah .program-stack button,#teras-maqdis .maqdis-programs button');
+  if (programme) {
+    const root = programme.closest('.program-steps,.program-stack,.maqdis-programs');
+    const cards = [...root.querySelectorAll('button')];
+    selectDiagramItems(cards,[programme],cards);
+    return;
+  }
+  const roleCard = event.target.closest('#portfolio .portfolio-role-card');
+  if (roleCard) {
+    const cards = [...portfolioRoot.querySelectorAll('.portfolio-role-card')];
+    selectDiagramItems(cards,[roleCard],cards);
+    return;
+  }
+  const groupHeading = event.target.closest('#portfolio .portfolio-role-group h3 button');
+  if (groupHeading) {
+    const groups = [...portfolioRoot.querySelectorAll('.portfolio-role-group')];
+    const group = groupHeading.closest('.portfolio-role-group');
+    selectDiagramItems(groups,[group],[...portfolioRoot.querySelectorAll('.portfolio-role-group h3 button')]);
+    return;
+  }
+  const functionNode = event.target.closest('#fungsi .function-node');
+  if (functionNode) {
+    const nodes = [...functionRoot.querySelectorAll('.function-node')];
+    const lines = [...functionRoot.querySelectorAll('.function-line')];
+    const index = nodes.indexOf(functionNode);
+    selectDiagramItems([...nodes,...lines],[functionNode,lines[index]],nodes);
+    return;
+  }
+  const stageControl = event.target.closest('#aliran .stage-node,#aliran .stage-co');
+  if (stageControl) {
+    const index = Number(stageControl.dataset.stageIndex);
+    const linked = [stageNodes[index],stageColumns[index]];
+    selectDiagramItems([...stageNodes,...stageColumns],linked,[...stageNodes,...stageColumns]);
+    return;
+  }
+  clearDiagramSelection();
+});
+document.addEventListener('keydown',(event) => {
+  if (event.key === 'Escape') {
+    clearDiagramSelection();
+    return;
+  }
+  if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('#aliran .stage-node,#aliran .stage-co')) {
+    event.preventDefault();
+    event.target.click();
+  }
+});
+
 const progress = document.querySelector('.scroll-progress span');
 const updateProgress = () => {
   const distance = document.documentElement.scrollHeight - innerHeight;
@@ -88,6 +167,26 @@ if (impactVisual) {
       });
     }
   });
+}
+
+const navGroups = [
+  { selector: '.main-nav a[href="#kota-suci"]', sections: ['kota-suci','impak','objektif','teras-iman','teras-madinah','teras-maqdis'] },
+  { selector: '.main-nav a[href="#sahabat"]', sections: ['sahabat','portfolio'] },
+  { selector: '.main-nav a[href="#hubungi"]', sections: ['hubungi'] }
+];
+const navTargets = navGroups.flatMap((group) => group.sections.map((id) => ({ group, section: document.getElementById(id) })).filter((entry) => entry.section));
+const setCurrentNav = (group) => document.querySelectorAll('.main-nav a').forEach((link) => {
+  const active = Boolean(group && link.matches(group.selector));
+  link.classList.toggle('is-current',active);
+  if (active) link.setAttribute('aria-current','location');
+  else link.removeAttribute('aria-current');
+});
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    const activeEntry = entries.filter((entry) => entry.isIntersecting).sort((a,b) => b.intersectionRatio-a.intersectionRatio)[0];
+    if (activeEntry) setCurrentNav(navTargets.find((item) => item.section === activeEntry.target)?.group || null);
+  }, { rootMargin: '-38% 0px -38% 0px', threshold: 0 });
+  navTargets.forEach((item) => navObserver.observe(item.section));
 }
 
 let snapLocked = false;
@@ -280,6 +379,9 @@ if (objectiveNetwork && objectiveSvg) {
   points.forEach(([x, y], index) => {
     const marker = document.createElementNS(svgNs, 'g');
     marker.setAttribute('class', 'objective-vertex');
+    marker.setAttribute('role','button');
+    marker.setAttribute('tabindex','0');
+    marker.setAttribute('aria-pressed','false');
     marker.dataset.index = String(index);
     marker.style.setProperty('--node-delay', `${950 + index * 130}ms`);
     const circle = document.createElementNS(svgNs, 'circle');
