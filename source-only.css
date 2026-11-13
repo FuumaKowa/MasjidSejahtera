@@ -743,54 +743,7 @@ html,body{max-width:100%;overflow-x:clip}
 #portfolio .portfolio-title-accent{color:#e8d28d}
 #portfolio .portfolio-role-group h3{color:#fffdf5}
 
-/* Keep page 10's shared photo background calm while preserving diagram motion. */
-#fungsi.page::before,#fungsi.page::after{display:none;animation:none}
+/* Page 10 uses the shared courtyard background; keep its diagram animations. */
+#fungsi.page::before{display:none;animation:none}
 #fungsi.is-visible .function-line{animation:function-line-glow 3s linear infinite 1.8s}
 #fungsi .function-halo{animation:function-halo-pulse 3s infinite}
-
-/* Page 10: one consistent wash over the shared mosque photograph. */
-#fungsi.page{
-  background-color:#e9eee6!important;
-  background-image:linear-gradient(rgba(235,239,231,.84),rgba(235,239,231,.84)),url("assets/experience/courtyard-arrival.jpg")!important;
-  background-position:center,center 45%;
-  background-size:cover,cover;
-  background-repeat:no-repeat,no-repeat;
-  background-attachment:fixed,fixed;
-}
-@media(max-width:700px){#fungsi.page{background-attachment:scroll,scroll}}
-
-/* Keep the courtyard visible while cropping out the pool's hard color break. */
-#fungsi.page{
-  background-position:center,center top;
-  background-size:cover,auto 150%;
-}
-@media(max-width:700px){
-  #fungsi.page{background-position:center,center top;background-size:cover,auto 150%}
-}
-
-#fungsi.page{
-  background-image:linear-gradient(rgba(235,239,231,.92),rgba(235,239,231,.92)),url("assets/experience/courtyard-arrival.jpg")!important;
-}
-
-/* Page 10 uses the same background stack as the rest of the site. */
-#fungsi.page{
-  background-color:#e9eee6!important;
-  background-image:linear-gradient(135deg,rgba(239,242,232,.74),rgba(232,239,233,.74)),url("assets/experience/courtyard-arrival.jpg")!important;
-  background-position:center,center 45%;
-  background-size:cover,cover;
-  background-repeat:no-repeat,no-repeat;
-  background-attachment:fixed,fixed;
-}
-#fungsi.page::before{
-  display:block;
-  opacity:.38;
-  animation:sejahtera-aurora-drift 42s ease-in-out infinite alternate;
-}
-#fungsi.page::after{
-  display:block;
-  opacity:.24;
-  animation:sejahtera-grid-shift 42s ease-in-out infinite alternate;
-}
-#fungsi.is-visible .function-line{animation:function-line-glow 3s linear infinite 1.8s}
-#fungsi .function-halo{animation:function-halo-pulse 3s infinite}
-@media(max-width:700px){#fungsi.page{background-attachment:scroll,scroll}}
