@@ -771,3 +771,26 @@ html,body{max-width:100%;overflow-x:clip}
 #fungsi.page{
   background-image:linear-gradient(rgba(235,239,231,.92),rgba(235,239,231,.92)),url("assets/experience/courtyard-arrival.jpg")!important;
 }
+
+/* Page 10 uses the same background stack as the rest of the site. */
+#fungsi.page{
+  background-color:#e9eee6!important;
+  background-image:linear-gradient(135deg,rgba(239,242,232,.74),rgba(232,239,233,.74)),url("assets/experience/courtyard-arrival.jpg")!important;
+  background-position:center,center 45%;
+  background-size:cover,cover;
+  background-repeat:no-repeat,no-repeat;
+  background-attachment:fixed,fixed;
+}
+#fungsi.page::before{
+  display:block;
+  opacity:.38;
+  animation:sejahtera-aurora-drift 42s ease-in-out infinite alternate;
+}
+#fungsi.page::after{
+  display:block;
+  opacity:.24;
+  animation:sejahtera-grid-shift 42s ease-in-out infinite alternate;
+}
+#fungsi.is-visible .function-line{animation:function-line-glow 3s linear infinite 1.8s}
+#fungsi .function-halo{animation:function-halo-pulse 3s infinite}
+@media(max-width:700px){#fungsi.page{background-attachment:scroll,scroll}}
