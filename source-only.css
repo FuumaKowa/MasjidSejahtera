@@ -848,3 +848,10 @@ html,body{max-width:100%;overflow-x:clip}
  #teras-iman .program-steps button:not(:last-child)::before,#teras-madinah .program-stack button::before,#teras-maqdis .maqdis-programs button::before,#teras-madinah .outcome-card::after,#teras-maqdis .maqdis-outcome::after,#fungsi .function-flow-particle{display:none!important;animation:none!important;transition:none!important}
  #fungsi .function-line,#fungsi .function-halo{animation:none!important;transition:none!important;stroke-dashoffset:0!important}
 }
+
+/* Tablet layout: page 6 focus-to-result connector turns downward. */
+@media(max-width:1050px) and (min-width:701px){
+ #teras-madinah .outcome-card::before{top:calc(-1 * var(--connector-distance));left:calc(50% - 1px);width:2px;height:var(--connector-distance)}
+ #teras-madinah .outcome-card::after{top:calc(-1 * var(--connector-distance) - 3.5px);left:calc(50% - 3.5px);animation-name:connector-light-y}
+ #teras-maqdis .maqdis-outcome::before,#teras-maqdis .maqdis-outcome::after{display:none}
+}
