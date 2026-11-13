@@ -67,7 +67,7 @@ const flowSvgNS='http://www.w3.org/2000/svg';
 function flowPoint(element,rootBox,edge,yRatio){
  const box=element.getBoundingClientRect();
  const x=edge==='right'?box.right-rootBox.left:edge==='left'?box.left-rootBox.left:box.left-rootBox.left+box.width/2;
- const y=box.top-rootBox.top+box.height*(yRatio == null ? 0.5 : yRatio);
+ const y=edge==='top'?box.top-rootBox.top:edge==='bottom'?box.bottom-rootBox.top:box.top-rootBox.top+box.height*(yRatio == null ? 0.5 : yRatio);
  return {x:x,y:y};
 }
 function flowCurve(start,end,bend){
@@ -109,7 +109,13 @@ function setupFlowDiagram(spec){
    const end={x:cx-Math.sqrt(Math.max(0,radius*radius-yOffset*yOffset)),y:cy+yOffset};
    addPath(flowCurve(start,end,.58),spec.color,index,false);
   });
-  addPath(flowCurve(flowPoint(focus,rect,'right',.5),flowPoint(outcome,rect,'left',.5),.62),spec.color,null,true);
+  const outcomeBox=outcome.getBoundingClientRect();
+  const focusBottom=focusBox.bottom-rect.top;
+  if(outcomeBox.top>=focusBox.bottom-20){
+   const from=flowPoint(focus,rect,'bottom'),to=flowPoint(outcome,rect,'top');
+   const reach=Math.max(24,(to.y-from.y)*.46);
+   addPath('M '+from.x+' '+from.y+' C '+from.x+' '+(from.y+reach)+', '+to.x+' '+(to.y-reach)+', '+to.x+' '+to.y,spec.color,null,true);
+  }else addPath(flowCurve(flowPoint(focus,rect,'right',.5),flowPoint(outcome,rect,'left',.5),.62),spec.color,null,true);
  }
  draw();if(window.ResizeObserver)new ResizeObserver(draw).observe(root);window.addEventListener('resize',draw,{passive:true});
  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
@@ -231,7 +237,7 @@ addEventListener('scroll', updateProgress, { passive: true });
 addEventListener('resize', updateProgress);
 updateProgress();
 
-const referenceSections = ['kota-suci', 'impak', 'objektif', 'portfolio', 'fungsi', 'sahabat', 'aliran', 'dimensi', 'penutup']
+const referenceSections = ['kota-suci', 'impak', 'objektif', 'teras-iman', 'teras-madinah', 'teras-maqdis', 'portfolio', 'fungsi', 'sahabat', 'aliran', 'dimensi', 'penutup']
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 if ('IntersectionObserver' in window) {
