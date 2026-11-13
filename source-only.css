@@ -743,6 +743,7 @@ html,body{max-width:100%;overflow-x:clip}
 #portfolio .portfolio-title-accent{color:#e8d28d}
 #portfolio .portfolio-role-group h3{color:#fffdf5}
 
-/* Keep the page 10 connectors calm after their initial draw. */
-#fungsi.is-visible .function-line{animation:none}
-#fungsi .function-halo{animation:none}
+/* Keep page 10's shared photo background calm while preserving diagram motion. */
+#fungsi.page::before,#fungsi.page::after{display:none;animation:none}
+#fungsi.is-visible .function-line{animation:function-line-glow 3s linear infinite 1.8s}
+#fungsi .function-halo{animation:function-halo-pulse 3s infinite}
