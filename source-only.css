@@ -720,16 +720,16 @@ html,body{max-width:100%;overflow-x:clip}
 :is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#sahabat,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page,
 #hubungi.closing-cta{
   background-color:#e9eee6;
-  background-image:linear-gradient(135deg,rgba(239,242,232,.74),rgba(232,239,233,.74)),url("assets/experience/courtyard-arrival.jpg");
-  background-position:center,center 45%;
-  background-size:cover,cover;
+  background-image:linear-gradient(rgba(239,242,232,.88),rgba(239,242,232,.88)),url("assets/experience/courtyard-arrival.jpg");
+  background-position:center,center 20%;
+  background-size:cover,auto 135%;
   background-repeat:no-repeat,no-repeat;
   background-attachment:fixed,fixed;
 }
 :is(#sahabat,#portfolio,#dimensi,#penutup).page,
 #hubungi.closing-cta{
   background-color:#092d3a;
-  background-image:linear-gradient(135deg,rgba(7,35,49,.74),rgba(8,59,46,.74)),url("assets/experience/courtyard-arrival.jpg");
+  background-image:linear-gradient(135deg,rgba(7,35,49,.88),rgba(8,59,46,.88)),url("assets/experience/courtyard-arrival.jpg");
 }
 :is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#sahabat,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::before{opacity:.38}
 :is(#kota-suci,#impak,#objektif,#teras-iman,#teras-madinah,#teras-maqdis,#sahabat,#portfolio,#fungsi,#aliran,#dimensi,#penutup).page::after{opacity:.24}
@@ -747,3 +747,48 @@ html,body{max-width:100%;overflow-x:clip}
 #fungsi.page::before{display:none;animation:none}
 #fungsi.is-visible .function-line{animation:function-line-glow 3s linear infinite 1.8s}
 #fungsi .function-halo{animation:function-halo-pulse 3s infinite}
+
+
+/* Interaction focus states shared by the source diagrams. */
+.sel{transition:opacity .24s ease,filter .24s ease,transform .24s ease,box-shadow .24s ease}
+.dm{opacity:.34!important;filter:saturate(.42);transition:opacity .24s ease,filter .24s ease}
+.main-nav a.is-current,.main-nav a[aria-current="location"]{background:#e5cc86;color:var(--deep);border-color:#e5cc86;box-shadow:0 0 0 3px #e5cc8633,0 7px 18px #03152355}
+#kota-suci .city-item.sel{transform:translateY(-6px);z-index:3;box-shadow:0 14px 30px #102f4d28,0 0 0 2px #c5a34d}
+#kota-suci .city-item.sel .city-letter{background:#d9bd62;color:#102f4d;box-shadow:0 0 0 5px #c5a34d35}
+#kota-suci .city-item.sel .city-letter svg{filter:brightness(.58) sepia(.4)}
+#impak [data-layer].sel{filter:drop-shadow(0 0 9px #c5a34dcc)}
+#impak .impact-ring.sel{stroke:#f0d37a;stroke-width:9}
+#impak .impact-leader.sel{stroke:#f0d37a;stroke-width:5}
+#impak .impact-callout.sel{transform:translateY(-5px);border-color:#e4c56e;background:#fff8e0;box-shadow:0 0 0 3px #c5a34d66,0 16px 34px #102f4d25}
+#objektif .objective-card.sel{z-index:4;transform:translate(-50%,-50%) translateY(-5px) scale(1.035);background:#f7f0d8;border-color:var(--gold);box-shadow:0 0 0 3px #c5a34d70,0 16px 32px #102f4d28}
+#objektif .objective-vertex.sel{opacity:1;transform:scale(1.48);filter:drop-shadow(0 0 8px #c5a34d)}
+#teras-iman .program-steps button.sel,#teras-madinah .program-stack button.sel,#teras-maqdis .maqdis-programs button.sel{z-index:3;transform:translateY(-4px);border-color:#e4c56e;background:#fff5d6;color:#102f4d;box-shadow:0 0 0 3px #c5a34d66,0 15px 28px #102f4d25}
+#teras-maqdis .maqdis-programs button.sel b{background:#c5a34d;color:#102f4d}
+#teras-madinah .program-stack button{position:relative;overflow:visible}
+#teras-madinah .program-stack button::after{content:"";position:absolute;z-index:-1;top:50%;right:calc(clamp(24px,4vw,58px)*-1);width:clamp(24px,4vw,58px);height:2px;background:#c5a34d;transform:translateY(-50%);transition:height .24s,filter .24s,background .24s}
+#teras-madinah .program-stack button.sel::after{height:4px;background:#f0d37a;filter:drop-shadow(0 0 5px #c5a34d)}
+#teras-maqdis .maqdis-programs button{position:relative;overflow:visible}
+#teras-maqdis .maqdis-programs button::after{content:"";position:absolute;z-index:-1;top:50%;right:calc(clamp(16px,3vw,42px)*-1);width:clamp(16px,3vw,42px);height:2px;background:#c5a34d;transform:translateY(-50%);transition:height .24s,filter .24s,background .24s}
+#teras-maqdis .maqdis-programs button.sel::after{height:4px;background:#f0d37a;filter:drop-shadow(0 0 5px #c5a34d)}
+#portfolio .portfolio-role-group{transition:opacity .24s,filter .24s,transform .24s}
+#portfolio .portfolio-role-group h3 button{all:unset;display:block;width:100%;font:inherit;line-height:inherit;cursor:pointer}
+#portfolio .portfolio-role-group h3 button:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+#portfolio .portfolio-role-group.sel h3{color:#f0d37a}
+#portfolio .portfolio-role-group.sel h3 button{border-left-color:var(--green)}
+#portfolio .portfolio-role-card.sel{transform:translateY(-3px) scale(1.015);border-color:var(--gold);background:#f1e9cf;box-shadow:0 0 0 3px #c5a34d55,0 12px 26px #102f4d23}
+#portfolio .portfolio-role-card.sel .portfolio-role-copy strong{color:#075e49}
+#portfolio .portfolio-sector.dm,#portfolio .portfolio-card.dm{opacity:.28!important}
+#fungsi .function-node.sel{background:var(--green);color:#fffdf7;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 0 0 3px #c5a34d66,0 0 28px #c5a34d88}
+#fungsi .function-line.sel{stroke:#f0d37a;stroke-width:3;filter:drop-shadow(0 0 4px #c5a34d);stroke-dashoffset:0}
+#fungsi .function-node.dm{opacity:.34!important}
+#aliran .stage-node{cursor:pointer;transition:opacity .24s,filter .24s,transform .24s}
+#aliran .stage-node.sel{filter:drop-shadow(0 0 10px #c5a34d);transform:scale(1.08)}
+#aliran .stage-node.sel circle{stroke:#f0d37a;stroke-width:11}
+#aliran .stage-co{cursor:pointer;transition:opacity .24s,filter .24s,transform .24s,box-shadow .24s}
+#aliran .stage-co.sel{padding:14px 12px;border-radius:14px;background:#fff9e8;box-shadow:0 0 0 2px #c5a34d,0 12px 26px #102f4d18}
+@media(max-width:700px){
+#teras-madinah .program-stack button::after,#teras-maqdis .maqdis-programs button::after{right:50%;top:auto;bottom:-10px;width:2px;height:10px;transform:translateX(50%);z-index:0}
+#teras-madinah .program-stack button.sel::after,#teras-maqdis .maqdis-programs button.sel::after{width:4px;height:12px}
+#aliran .stage-co.sel{margin-inline:4px}
+}
+@media(prefers-reduced-motion:reduce){.sel,.dm,#portfolio .portfolio-role-group,#aliran .stage-node,#aliran .stage-co{transition:none}}
