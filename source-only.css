@@ -793,3 +793,6 @@ html,body{max-width:100%;overflow-x:clip}
 #aliran .stage-co.sel{margin-inline:4px}
 }
 @media(prefers-reduced-motion:reduce){.sel,.dm,#portfolio .portfolio-role-group,#aliran .stage-node,#aliran .stage-co{transition:none}}
+
+/* Page 10: keep the shared lattice without the radial vignette. */
+#fungsi.page::after{background:repeating-linear-gradient(45deg,transparent 0 86px,#102f4d0b 87px 88px,transparent 89px 174px),repeating-linear-gradient(-45deg,transparent 0 106px,#c5a34d11 107px 108px,transparent 109px 216px);mask-image:none;opacity:.14;animation:none}
