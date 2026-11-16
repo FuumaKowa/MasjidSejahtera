@@ -1414,3 +1414,119 @@ main>.page:not(#utama) .page-inner>h2{
 @media(prefers-reduced-motion:reduce){
   #teras-iman .program-steps button,#teras-madinah .program-stack button,#teras-maqdis .maqdis-programs button{transition:none!important}
 }
+
+
+/* Teras visual revamp v2: lighter editorial cards, preserved diagram structure, connector-only light. */
+#teras-iman .result-ribbon{
+  border-radius:3px 22px 3px 22px;
+  background:linear-gradient(105deg,#12334d 0%,#075e49 100%);
+  box-shadow:0 10px 24px #102f4d1c,inset 0 1px #ffffff30;
+}
+#teras-iman .focus-hex{
+  border:1px solid #d2b45f;
+  background:linear-gradient(145deg,#fffdf6,#f1efdf);
+  filter:drop-shadow(0 12px 18px #102f4d18);
+}
+#teras-iman .program-flow{
+  border:1px solid #c6aa60;
+  border-radius:24px 5px 24px 5px;
+  background:linear-gradient(135deg,#f5f4e8eb,#e4efe4e8);
+  box-shadow:0 16px 32px #102f4d18,inset 0 1px #fff;
+}
+#teras-iman .program-flow h3{color:#075e49}
+#teras-iman .program-steps button{
+  border:1px solid #8cae9b;
+  border-radius:4px 20px 4px 20px;
+  background:linear-gradient(145deg,#fffef9,#f1f2e8);
+  color:#102f4d;
+  box-shadow:0 7px 15px #102f4d12,inset 0 1px #fff;
+  font-weight:600;
+}
+#teras-iman .program-steps button:hover,
+#teras-iman .program-steps button[aria-pressed=true]{
+  border-color:#c5a34d;
+  background:#075e49;
+  color:#fffdf5;
+  outline:2px solid #c5a34d;
+  outline-offset:2px;
+  box-shadow:none;
+}
+#teras-iman .program-steps button:not(:last-child)::after{
+  color:#9c7c2e;
+  text-shadow:none;
+}
+#teras-iman .program-steps button.sel::after{
+  color:#f0d47e;
+  filter:drop-shadow(0 0 4px #f0d47e)!important;
+}
+#teras-madinah .program-stack button,
+#teras-maqdis .maqdis-programs button{
+  border:1px solid #9cb8a5;
+  border-left:6px solid #078360;
+  border-radius:4px 20px 4px 20px;
+  background:linear-gradient(130deg,#fffef9f5,#eef3e9f5);
+  color:#102f4d;
+  box-shadow:0 8px 18px #102f4d14,inset 0 1px #fff;
+  font-weight:600;
+}
+#teras-madinah .program-stack button:hover,
+#teras-madinah .program-stack button[aria-pressed=true],
+#teras-maqdis .maqdis-programs button:hover,
+#teras-maqdis .maqdis-programs button[aria-pressed=true]{
+  border-color:#c5a34d;
+  border-left-color:#c5a34d;
+  background:#075e49;
+  color:#fffdf5;
+  outline:2px solid #c5a34d;
+  outline-offset:2px;
+  box-shadow:none;
+}
+#teras-madinah .muafakat-focus{
+  border-color:#d0ad54;
+  background:radial-gradient(circle at 35% 25%,#0d9671,#08765a 74%,#075e49);
+  box-shadow:0 16px 30px #102f4d22,inset 0 0 0 1px #ffffff65;
+}
+#teras-madinah .outcome-card{
+  border:1px solid #c5a34d;
+  border-left:7px solid #c5a34d;
+  border-radius:4px 20px 4px 20px;
+  background:linear-gradient(145deg,#123550,#102f4d);
+  box-shadow:0 12px 24px #102f4d1c;
+}
+#teras-maqdis .maqdis-programs button{border-left-width:1px}
+#teras-maqdis .maqdis-programs button b{
+  background:#078360;
+  color:#fffdf5;
+  box-shadow:none;
+}
+#teras-maqdis .maqdis-focus{
+  border-color:#d0ad54;
+  background:linear-gradient(145deg,#fffef8,#f1f0df);
+  box-shadow:inset 0 0 0 4px #078360,0 14px 28px #102f4d18;
+}
+#teras-maqdis .maqdis-outcome{
+  border:1px solid #c5a34d;
+  border-radius:4px 20px 4px 20px;
+  background:linear-gradient(145deg,#123550,#102f4d);
+  box-shadow:0 12px 24px #102f4d1c;
+}
+#teras-madinah .program-stack button::before,
+#teras-maqdis .maqdis-programs button::before,
+#teras-madinah .outcome-card::after,
+#teras-maqdis .maqdis-outcome::after{display:none!important;animation:none!important}
+#teras-madinah .flow-link,#teras-maqdis .flow-link{opacity:.55;filter:none!important}
+#teras-madinah .flow-link.sel,#teras-maqdis .flow-link.sel{
+  opacity:1!important;
+  filter:drop-shadow(0 0 3px #fff4c8) drop-shadow(0 0 7px #c5a34d)!important;
+}
+#teras-madinah .flow-particle,#teras-maqdis .flow-particle{opacity:0!important;filter:none!important}
+#teras-madinah .flow-particle.sel,#teras-maqdis .flow-particle.sel{
+  opacity:1!important;
+  filter:drop-shadow(0 0 3px #fff5cf) drop-shadow(0 0 7px #c5a34d)!important;
+}
+@media(max-width:700px){
+  #teras-iman .program-flow{border-radius:18px 4px 18px 4px}
+  #teras-iman .program-steps button,
+  #teras-madinah .program-stack button,
+  #teras-maqdis .maqdis-programs button{border-radius:4px 16px 4px 16px}
+}
