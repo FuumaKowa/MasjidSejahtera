@@ -2130,3 +2130,9 @@ main>.page:not(#utama) .page-inner>h2{
   0%,60%,100% { opacity:.42; transform:translateX(-8px) scaleX(.82); }
   18%,34% { opacity:.92; transform:translateX(0) scaleX(1); }
 }
+
+/* Let the teaser card show beside the symbol throughout its peek cycle. */
+#kota-suci .city-story.is-intro .city-item:first-child::before,
+#kota-suci .city-story.is-revealed .city-item:not(.is-open)::before {
+  inset:14px -58px 14px 78px;
+}
