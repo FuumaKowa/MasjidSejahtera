@@ -1561,3 +1561,31 @@ main>.page:not(#utama) .page-inner>h2{
 @media(prefers-reduced-motion:reduce){
   #teras-iman .program-steps button.sel::before{display:none!important;animation:none!important}
 }
+
+
+/* Selected connector beacon v4: clear endpoint light with motion only on active arrows. */
+#teras-iman .program-steps button.sel:not(:last-child)::after{
+  color:#e6c35d!important;
+  filter:drop-shadow(0 0 4px #fff4c4) drop-shadow(0 0 9px #c5a34d)!important;
+}
+#teras-iman .program-steps button.sel:not(:last-child)::before{
+  display:block!important;
+  opacity:1!important;
+  background:#fff4c4!important;
+  box-shadow:0 0 5px 2px #fff0ae,0 0 12px 5px #c5a34d!important;
+}
+@media(prefers-reduced-motion:no-preference){
+  #teras-iman .program-steps button.sel:not(:last-child)::before{
+    animation:connector-light-page5-x 3.4s ease-in-out infinite!important;
+  }
+  @media(max-width:1050px) and (min-width:701px){
+    #teras-iman .program-steps button:nth-child(2).sel::before{
+      animation:connector-light-page5-y 3.4s ease-in-out infinite!important;
+    }
+  }
+  @media(max-width:700px){
+    #teras-iman .program-steps button.sel:not(:last-child)::before{
+      animation:connector-light-page5-y 3.4s ease-in-out infinite!important;
+    }
+  }
+}
