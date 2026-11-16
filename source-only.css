@@ -1530,3 +1530,34 @@ main>.page:not(#utama) .page-inner>h2{
   #teras-madinah .program-stack button,
   #teras-maqdis .maqdis-programs button{border-radius:4px 16px 4px 16px}
 }
+
+
+/* Teras connector tracer v3: show the moving light only on the selected Page 5 arrow. */
+#teras-iman .program-steps button.sel:not(:last-child)::before{
+  display:block!important;
+  animation:connector-light-page5-x 3.4s ease-in-out infinite!important;
+}
+@media(max-width:1050px) and (min-width:701px){
+  #teras-iman .program-steps button.sel:not(:last-child)::before{
+    right:calc(-1 * var(--connector-distance));
+    top:50%;
+    animation:connector-light-page5-x 3.4s ease-in-out infinite!important;
+  }
+  #teras-iman .program-steps button:nth-child(2).sel::before{
+    right:calc(50% - 3.5px);
+    top:auto;
+    bottom:calc(-1 * var(--connector-distance));
+    animation:connector-light-page5-y 3.4s ease-in-out infinite!important;
+  }
+}
+@media(max-width:700px){
+  #teras-iman .program-steps button.sel:not(:last-child)::before{
+    right:calc(50% - 3.5px);
+    top:auto;
+    bottom:calc(-1 * var(--connector-distance));
+    animation:connector-light-page5-y 3.4s ease-in-out infinite!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #teras-iman .program-steps button.sel::before{display:none!important;animation:none!important}
+}
