@@ -181,9 +181,12 @@ document.addEventListener('click', (event) => {
 
     const detailParts = [city.querySelector('.city-arrow'), city.querySelector('.city-panel'), city.querySelector('.city-image')].filter(Boolean);
     if (firstReveal && !reducedMotion && window.gsap) {
+      city.classList.add('is-gsap-animating');
       requestAnimationFrame(() => {
         const destinations = cityItems.map((item) => item.getBoundingClientRect());
         const reveal = gsap.timeline();
+        reveal.eventCallback('onComplete', () => city.classList.remove('is-gsap-animating'));
+        reveal.eventCallback('onInterrupt', () => city.classList.remove('is-gsap-animating'));
         cityItems.forEach((item, index) => {
           const destination = destinations[index];
           if (!origin || !destination) return;
@@ -197,7 +200,7 @@ document.addEventListener('click', (event) => {
             autoAlpha: 1,
             duration: index === 0 ? 0.76 : 0.88,
             ease: 'power3.out',
-            clearProps: 'transform,opacity,visibility',
+            clearProps: 'opacity,visibility',
             onComplete: () => item.classList.remove('is-arriving')
           }, index === 0 ? 0 : 0.13 + index * 0.15);
         });

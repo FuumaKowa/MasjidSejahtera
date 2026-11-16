@@ -2188,8 +2188,8 @@ main>.page:not(#utama) .page-inner>h2{
   transition:none;
 }
 #kota-suci .city-story.is-revealed .city-item.is-arriving {
-  transition:none!important;
-  will-change:transform,opacity;
+  transition:width .68s cubic-bezier(.2,.7,.2,1),height .55s ease,min-height .55s ease,max-height .55s ease,grid-template-columns .55s ease,gap .45s ease,padding .45s ease,border-radius .3s ease,background .3s ease,box-shadow .3s ease!important;
+  will-change:transform,opacity,width;
 }
 #kota-suci .city-story.is-revealed .city-item.is-arriving::before {
   animation:none!important;
@@ -2204,8 +2204,8 @@ main>.page:not(#utama) .page-inner>h2{
 /* Smooth first reveal: freeze the compact cards before the layout changes,
    then let their staggered position animation finish before restarting the peek. */
 #kota-suci .city-story.is-revealed .city-item.is-arriving {
-  transition:none!important;
-  will-change:transform,opacity;
+  transition:width .68s cubic-bezier(.2,.7,.2,1),height .55s ease,min-height .55s ease,max-height .55s ease,grid-template-columns .55s ease,gap .45s ease,padding .45s ease,border-radius .3s ease,background .3s ease,box-shadow .3s ease!important;
+  will-change:transform,opacity,width;
 }
 #kota-suci .city-story.is-revealed .city-item.is-arriving::before {
   animation:none!important;
@@ -2223,5 +2223,5 @@ main>.page:not(#utama) .page-inner>h2{
 #kota-suci .city-story.is-revealed .city-item.is-arriving .city-letter { transform:none!important; }
 #kota-suci .city-story.is-revealed .city-item.is-arriving:hover,
 #kota-suci .city-story.is-revealed .city-item.is-arriving:focus-visible {
-  transform:none!important;
+  outline-offset:5px;
 }
