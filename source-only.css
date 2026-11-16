@@ -1083,3 +1083,6 @@ main>.page:not(#utama) .page-inner>h2{color:#fffdf5!important;text-shadow:0 2px 
 @media(prefers-reduced-motion:reduce){
   main>.page:not(#utama){background-attachment:scroll,scroll}
 }
+/* Keep the three pillar titles and subtitles legible over the green image wash. */
+#teras-iman .teras-heading,#teras-madinah .teras-heading,#teras-maqdis .teras-heading{color:#fffdf5!important}
+#teras-iman .teras-subtitle,#teras-madinah .teras-subtitle,#teras-maqdis .teras-subtitle{color:#f0d47e!important}
