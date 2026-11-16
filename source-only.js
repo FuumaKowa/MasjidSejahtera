@@ -31,6 +31,28 @@ const selectDiagramItems = (allItems, selectedItems, controls = []) => {
   selectedControls.forEach((item) => item.setAttribute('aria-pressed', String(hits.includes(item))));
 };
 const cityItems = [...document.querySelectorAll('#kota-suci .city-item')];
+const cityStory = document.querySelector('#kota-suci .city-story');
+const cityTitle = (item) => item.querySelector('.city-panel strong')?.textContent.trim() || '';
+const setCityItemOpen = (item, open) => {
+  item.classList.toggle('is-open', open);
+  item.classList.toggle('is-active', open || (cityStory?.classList.contains('is-intro') && item === cityItems[0]));
+  item.setAttribute('aria-expanded', String(open));
+  const panel = item.querySelector('.city-panel');
+  if (panel) {
+    panel.id = `city-panel-${item.dataset.focus}`;
+    panel.setAttribute('aria-hidden', String(!open));
+    item.setAttribute('aria-controls', panel.id);
+  }
+  if (open) item.removeAttribute('aria-label');
+  else item.setAttribute('aria-label', cityTitle(item));
+};
+if (cityStory) {
+  cityStory.classList.add('is-intro');
+  cityItems.forEach((item) => {
+    item.removeAttribute('aria-pressed');
+    setCityItemOpen(item, false);
+  });
+}
 const impactRoot = document.getElementById('impak');
 const objectiveRoot = document.getElementById('objektif');
 const portfolioRoot = document.querySelector('#portfolio .portfolio-role-map');
@@ -143,7 +165,33 @@ stageNodes.forEach((node, index) => {
 document.addEventListener('click', (event) => {
   const city = event.target.closest('#kota-suci .city-item');
   if (city) {
-    selectDiagramItems(cityItems,[city],cityItems);
+    const firstReveal = cityStory?.classList.contains('is-intro');
+    const willOpen = !city.classList.contains('is-open');
+    const previousOpen = cityItems.find((item) => item.classList.contains('is-open'));
+    const beforeRects = new Map(cityItems.map((item) => [item, item.getBoundingClientRect()]));
+    const moving = new Set([city]);
+    if (previousOpen && previousOpen !== city) moving.add(previousOpen);
+    if (firstReveal) {
+      cityStory.classList.remove('is-intro');
+      cityStory.classList.add('is-revealed');
+    }
+    cityItems.forEach((item) => setCityItemOpen(item, willOpen && item === city));
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      requestAnimationFrame(() => {
+        moving.forEach((item) => {
+          const before = beforeRects.get(item);
+          if (!before || !item.classList.contains('is-open') && firstReveal && item !== city) return;
+          const after = item.getBoundingClientRect();
+          const dx = before.left - after.left;
+          const dy = before.top - after.top;
+          if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+          item.animate(
+            [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'translate(0, 0)' }],
+            { duration: 680, easing: 'cubic-bezier(.2,.7,.2,1)' }
+          );
+        });
+      });
+    }
     return;
   }
   const layer = event.target.closest('#impak [data-layer]');
