@@ -446,7 +446,7 @@ html{scroll-snap-type:y proximity}
 }
 @media(prefers-reduced-motion:reduce){#portfolio .portfolio-sector{opacity:1;transform:none;transition:none}#portfolio .portfolio-slice{stroke-dashoffset:0;transition:none}#portfolio .portfolio-halo{animation:none}}
 
-/* Page 4: exact five-point geometry with individually drawn edges and card leaders. */
+/* Page 4: five-point network with clearer line hierarchy and a central anchor. */
 #objektif{background:radial-gradient(ellipse at 50% 44%,#f9f7ee 0,#edf3ef 60%,#e5eceb 100%)}
 #objektif .page-inner{width:min(100%,1320px)}
 #objektif h2{text-align:left;margin-left:clamp(0px,2vw,28px);font-size:clamp(30px,4vw,50px)}
@@ -456,11 +456,11 @@ html{scroll-snap-type:y proximity}
 #objektif .objective-pentagon{opacity:0;transition:opacity .45s ease 1.2s;}
 #objektif.is-visible .objective-pentagon{opacity:1;}
 #objektif .objective-line{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--line-length);stroke-dashoffset:var(--line-length);transition:stroke-dashoffset .68s cubic-bezier(.2,.7,.2,1) var(--line-delay);}
-#objektif .objective-outline{stroke:#c5a34d;stroke-width:3.2;}
-#objektif .objective-starline{stroke:#078360;stroke-width:2.8;}
-#objektif .objective-leader{stroke:#9b792e;stroke-width:2.2;}
+#objektif .objective-outline{stroke:#b89235;stroke-width:3.6;}
+#objektif .objective-starline{stroke:#087b60;stroke-width:3.8;opacity:.92;}
+#objektif .objective-leader{stroke:#b89235;stroke-width:3;opacity:.9;}
 #objektif.is-visible .objective-line{stroke-dashoffset:0;}
-#objektif .objective-vertex{opacity:0;transform-box:fill-box;transform-origin:center;transition:transform .25s ease,filter .25s ease;}
+#objektif .objective-center{fill:#fffdf7;stroke:#c5a34d;stroke-width:4;filter:drop-shadow(0 2px 5px #102f4d35);}\n#objektif .objective-center-core{fill:#078360;stroke:#fffdf7;stroke-width:1.5;}\n#objektif .objective-vertex{opacity:0;transform-box:fill-box;transform-origin:center;transition:transform .25s ease,filter .25s ease;}
 #objektif.is-visible .objective-vertex{animation:objective-node-arrive .4s cubic-bezier(.2,.7,.2,1) var(--node-delay) both,objective-node-glow 2.6s ease-in-out calc(var(--node-delay) + .5s) infinite;}
 #objektif .objective-vertex.hot{transform:scale(1.45);filter:drop-shadow(0 0 3px #c5a34d);}
 #objektif .objective-card{z-index:2;width:27%;min-height:112px;padding:clamp(15px,1.35vw,19px);gap:7px;border:1px solid #078360;border-top:5px solid var(--gold);border-radius:3px 22px 3px 3px;background:#fffdf7;color:var(--navy);box-shadow:0 12px 26px #102f4d15;text-align:center;transform:translate(-50%,-50%);opacity:0;translate:0 16px;}
