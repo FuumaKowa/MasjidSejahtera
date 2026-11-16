@@ -1971,7 +1971,7 @@ main>.page:not(#utama) .page-inner>h2{
   border-color: transparent;
   border-radius: 14px;
   box-shadow: none;
-  transition: width .68s cubic-bezier(.2,.7,.2,1), min-height .55s ease, grid-template-columns .55s ease, gap .45s ease, opacity .35s ease, background .3s ease, box-shadow .3s ease;
+  transition: width .92s cubic-bezier(.2,.7,.2,1), min-height .72s ease, grid-template-columns .72s ease, gap .62s ease, opacity .35s ease, background .3s ease, box-shadow .3s ease;
 }
 #kota-suci .city-story.is-revealed .city-item:not(.is-open) {
   align-self: center;
@@ -1988,7 +1988,7 @@ main>.page:not(#utama) .page-inner>h2{
 }
 #kota-suci .city-story.is-revealed .city-item.is-open {
   width: 100%;
-  transition: width .68s cubic-bezier(.2,.7,.2,1), min-height .45s ease, grid-template-columns .55s ease, gap .45s ease, opacity .35s ease, background .3s ease, box-shadow .3s ease;
+  transition: width .92s cubic-bezier(.2,.7,.2,1), min-height .72s ease, grid-template-columns .72s ease, gap .62s ease, opacity .35s ease, background .3s ease, box-shadow .3s ease;
 }
 #kota-suci .city-story.is-revealed .city-item:not(.is-open) .city-arrow,
 #kota-suci .city-story.is-intro .city-item:first-child .city-arrow,
@@ -2224,4 +2224,10 @@ main>.page:not(#utama) .page-inner>h2{
 #kota-suci .city-story.is-revealed .city-item.is-arriving:hover,
 #kota-suci .city-story.is-revealed .city-item.is-arriving:focus-visible {
   outline-offset:5px;
+}
+
+/* Later city selections use GSAP for width and reveal content after the card opens. */
+#kota-suci .city-story.is-revealed .city-item.is-gsap-animating:not(.is-arriving) {
+  transition:grid-template-columns .88s cubic-bezier(.2,.7,.2,1),min-height .72s ease,gap .68s ease,padding .58s ease,border-radius .4s ease,background .4s ease,box-shadow .4s ease!important;
+  will-change:width,grid-template-columns;
 }

@@ -169,6 +169,7 @@ document.addEventListener('click', (event) => {
     const willOpen = !city.classList.contains('is-open');
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const origin = firstReveal ? cityItems[0].getBoundingClientRect() : null;
+    const compactRect = !firstReveal && willOpen ? city.getBoundingClientRect() : null;
 
     if (firstReveal) {
       // Lock the compact symbols before the grid opens so their width and hover
@@ -176,6 +177,8 @@ document.addEventListener('click', (event) => {
       cityItems.forEach((item) => item.classList.add('is-arriving'));
       cityStory.classList.remove('is-intro');
       cityStory.classList.add('is-revealed');
+    } else if (willOpen && !reducedMotion && window.gsap) {
+      city.classList.add('is-gsap-animating');
     }
     cityItems.forEach((item) => setCityItemOpen(item, willOpen && item === city));
 
@@ -214,20 +217,27 @@ document.addEventListener('click', (event) => {
       });
     } else if (!firstReveal && willOpen && !reducedMotion && window.gsap && detailParts.length) {
       const clearAnimatingState = () => city.classList.remove('is-gsap-animating');
-      city.classList.add('is-gsap-animating');
-      gsap.fromTo(detailParts,
-        { x: -14, autoAlpha: 0 },
-        {
-          x: 0,
-          autoAlpha: 1,
-          duration: 0.48,
-          stagger: 0.07,
-          ease: 'power2.out',
-          clearProps: 'transform,opacity,visibility',
-          onComplete: clearAnimatingState,
-          onInterrupt: clearAnimatingState
+      const expandedWidth = city.getBoundingClientRect().width;
+      const expand = gsap.timeline({
+        onComplete: () => {
+          gsap.set(city, { clearProps: 'clipPath' });
+          clearAnimatingState();
+        },
+        onInterrupt: () => {
+          gsap.set(city, { clearProps: 'clipPath' });
+          clearAnimatingState();
         }
-      );
+      });
+      if (compactRect) {
+        const clippedWidth = Math.max(0, expandedWidth - compactRect.width);
+        gsap.set(city, { clipPath: `inset(0px ${clippedWidth}px 0px 0px round 16px)` });
+        gsap.set(detailParts, { x: -20, autoAlpha: 0 });
+        expand.to(city, { clipPath: 'inset(0px 0px 0px 0px round 16px)', duration: 1.28, ease: 'power3.inOut' }, 0);
+        expand.to(detailParts,
+          { x: 0, autoAlpha: 1, duration: 0.62, stagger: 0.1, ease: 'power2.out', clearProps: 'transform,opacity,visibility' },
+          0.72
+        );
+      }
     } else if (firstReveal) {
       cityItems.forEach((item) => item.classList.remove('is-arriving'));
     }
