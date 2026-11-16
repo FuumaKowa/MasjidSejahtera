@@ -972,3 +972,7 @@ html,body{max-width:100%;overflow-x:clip}
 #dimensi.page h2{color:#102f4d!important}
 #dimensi.page p{color:#075e49!important}
 #penutup.page h2{color:#102f4d!important}
+
+/* Give the supplied portrait logo enough room in the navigation. */
+.site-header .brand-logo img{height:70px;max-width:76px}
+@media(max-width:700px){.site-header .brand-logo img{height:56px;max-width:56px}}
