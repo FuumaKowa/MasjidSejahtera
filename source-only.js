@@ -173,42 +173,60 @@ document.addEventListener('click', (event) => {
     if (firstReveal) {
       // Lock the compact symbols before the grid opens so their width and hover
       // transitions cannot compete with the glide animation.
-      cityItems.slice(1).forEach((item) => item.classList.add('is-arriving'));
+      cityItems.forEach((item) => item.classList.add('is-arriving'));
       cityStory.classList.remove('is-intro');
       cityStory.classList.add('is-revealed');
     }
     cityItems.forEach((item) => setCityItemOpen(item, willOpen && item === city));
 
-    if (firstReveal && !reducedMotion) {
+    const detailParts = [city.querySelector('.city-arrow'), city.querySelector('.city-panel'), city.querySelector('.city-image')].filter(Boolean);
+    if (firstReveal && !reducedMotion && window.gsap) {
       requestAnimationFrame(() => {
         const destinations = cityItems.map((item) => item.getBoundingClientRect());
+        const reveal = gsap.timeline();
         cityItems.forEach((item, index) => {
           const destination = destinations[index];
           if (!origin || !destination) return;
           const dx = origin.left - destination.left;
           const dy = origin.top - destination.top;
-          const animation = item.animate(
-            [
-              { transform: `translate3d(${dx}px, ${dy}px, 0)`, opacity: index === 0 ? 1 : 0 },
-              { transform: 'translate3d(0, 0, 0)', opacity: 1 }
-            ],
-            {
-              duration: index === 0 ? 760 : 880,
-              delay: index === 0 ? 0 : 130 + index * 150,
-              easing: 'cubic-bezier(.22,.68,.22,1)',
-              fill: 'both'
-            }
-          );
-          animation.finished.then(() => {
-            animation.cancel();
-            if (index > 0) item.classList.remove('is-arriving');
-          }).catch(() => {
-            if (index > 0) item.classList.remove('is-arriving');
-          });
+          gsap.set(item, { x: dx, y: dy, scale: index === 0 ? 1 : 0.88, autoAlpha: index === 0 ? 1 : 0 });
+          reveal.to(item, {
+            x: 0,
+            y: 0,
+            scale: 1,
+            autoAlpha: 1,
+            duration: index === 0 ? 0.76 : 0.88,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity,visibility',
+            onComplete: () => item.classList.remove('is-arriving')
+          }, index === 0 ? 0 : 0.13 + index * 0.15);
         });
+        if (detailParts.length) {
+          reveal.fromTo(detailParts,
+            { x: -14, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 0.52, stagger: 0.07, ease: 'power2.out', clearProps: 'transform,opacity,visibility' },
+            0.22
+          );
+        }
       });
+    } else if (!firstReveal && willOpen && !reducedMotion && window.gsap && detailParts.length) {
+      const clearAnimatingState = () => city.classList.remove('is-gsap-animating');
+      city.classList.add('is-gsap-animating');
+      gsap.fromTo(detailParts,
+        { x: -14, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.48,
+          stagger: 0.07,
+          ease: 'power2.out',
+          clearProps: 'transform,opacity,visibility',
+          onComplete: clearAnimatingState,
+          onInterrupt: clearAnimatingState
+        }
+      );
     } else if (firstReveal) {
-      cityItems.slice(1).forEach((item) => item.classList.remove('is-arriving'));
+      cityItems.forEach((item) => item.classList.remove('is-arriving'));
     }
     return;
   }
