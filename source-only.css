@@ -1800,3 +1800,82 @@ main>.page:not(#utama) .page-inner>h2{
 @media(prefers-reduced-motion:reduce){
   #portfolio .portfolio-role-card,#portfolio .portfolio-role-group h3 button{transition:none!important}
 }
+
+
+/* Sahabat directory: staggered two-column reference layout with corner line ornaments. */
+#portfolio.page .page-inner{max-width:1450px}
+#portfolio.page h2{max-width:1250px;font-size:clamp(30px,3.5vw,48px);line-height:1.08}
+#portfolio .portfolio-lead{max-width:1120px;margin-top:10px;font-size:clamp(15px,1.35vw,18px);line-height:1.4}
+#portfolio .portfolio-role-map{position:relative;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(42px,5vw,76px);max-width:1360px;margin:clamp(24px,3vw,38px) auto 0}
+#portfolio .portfolio-role-map::before{content:"";position:absolute;top:8px;bottom:8px;left:50%;width:1px;background:linear-gradient(transparent,#102f4d50 12%,#102f4d50 88%,transparent);pointer-events:none}
+#portfolio .portfolio-role-group,#portfolio .portfolio-role-group--community{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:repeat(5,minmax(104px,auto));grid-auto-flow:row;gap:10px 12px;min-width:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;transition:opacity .24s,filter .24s}
+#portfolio .portfolio-role-group h3{grid-column:2;grid-row:1;align-self:start;min-height:0;margin:0;padding:0 4px;color:#102f4d;font-size:clamp(15px,1.3vw,18px);font-weight:800;line-height:1.18}
+#portfolio .portfolio-role-group h3 button{all:unset;display:block;width:100%;padding:0;cursor:pointer;font:inherit;line-height:inherit}
+#portfolio .portfolio-role-group h3 button:hover,#portfolio .portfolio-role-group h3 button:focus-visible,#portfolio .portfolio-role-group.sel h3 button{color:#087b60}
+#portfolio .portfolio-role-group h3 button:focus-visible{outline:3px solid #c5a34d;outline-offset:4px}
+#portfolio .portfolio-role-list{display:contents}
+#portfolio .portfolio-role-card,#portfolio .portfolio-role-group--community .portfolio-role-card{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-width:0;min-height:116px;padding:12px 12px;border:5px solid #1373a5;border-radius:25px 5px 25px 5px;background:#f7f9f4f2;color:#102f4d;text-align:left;box-shadow:0 5px 14px #102f4d14;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease,background .22s ease,opacity .22s ease}
+#portfolio .portfolio-role-group--community .portfolio-role-card{border-color:#0a8a5c;border-radius:5px 25px 5px 25px}
+#portfolio .portfolio-role-card:hover{transform:translateY(-3px);box-shadow:0 12px 22px #102f4d26}
+#portfolio .portfolio-role-group--generation .portfolio-role-card:nth-child(1){grid-column:1;grid-row:1}
+#portfolio .portfolio-role-group--generation .portfolio-role-card:nth-child(2){grid-column:2;grid-row:2}
+#portfolio .portfolio-role-group--generation .portfolio-role-card:nth-child(3){grid-column:1;grid-row:3}
+#portfolio .portfolio-role-group--generation .portfolio-role-card:nth-child(4){grid-column:2;grid-row:4}
+#portfolio .portfolio-role-group--generation .portfolio-role-card:nth-child(5){grid-column:2;grid-row:5}
+#portfolio .portfolio-role-group--community .portfolio-role-card:nth-child(1){grid-column:1;grid-row:1}
+#portfolio .portfolio-role-group--community .portfolio-role-card:nth-child(2){grid-column:1;grid-row:2}
+#portfolio .portfolio-role-group--community .portfolio-role-card:nth-child(3){grid-column:1;grid-row:3}
+#portfolio .portfolio-role-group--community .portfolio-role-card:nth-child(4){grid-column:2;grid-row:3}
+#portfolio .portfolio-role-group--community .portfolio-role-card:nth-child(5){grid-column:2;grid-row:5}
+#portfolio .portfolio-role-icon,#portfolio .portfolio-role-group--community .portfolio-role-icon{display:grid;place-items:center;flex:0 0 clamp(54px,6vw,78px);width:clamp(54px,6vw,78px);height:clamp(54px,6vw,78px);color:#1373a5}
+#portfolio .portfolio-role-group--community .portfolio-role-icon{color:#0a8a5c}
+#portfolio .portfolio-role-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#portfolio .portfolio-role-copy{display:grid;gap:5px;min-width:0}
+#portfolio .portfolio-role-copy strong{color:#102f4d;font-size:clamp(15px,1.25vw,19px);font-weight:850;line-height:1.08}
+#portfolio .portfolio-role-copy>span{color:#18354a;font-size:clamp(12px,1vw,15px);line-height:1.2}
+#portfolio .portfolio-role-card.sel,#portfolio .portfolio-role-card[aria-pressed=true],#portfolio .portfolio-role-card.is-active{border-color:#c5a34d;background:#f3e8c8;box-shadow:0 0 0 2px #c5a34d70,0 12px 25px #102f4d23}
+#portfolio .portfolio-role-card.sel .portfolio-role-copy strong,#portfolio .portfolio-role-card[aria-pressed=true] .portfolio-role-copy strong{color:#075e49}
+#portfolio .portfolio-role-group.sel{opacity:1;filter:none}
+#portfolio .portfolio-role-group.dm{opacity:.3;filter:saturate(.5)}
+#portfolio .portfolio-role-card.dm{opacity:.32!important;filter:saturate(.5)}
+#portfolio .portfolio-role-map::after{content:"";position:absolute;z-index:-1;inset:-28px -34px;pointer-events:none;opacity:.36;background:repeating-linear-gradient(45deg,transparent 0 37px,#2e82684d 38px 39px,transparent 40px 76px),repeating-linear-gradient(-45deg,transparent 0 37px,#24739845 38px 39px,transparent 40px 76px);mask-image:linear-gradient(135deg,transparent 0 10%,#000 13% 18%,transparent 21% 79%,#000 82% 87%,transparent 90%)}
+#portfolio .page-inner::before,#portfolio .page-inner::after{content:"";position:absolute;z-index:-1;width:190px;height:150px;pointer-events:none;opacity:.38;background:repeating-linear-gradient(45deg,transparent 0 30px,#1b6ea84d 31px 32px,transparent 33px 62px),repeating-linear-gradient(-45deg,transparent 0 30px,#0a8a5c44 31px 32px,transparent 33px 62px);mask-image:linear-gradient(135deg,transparent 15%,#000 44%,transparent 76%)}
+#portfolio .page-inner::before{top:-58px;right:-54px}
+#portfolio .page-inner::after{bottom:-45px;left:-54px}
+@media(max-width:1080px){
+  #portfolio .portfolio-role-map{grid-template-columns:1fr;gap:30px}
+  #portfolio .portfolio-role-map::before{display:none}
+  #portfolio .portfolio-role-group--community{padding-top:26px;border-top:1px solid #102f4d45}
+  #portfolio .page-inner::before{right:-20px}
+}
+@media(max-width:720px){
+  #portfolio.page{padding-inline:20px;padding-top:calc(var(--header) + 30px);padding-bottom:42px}
+  #portfolio.page h2{font-size:clamp(29px,8vw,40px)}
+  #portfolio .portfolio-lead{margin-top:12px;font-size:15px;line-height:1.45}
+  #portfolio .portfolio-role-map{gap:24px;margin-top:22px}
+  #portfolio .portfolio-role-group,#portfolio .portfolio-role-group--community{display:block;padding:0;border:0}
+  #portfolio .portfolio-role-group--community{padding-top:20px;border-top:1px solid #102f4d45}
+  #portfolio .portfolio-role-group h3{margin:0 0 13px;font-size:17px}
+  #portfolio .portfolio-role-group h3 button{min-height:44px}
+  #portfolio .portfolio-role-list{display:grid;gap:10px}
+  #portfolio .portfolio-role-card,#portfolio .portfolio-role-group--community .portfolio-role-card{grid-column:auto!important;grid-row:auto!important;min-height:94px;padding:10px 12px;border-width:4px;border-radius:20px 5px 20px 5px}
+  #portfolio .portfolio-role-icon,#portfolio .portfolio-role-group--community .portfolio-role-icon{flex-basis:58px;width:58px;height:58px}
+  #portfolio .portfolio-role-copy strong{font-size:16px}
+  #portfolio .portfolio-role-copy>span{font-size:14px;line-height:1.3}
+  #portfolio .page-inner::before,#portfolio .page-inner::after{width:110px;height:95px;opacity:.19}
+  #portfolio .page-inner::before{top:-25px;right:-20px}
+  #portfolio .page-inner::after{bottom:-20px;left:-20px}
+}
+/* Page 4 network timing and stable SVG marker emphasis. */
+#objektif .objective-line{transition:stroke-dashoffset .92s cubic-bezier(.2,.7,.2,1) var(--line-delay)}
+#objektif .objective-outline{stroke-width:3.4}
+#objektif .objective-starline{stroke-width:3.6}
+#objektif .objective-leader{stroke-width:2.8}
+#objektif .objective-vertex{transform:none!important;filter:none!important}
+#objektif .objective-vertex circle:first-of-type{transition:r .22s ease,filter .22s ease}
+#objektif .objective-vertex.hot circle:first-of-type{r:16px;filter:drop-shadow(0 0 4px #c5a34d)}
+@keyframes objective-node-arrive{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){
+  #objektif .objective-line{stroke-dashoffset:0;transition:none}
+  #objektif .objective-vertex,#objektif .objective-card{opacity:1;animation:none!important}
+}
