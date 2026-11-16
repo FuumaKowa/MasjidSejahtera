@@ -171,43 +171,44 @@ document.addEventListener('click', (event) => {
     const origin = firstReveal ? cityItems[0].getBoundingClientRect() : null;
 
     if (firstReveal) {
+      // Lock the compact symbols before the grid opens so their width and hover
+      // transitions cannot compete with the glide animation.
+      cityItems.slice(1).forEach((item) => item.classList.add('is-arriving'));
       cityStory.classList.remove('is-intro');
       cityStory.classList.add('is-revealed');
     }
     cityItems.forEach((item) => setCityItemOpen(item, willOpen && item === city));
 
     if (firstReveal && !reducedMotion) {
-      // Let the grid settle first, then glide each compact symbol from Alif's
-      // starting position into its own row. The open card expands via CSS.
-      const destinations = cityItems.map((item) => item.getBoundingClientRect());
-      cityItems.forEach((item, index) => {
-        const destination = destinations[index];
-        const start = index === 0 ? origin : origin;
-        if (!start || !destination) return;
-        const dx = start.left - destination.left;
-        const dy = start.top - destination.top;
-        if (index > 0) item.classList.add('is-arriving');
-        const animation = item.animate(
-          [
-            { transform: `translate(${dx}px, ${dy}px)`, opacity: index === 0 ? 1 : 0 },
-            { transform: 'translate(0, 0)', opacity: 1 }
-          ],
-          {
-            duration: index === 0 ? 760 : 820,
-            delay: index === 0 ? 0 : index * 140,
-            easing: 'cubic-bezier(.22,.68,.22,1)',
-            fill: 'both'
-          }
-        );
-        if (index > 0) {
+      requestAnimationFrame(() => {
+        const destinations = cityItems.map((item) => item.getBoundingClientRect());
+        cityItems.forEach((item, index) => {
+          const destination = destinations[index];
+          if (!origin || !destination) return;
+          const dx = origin.left - destination.left;
+          const dy = origin.top - destination.top;
+          const animation = item.animate(
+            [
+              { transform: `translate3d(${dx}px, ${dy}px, 0)`, opacity: index === 0 ? 1 : 0 },
+              { transform: 'translate3d(0, 0, 0)', opacity: 1 }
+            ],
+            {
+              duration: index === 0 ? 760 : 880,
+              delay: index === 0 ? 0 : 130 + index * 150,
+              easing: 'cubic-bezier(.22,.68,.22,1)',
+              fill: 'both'
+            }
+          );
           animation.finished.then(() => {
             animation.cancel();
-            item.classList.remove('is-arriving');
-          }).catch(() => {});
-        } else {
-          animation.finished.then(() => animation.cancel()).catch(() => {});
-        }
+            if (index > 0) item.classList.remove('is-arriving');
+          }).catch(() => {
+            if (index > 0) item.classList.remove('is-arriving');
+          });
+        });
       });
+    } else if (firstReveal) {
+      cityItems.slice(1).forEach((item) => item.classList.remove('is-arriving'));
     }
     return;
   }
