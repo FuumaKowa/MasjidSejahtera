@@ -1089,3 +1089,36 @@ main>.page:not(#utama) .page-inner>h2{color:#fffdf5!important;text-shadow:0 2px 
 
 /* Keep the full Sahabat categories heading readable on the shared green backdrop. */
 #portfolio.page .portfolio-title-accent{color:#fffdf5!important}
+
+/* A single, continuous light green mosque backdrop for every middle section. */
+html{
+  background-color:#a9d4b2!important;
+  background-image:linear-gradient(rgba(169,212,178,.82),rgba(169,212,178,.82)),url("assets/experience/courtyard-arrival.jpg")!important;
+  background-position:center center,center 45%!important;
+  background-size:cover,cover!important;
+  background-repeat:no-repeat,no-repeat!important;
+  background-attachment:fixed,fixed!important;
+}
+body{background:transparent!important}
+main>.page:not(#utama){
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+main>.page:not(#utama)::before,
+main>.page:not(#utama)::after{
+  display:none!important;
+  content:none!important;
+  animation:none!important;
+}
+main>.page:not(#utama) .page-inner>h2{
+  color:#102f4d!important;
+  text-shadow:0 1px 0 #ffffff70!important;
+}
+#portfolio.page .portfolio-title-accent,
+#portfolio.page .portfolio-lead,
+#portfolio.page .portfolio-role-group h3{color:#075e49!important}
+#teras-iman .teras-heading,#teras-madinah .teras-heading,#teras-maqdis .teras-heading{color:#102f4d!important}
+#teras-iman .teras-subtitle,#teras-madinah .teras-subtitle,#teras-maqdis .teras-subtitle{color:#075e49!important}
+@media(max-width:700px){html{background-attachment:scroll,scroll!important}}
+@media(prefers-reduced-motion:reduce){html{background-attachment:scroll,scroll!important}}
