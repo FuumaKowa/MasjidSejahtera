@@ -1075,7 +1075,7 @@ main>.page:not(#utama)::before{opacity:.24!important}
 main>.page:not(#utama)::after{opacity:.18!important}
 main>.page:not(#utama) .page-inner>h2{color:#fffdf5!important;text-shadow:0 2px 18px #001a2055}
 #portfolio.page .portfolio-lead,#portfolio.page .portfolio-role-group h3{color:#fffdf5!important}
-#fungsi.page .function-caption{color:#fffdf5!important}
+#fungsi.page .function-caption{color:#102f4d!important}
 @media(max-width:700px){
   main>.page:not(#utama){background-attachment:scroll,scroll}
   main>.page:not(#utama)::before{opacity:.18!important}
