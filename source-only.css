@@ -541,7 +541,7 @@ html{scroll-snap-type:y proximity}
 #kota-suci .city-sub{margin:12px 0 0;color:#078360;font-family:Georgia,serif;font-size:clamp(22px,2.7vw,36px);font-weight:700;line-height:1.1;text-align:left}
 #kota-suci .city-story{width:min(100%,1120px);margin:clamp(26px,4.4vh,44px) auto 0;padding:0}
 #kota-suci .city-list{display:grid;grid-template-rows:repeat(3,minmax(104px,1fr));gap:clamp(12px,1.8vh,18px)}
-#kota-suci .city-item{display:grid;grid-template-columns:clamp(76px,9vw,110px) 44px minmax(0,1fr);gap:clamp(12px,2vw,22px);align-items:center;width:100%;min-height:104px;padding:0;border:0;border-radius:0;background:transparent;color:var(--navy);text-align:left;box-shadow:none;clip-path:none;filter:none;opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .28s ease,filter .28s ease}
+#kota-suci .city-item{display:grid;grid-template-columns:clamp(76px,9vw,110px) 44px minmax(0,1fr) clamp(88px,10vw,128px);gap:clamp(12px,2vw,22px);align-items:center;width:100%;min-height:104px;padding:0;border:0;border-radius:0;background:transparent;color:var(--navy);text-align:left;box-shadow:none;clip-path:none;filter:none;opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .28s ease,filter .28s ease}
 #kota-suci.is-visible .city-item{opacity:1;transform:none}
 #kota-suci.is-visible .city-item:nth-child(2){transition-delay:.14s}#kota-suci.is-visible .city-item:nth-child(3){transition-delay:.28s}
 #kota-suci .city-letter{display:grid;place-items:center;width:100%;height:100%;min-height:104px;border:1px solid #c5a34d;border-radius:18px 4px 18px 4px;background:#fffdf7;color:#102f4d;font-family:Amiri,"Noto Naskh Arabic",serif;font-size:clamp(54px,7vw,80px);font-weight:700;line-height:1.1;box-shadow:0 10px 24px #102f4d10;transition:background .28s,color .28s,transform .28s,box-shadow .28s}
@@ -561,7 +561,7 @@ html{scroll-snap-type:y proximity}
   #kota-suci .city-sub{font-size:27px}
   #kota-suci .city-story{margin-top:28px}
   #kota-suci .city-list{grid-template-rows:repeat(3,minmax(104px,auto));gap:14px}
-  #kota-suci .city-item{grid-template-columns:58px 30px minmax(0,1fr);gap:9px;min-height:100px}
+  #kota-suci .city-item{grid-template-columns:58px 30px minmax(0,1fr) 58px;gap:9px;min-height:100px}
   #kota-suci .city-letter{min-height:92px;font-size:45px;border-radius:13px 4px 13px 4px}
   #kota-suci .city-alif{width:38px;height:54px}
   #kota-suci .city-arrow{height:22px}
@@ -976,3 +976,7 @@ html,body{max-width:100%;overflow-x:clip}
 /* Give the supplied portrait logo enough room in the navigation. */
 .site-header .brand-logo img{height:70px;max-width:76px}
 @media(max-width:700px){.site-header .brand-logo img{height:56px;max-width:56px}}
+
+/* Original circular illustrations from the source model for the three cities. */
+#kota-suci .city-image{display:block;width:100%;aspect-ratio:1;object-fit:contain;border-radius:50%;filter:drop-shadow(0 8px 14px #102f4d22)}
+@media(max-width:700px){#kota-suci .city-image{width:58px;justify-self:end}}
