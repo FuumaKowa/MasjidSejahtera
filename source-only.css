@@ -1920,3 +1920,17 @@ main>.page:not(#utama) .page-inner>h2{
   #portfolio .portfolio-role-card,#portfolio .portfolio-role-group--community .portfolio-role-card{min-height:94px;padding:10px 12px}
   #portfolio .portfolio-role-icon,#portfolio .portfolio-role-group--community .portfolio-role-icon{flex-basis:58px;width:58px;height:58px}
 }
+
+
+/* Draw the pentagram paths explicitly when the objective page enters view. */
+@keyframes objective-starline-draw {
+  from { stroke-dashoffset: var(--line-length); }
+  to { stroke-dashoffset: 0; }
+}
+#objektif .objective-starline { transition: none; }
+#objektif.is-visible .objective-starline {
+  animation: objective-starline-draw .92s cubic-bezier(.2,.7,.2,1) var(--line-delay) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  #objektif .objective-starline { stroke-dashoffset: 0; animation: none; }
+}
