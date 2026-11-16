@@ -2119,3 +2119,14 @@ main>.page:not(#utama) .page-inner>h2{
     max-height:96px;
   }
 }
+
+/* Make the repeating peek visibly read as a card behind each symbol. */
+#kota-suci .city-story.is-intro .city-item:first-child::before,
+#kota-suci .city-story.is-revealed .city-item:not(.is-open)::before {
+  inset:12px -52px 12px 30px;
+  transform-origin:left center;
+}
+@keyframes city-card-peek {
+  0%,60%,100% { opacity:.42; transform:translateX(-8px) scaleX(.82); }
+  18%,34% { opacity:.92; transform:translateX(0) scaleX(1); }
+}
