@@ -983,6 +983,6 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Arabic identity marks on the three concentric city circles. */
 #impak .impact-symbol{font-family:Amiri,"Noto Naskh Arabic",serif;font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}
-#impak .impact-symbol-inner{font-size:64px;fill:#f0d37a}
-#impak .impact-symbol-middle{font-size:64px;fill:#fff2c8}
-#impak .impact-symbol-outer{font-size:72px;fill:#078360}
+#impak .impact-symbol-inner{font-size:40px;fill:#f0d37a}
+#impak .impact-symbol-middle{font-size:48px;fill:#fff2c8}
+#impak .impact-symbol-outer{font-size:50px;fill:#078360}
