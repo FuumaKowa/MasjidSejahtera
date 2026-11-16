@@ -2068,3 +2068,31 @@ main>.page:not(#utama) .page-inner>h2{
   #kota-suci .city-story.is-intro .city-item:first-child::before,
   #kota-suci .city-story.is-revealed .city-item:not(.is-open)::before { animation: none; opacity: .7; transform: translateX(0) scaleX(.9); }
 }
+
+/* Keep unopened city symbols compact after the first reveal. */
+#kota-suci .city-story.is-intro .city-list,
+#kota-suci .city-story.is-revealed .city-list {
+  display:grid;
+  align-content:center;
+  height:auto;
+}
+#kota-suci .city-story.is-intro .city-list {
+  grid-template-rows:minmax(280px,1fr) 0 0;
+}
+#kota-suci .city-story.is-revealed .city-list {
+  grid-template-rows:repeat(3,auto);
+  gap:clamp(14px,2vw,22px);
+  min-height:0;
+}
+#kota-suci .city-story.is-revealed .city-item:not(.is-open) {
+  height:104px;
+  min-height:104px;
+  max-height:104px;
+}
+@media(max-width:700px) {
+  #kota-suci .city-story.is-revealed .city-item:not(.is-open) {
+    height:96px;
+    min-height:96px;
+    max-height:96px;
+  }
+}
