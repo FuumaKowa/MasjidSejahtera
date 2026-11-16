@@ -1879,3 +1879,21 @@ main>.page:not(#utama) .page-inner>h2{
   #objektif .objective-line{stroke-dashoffset:0;transition:none}
   #objektif .objective-vertex,#objektif .objective-card{opacity:1;animation:none!important}
 }
+
+/* Corner filigree: geometric linework from the supplied layout, kept clear of the text. */
+#portfolio .portfolio-role-map::after{display:none}
+#portfolio .portfolio-role-group h3 button{color:#102f4d!important}
+#portfolio .portfolio-role-group.sel h3 button{color:#087b60!important}
+#portfolio .portfolio-role-group--community{grid-template-rows:repeat(4,minmax(104px,auto))}
+#portfolio .portfolio-role-group--community .portfolio-role-card:nth-child(5){grid-row:4}
+#portfolio .page-inner::before,#portfolio .page-inner::after{width:255px;height:245px;opacity:.55;background-repeat:no-repeat;background-position:center;background-size:contain;mask-image:none}
+#portfolio .page-inner::before{top:-46px;right:-54px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20300%20280%22%3E%3Cg%20fill%3D%22none%22%20stroke-width%3D%222%22%3E%3Cg%20stroke%3D%22%230a8a5c%22%3E%3Cpath%20d%3D%22M25%20-8%20115%2082%20205%20-8%22%2F%3E%3Cpath%20d%3D%22M60%20-8%20150%2082%20240%20-8%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%231373a5%22%3E%3Cpath%20d%3D%22M100%20-8%20190%2082%20260%2012%20260%2058%20286%2084%20260%20110%20260%20156%20286%20182%20260%20208%20260%20278%22%2F%3E%3Cpath%20d%3D%22M135%20-8%20225%2082%20295%2012%20295%2058%22%2F%3E%3Cpath%20d%3D%22M220%2095%20270%20145%20220%20195%20270%20245%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+#portfolio .page-inner::after{bottom:-55px;left:-54px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20300%20300%22%3E%3Cg%20fill%3D%22none%22%20stroke-width%3D%222%22%3E%3Cg%20stroke%3D%22%231373a5%22%3E%3Cpath%20d%3D%22M-10%2018%2080%20108%20-10%20198%22%2F%3E%3Cpath%20d%3D%22M-10%2052%20115%20177%20-10%20302%22%2F%3E%3Cpath%20d%3D%22M-10%20116%2060%20186%2060%20100%20150%20190%20150%20120%20240%20210%22%2F%3E%3Cpath%20d%3D%22M-10%20170%2040%20220%2040%20300%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%230a8a5c%22%3E%3Cpath%20d%3D%22M-10%20220%20110%20340%22%2F%3E%3Cpath%20d%3D%22M50%20300%20140%20210%20230%20300%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+@media(max-width:1080px){
+  #portfolio .portfolio-role-group--community{grid-template-rows:repeat(4,minmax(104px,auto))}
+}
+@media(max-width:720px){
+  #portfolio .page-inner::before,#portfolio .page-inner::after{width:145px;height:140px;opacity:.24}
+  #portfolio .page-inner::before{top:-30px;right:-24px}
+  #portfolio .page-inner::after{bottom:-28px;left:-24px}
+}
