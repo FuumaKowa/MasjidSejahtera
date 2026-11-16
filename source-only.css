@@ -1589,3 +1589,212 @@ main>.page:not(#utama) .page-inner>h2{
     }
   }
 }
+
+
+/* Sahabat directory redesign: a paired, connected category map with clear role cards. */
+#portfolio.page{padding-top:calc(var(--header) + clamp(28px,4vw,52px));padding-bottom:clamp(34px,5vw,64px)}
+#portfolio.page .page-inner{max-width:1440px}
+#portfolio.page h2{
+  max-width:1320px;
+  color:#102f4d!important;
+  font-size:clamp(32px,4vw,54px);
+  letter-spacing:-.045em;
+  line-height:1.04;
+}
+#portfolio.page h2::after{width:96px;height:4px;margin-top:16px}
+#portfolio.page .portfolio-title-accent{color:#075e49!important}
+#portfolio.page .portfolio-lead{
+  max-width:1140px;
+  margin:14px 0 0;
+  padding:12px 18px;
+  border-left:4px solid #c5a34d;
+  border-radius:0 14px 2px 0;
+  background:linear-gradient(100deg,#fffdf0cf,#fffdf050);
+  color:#12354b!important;
+  font-size:clamp(15px,1.35vw,18px);
+  line-height:1.52;
+  box-shadow:0 8px 20px #102f4d0c;
+  backdrop-filter:blur(4px);
+}
+#portfolio .portfolio-role-map{
+  max-width:1370px;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(22px,3.2vw,44px);
+  margin:clamp(24px,3vw,38px) auto 0;
+  align-items:stretch;
+}
+#portfolio .portfolio-role-group{
+  position:relative;
+  min-width:0;
+  padding:18px;
+  border:1px solid #d5bd71c9;
+  border-radius:24px 5px 24px 5px;
+  background:linear-gradient(145deg,#fffdf0dc,#ecf4e8c8);
+  box-shadow:0 18px 38px #102f4d18,inset 0 1px #fff;
+  backdrop-filter:blur(9px);
+}
+#portfolio .portfolio-role-group--community{
+  border:1px solid #86b59c;
+  padding-left:18px;
+  border-radius:5px 24px 5px 24px;
+  background:linear-gradient(145deg,#edf6e8d8,#fffdf0c9);
+}
+#portfolio .portfolio-role-group h3{
+  min-height:0;
+  margin:0 0 15px;
+  color:#fffdf7!important;
+  font-size:clamp(16px,1.4vw,20px);
+  line-height:1.28;
+}
+#portfolio .portfolio-role-group h3 button{
+  min-height:64px;
+  padding:13px 17px;
+  border:1px solid #e0c573;
+  border-radius:15px 3px 15px 3px;
+  background:linear-gradient(105deg,#102f4d,#184563);
+  color:#fffdf7;
+  font:inherit;
+  font-weight:780;
+  letter-spacing:.01em;
+  text-align:left;
+  transition:background .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+#portfolio .portfolio-role-group--community h3 button{
+  border-color:#9ac5aa;
+  border-radius:3px 15px 3px 15px;
+  background:linear-gradient(105deg,#075e49,#078360);
+}
+#portfolio .portfolio-role-group h3 button:hover,
+#portfolio .portfolio-role-group h3 button:focus-visible,
+#portfolio .portfolio-role-group.sel h3 button{
+  border-color:#f0d47e;
+  background:linear-gradient(105deg,#0b684f,#087c5e);
+  box-shadow:0 0 0 3px #c5a34d44;
+  color:#fffdf7;
+}
+#portfolio .portfolio-role-group h3 button:focus-visible{outline:3px solid #f0d47e;outline-offset:3px}
+#portfolio .portfolio-role-list{
+  position:relative;
+  gap:11px;
+  padding-left:0;
+}
+#portfolio .portfolio-role-list::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:22px;
+  bottom:22px;
+  left:37px;
+  width:2px;
+  background:linear-gradient(#c5a34d95,#07836065);
+  pointer-events:none;
+}
+#portfolio .portfolio-role-card,
+#portfolio .portfolio-role-group--community .portfolio-role-card{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr);
+  gap:15px;
+  min-height:82px;
+  padding:11px 16px 11px 9px;
+  border:1px solid #a7bdba;
+  border-left:4px solid #1b6ea8;
+  border-radius:5px 20px 5px 20px;
+  background:linear-gradient(110deg,#fffef8f5,#f8f8eef0);
+  color:#102f4d;
+  box-shadow:0 7px 16px #102f4d10,inset 0 1px #fff;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease,opacity .22s ease;
+}
+#portfolio .portfolio-role-group--community .portfolio-role-card{
+  border-left-color:#078360;
+  border-radius:20px 5px 20px 5px;
+}
+#portfolio .portfolio-role-card:hover{
+  transform:translateX(4px);
+  border-color:#c5a34d;
+  box-shadow:0 12px 24px #102f4d1d;
+}
+#portfolio .portfolio-role-icon{
+  position:relative;
+  z-index:1;
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:52px;
+  height:52px;
+  border:1px solid #8cb4cb;
+  border-radius:50%;
+  background:linear-gradient(145deg,#f8fbf8,#e4eef0);
+  color:#176b9d;
+  box-shadow:0 0 0 4px #fffef4;
+}
+#portfolio .portfolio-role-group--community .portfolio-role-icon{
+  border-color:#89bba0;
+  background:linear-gradient(145deg,#fbfff6,#deeee1);
+  color:#078360;
+}
+#portfolio .portfolio-role-icon svg{width:34px;height:34px;stroke-width:2}
+#portfolio .portfolio-role-copy{gap:4px}
+#portfolio .portfolio-role-copy strong{
+  color:#102f4d;
+  font-size:clamp(16px,1.25vw,19px);
+  font-weight:800;
+  letter-spacing:.005em;
+  line-height:1.15;
+}
+#portfolio .portfolio-role-copy>span{
+  color:#294356;
+  font-size:clamp(13px,1.05vw,15px);
+  line-height:1.4;
+}
+#portfolio .portfolio-role-card.sel,
+#portfolio .portfolio-role-card[aria-pressed=true],
+#portfolio .portfolio-role-card.is-active{
+  transform:translateX(5px);
+  border-color:#c5a34d;
+  border-left-color:#e1c264;
+  background:linear-gradient(110deg,#075e49,#0b765a);
+  box-shadow:0 0 0 3px #c5a34d58,0 14px 28px #102f4d25;
+}
+#portfolio .portfolio-role-card.sel .portfolio-role-icon,
+#portfolio .portfolio-role-card[aria-pressed=true] .portfolio-role-icon{
+  border-color:#f0d47e;
+  background:#fff9e7;
+  color:#075e49;
+  box-shadow:0 0 0 4px #0b765a;
+}
+#portfolio .portfolio-role-card.sel .portfolio-role-copy strong,
+#portfolio .portfolio-role-card[aria-pressed=true] .portfolio-role-copy strong,
+#portfolio .portfolio-role-card.sel .portfolio-role-copy>span,
+#portfolio .portfolio-role-card[aria-pressed=true] .portfolio-role-copy>span{color:#fffdf7}
+#portfolio .portfolio-role-card.dm{opacity:.34!important;filter:saturate(.55)}
+#portfolio .portfolio-role-group.dm{opacity:.36;filter:saturate(.55)}
+#portfolio .portfolio-role-group.sel{border-color:#c5a34d;box-shadow:0 0 0 3px #c5a34d36,0 18px 38px #102f4d18}
+@media(max-width:920px){
+  #portfolio .portfolio-role-map{gap:18px}
+  #portfolio .portfolio-role-group,#portfolio .portfolio-role-group--community{padding:14px}
+  #portfolio .portfolio-role-card,#portfolio .portfolio-role-group--community .portfolio-role-card{grid-template-columns:50px minmax(0,1fr);min-height:78px;gap:12px;padding:10px 11px 10px 7px}
+  #portfolio .portfolio-role-icon{width:46px;height:46px}
+  #portfolio .portfolio-role-list::before{left:30px}
+}
+@media(max-width:700px){
+  #portfolio.page{padding-top:calc(var(--header) + 24px);padding-bottom:40px}
+  #portfolio.page h2{font-size:clamp(29px,7.7vw,38px)}
+  #portfolio.page .portfolio-lead{margin-top:12px;padding:11px 13px;font-size:14px}
+  #portfolio .portfolio-role-map{grid-template-columns:minmax(0,1fr);gap:18px;margin-top:20px}
+  #portfolio .portfolio-role-group,#portfolio .portfolio-role-group--community{padding:13px;border-radius:18px 4px 18px 4px}
+  #portfolio .portfolio-role-group--community{border-top:1px solid #86b59c}
+  #portfolio .portfolio-role-group h3{margin-bottom:12px}
+  #portfolio .portfolio-role-group h3 button{min-height:56px;padding:11px 13px}
+  #portfolio .portfolio-role-list{gap:9px}
+  #portfolio .portfolio-role-list::before{left:28px}
+  #portfolio .portfolio-role-card,#portfolio .portfolio-role-group--community .portfolio-role-card{grid-template-columns:44px minmax(0,1fr);gap:10px;min-height:72px;padding:8px 9px 8px 6px;border-radius:4px 15px 4px 15px}
+  #portfolio .portfolio-role-icon{width:42px;height:42px}
+  #portfolio .portfolio-role-icon svg{width:29px;height:29px}
+  #portfolio .portfolio-role-copy strong{font-size:15px}
+  #portfolio .portfolio-role-copy>span{font-size:13px;line-height:1.35}
+}
+@media(prefers-reduced-motion:reduce){
+  #portfolio .portfolio-role-card,#portfolio .portfolio-role-group h3 button{transition:none!important}
+}
