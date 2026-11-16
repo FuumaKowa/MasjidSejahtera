@@ -1004,3 +1004,37 @@ html,body{max-width:100%;overflow-x:clip}
   #hubungi .closing-identity img{width:62px;height:62px}
   #hubungi .closing-identity p{font-size:16px}
 }
+
+/* Masjid Sejahtera visual refinement: richer surfaces, depth and page rhythm. */
+.page-inner>h2{position:relative;text-shadow:0 1px 0 #fff8}
+.page-inner>h2::after{content:"";display:block;width:clamp(58px,8vw,112px);height:3px;margin-top:clamp(14px,1.8vw,22px);border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--green),transparent)}
+#kota-suci .city-list{gap:clamp(14px,2vw,22px)}
+#kota-suci .city-item{border:1px solid #d5b65c;border-radius:16px 48px 16px 16px;background:linear-gradient(108deg,#102f4df5 0%,#0b604cf2 100%);box-shadow:0 16px 36px #102f4d20,inset 0 1px #fff5}
+#kota-suci .city-item.is-active{border-color:#f2d882;box-shadow:0 0 0 3px #e2c36d45,0 20px 42px #102f4d30,inset 0 1px #fff8}
+#kota-suci .city-letter{display:grid;place-items:center;min-height:82px;border:1px solid #e1c46b;border-radius:13px 26px 13px 13px;background:linear-gradient(145deg,#f5dc91,#d0ad52);box-shadow:inset 0 1px #fff9,0 8px 18px #001d3025}
+#kota-suci .city-arrow{filter:drop-shadow(0 2px 3px #001d3033)}
+#kota-suci .city-image{border:2px solid #e4c56e;padding:3px;background:#fffdf7;box-shadow:0 8px 20px #001d3040}
+#kota-suci .city-item strong{letter-spacing:.01em;text-shadow:0 2px 12px #001d3035}
+#impak .impact-callout{border-radius:5px 24px 5px 5px;background:linear-gradient(140deg,#fffdf8,#f5f0de);box-shadow:0 14px 30px #102f4d16,inset 0 1px #fff}
+#impak .impact-callout:hover,#impak .impact-callout.is-active{box-shadow:0 0 0 2px #c5a34d55,0 18px 38px #102f4d24}
+#objektif .objective-card{border-radius:5px 25px 5px 5px;box-shadow:0 12px 30px #102f4d1b,inset 0 1px #fff}
+#objektif .objective-card:hover,#objektif .objective-card[aria-pressed=true]{box-shadow:0 0 0 3px #c5a34d44,0 20px 42px #102f4d28}
+#teras-iman .result-ribbon,#teras-madinah .outcome-card,#teras-maqdis .maqdis-outcome{box-shadow:0 16px 34px #102f4d1f,inset 0 1px #fff3}
+#teras-iman .focus-hex,#teras-madinah .muafakat-focus,#teras-maqdis .maqdis-focus{filter:drop-shadow(0 12px 20px #102f4d20)}
+#teras-iman .program-steps button,#teras-madinah .program-stack button,#teras-maqdis .maqdis-programs button{border-radius:3px 24px 3px 3px;box-shadow:0 10px 24px #102f4d20,inset 0 1px #fff4}
+#teras-iman .program-steps button:hover,#teras-iman .program-steps button[aria-pressed=true],#teras-madinah .program-stack button:hover,#teras-madinah .program-stack button[aria-pressed=true],#teras-maqdis .maqdis-programs button:hover,#teras-maqdis .maqdis-programs button[aria-pressed=true]{box-shadow:0 0 0 2px #e3c56f8c,0 16px 32px #102f4d30}
+#portfolio .portfolio-role-card{border-radius:5px 24px 5px 5px;box-shadow:0 9px 22px #102f4d17,inset 0 1px #fff}
+#portfolio .portfolio-role-card:hover,#portfolio .portfolio-role-card[aria-pressed=true]{box-shadow:0 0 0 2px #c5a34d70,0 15px 30px #102f4d24}
+#fungsi .function-node{border-radius:4px 24px 4px 4px;box-shadow:0 12px 25px #102f4d20,inset 0 1px #fff}
+#fungsi .function-node:hover,#fungsi .function-node[aria-pressed=true]{box-shadow:0 0 0 3px #c5a34d55,0 18px 36px #102f4d28}
+#aliran .stage-co{border-radius:4px 24px 4px 4px;box-shadow:0 14px 30px #102f4d1c,inset 0 1px #fff}
+#aliran .stage-node{filter:drop-shadow(0 12px 18px #001d3033)}
+@media(max-width:700px){
+  .page-inner>h2::after{width:56px;height:3px;margin-top:12px}
+  #kota-suci .city-item{border-radius:10px 30px 10px 10px}
+  #kota-suci .city-letter{min-height:62px;border-radius:10px 20px 10px 10px}
+  #kota-suci .city-image{padding:2px}
+}
+@media(prefers-reduced-motion:reduce){
+  #kota-suci .city-item,#impak .impact-callout,#objektif .objective-card,#portfolio .portfolio-role-card,#fungsi .function-node{transition:none}
+}
