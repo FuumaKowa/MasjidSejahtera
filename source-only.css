@@ -2177,3 +2177,26 @@ main>.page:not(#utama) .page-inner>h2{
     animation:none;
   }
 }
+
+/* Give the reveal a stable final grid; the symbols animate into these tracks. */
+#kota-suci .city-story.is-intro .city-list {
+  transition:none;
+}
+#kota-suci .city-story.is-revealed .city-list {
+  grid-template-rows:repeat(3,minmax(104px,auto));
+  align-content:start;
+  transition:none;
+}
+#kota-suci .city-story.is-revealed .city-item.is-arriving {
+  transition:none!important;
+  will-change:transform,opacity;
+}
+#kota-suci .city-story.is-revealed .city-item.is-arriving::before {
+  animation:none!important;
+  opacity:0!important;
+}
+#kota-suci .city-story.is-revealed .city-item.is-arriving .city-arrow,
+#kota-suci .city-story.is-revealed .city-item.is-arriving .city-panel,
+#kota-suci .city-story.is-revealed .city-item.is-arriving .city-image {
+  transition:none!important;
+}
