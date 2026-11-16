@@ -1062,3 +1062,24 @@ html,body{max-width:100%;overflow-x:clip}
   #hubungi .closing-identity{width:100%;box-sizing:border-box;justify-content:flex-start;border-radius:14px 4px 14px 4px}
 }
 @media(prefers-reduced-motion:reduce){#hubungi .whatsapp-cta,#hubungi .whatsapp-arrow{transition:none}}
+
+/* Shared mosque image with a translucent green wash on every middle page. */
+main>.page:not(#utama){
+  background-color:#092b26!important;
+  background-image:linear-gradient(135deg,rgba(5,68,52,.78) 0%,rgba(6,57,47,.72) 52%,rgba(6,70,52,.78) 100%),url("assets/experience/courtyard-arrival.jpg")!important;
+  background-position:center center,center 45%;
+  background-size:cover,cover;
+  background-attachment:fixed,fixed;
+}
+main>.page:not(#utama)::before{opacity:.24!important}
+main>.page:not(#utama)::after{opacity:.18!important}
+main>.page:not(#utama) .page-inner>h2{color:#fffdf5!important;text-shadow:0 2px 18px #001a2055}
+#portfolio.page .portfolio-lead,#portfolio.page .portfolio-role-group h3{color:#fffdf5!important}
+#fungsi.page .function-caption{color:#fffdf5!important}
+@media(max-width:700px){
+  main>.page:not(#utama){background-attachment:scroll,scroll}
+  main>.page:not(#utama)::before{opacity:.18!important}
+}
+@media(prefers-reduced-motion:reduce){
+  main>.page:not(#utama){background-attachment:scroll,scroll}
+}
