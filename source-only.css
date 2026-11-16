@@ -986,3 +986,6 @@ html,body{max-width:100%;overflow-x:clip}
 #impak .impact-symbol-inner{font-size:34px;fill:#f0d37a}
 #impak .impact-symbol-middle{font-size:48px;fill:#fff2c8}
 #impak .impact-symbol-outer{font-size:50px;fill:#078360}
+
+/* Jawi letters in the closing statement. */
+#dimensi .jawi-letters{font-family:Amiri,"Noto Naskh Arabic",serif;font-size:1.16em;font-weight:700;direction:rtl;unicode-bidi:isolate;white-space:nowrap;vertical-align:-.04em;letter-spacing:.04em}
