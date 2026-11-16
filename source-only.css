@@ -980,3 +980,9 @@ html,body{max-width:100%;overflow-x:clip}
 /* Original circular illustrations from the source model for the three cities. */
 #kota-suci .city-image{display:block;width:100%;aspect-ratio:1;object-fit:contain;border-radius:50%;filter:drop-shadow(0 8px 14px #102f4d22)}
 @media(max-width:700px){#kota-suci .city-image{width:58px;justify-self:end}}
+
+/* Arabic identity marks on the three concentric city circles. */
+#impak .impact-symbol{font-family:Amiri,"Noto Naskh Arabic",serif;font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+#impak .impact-symbol-inner{font-size:38px;fill:#f0d37a}
+#impak .impact-symbol-middle{font-size:52px;fill:#fff2c8}
+#impak .impact-symbol-outer{font-size:62px;fill:#078360}
