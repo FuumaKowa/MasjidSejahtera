@@ -2136,3 +2136,10 @@ main>.page:not(#utama) .page-inner>h2{
 #kota-suci .city-story.is-revealed .city-item:not(.is-open)::before {
   inset:14px -58px 14px 78px;
 }
+
+/* Reset dimensions inherited from the original connector pseudo-element. */
+#kota-suci .city-story.is-intro .city-item:first-child::before,
+#kota-suci .city-story.is-revealed .city-item:not(.is-open)::before {
+  width:auto;
+  height:auto;
+}
