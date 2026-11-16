@@ -2096,3 +2096,26 @@ main>.page:not(#utama) .page-inner>h2{
     max-height:96px;
   }
 }
+
+/* Place the compact choices back on the left edge of their final rows. */
+#kota-suci .city-story.is-intro .city-item:first-child {
+  height:104px;
+  max-height:104px;
+}
+#kota-suci .city-story.is-revealed .city-item:not(.is-open) {
+  justify-self:start;
+}
+#kota-suci .city-story.is-intro .city-item:first-child::before,
+#kota-suci .city-story.is-revealed .city-item:not(.is-open)::before {
+  z-index:0;
+}
+#kota-suci .city-story.is-intro .city-item:first-child .city-letter,
+#kota-suci .city-story.is-revealed .city-item:not(.is-open) .city-letter {
+  z-index:1;
+}
+@media(max-width:700px) {
+  #kota-suci .city-story.is-intro .city-item:first-child {
+    height:96px;
+    max-height:96px;
+  }
+}
