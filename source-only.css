@@ -1038,3 +1038,27 @@ html,body{max-width:100%;overflow-x:clip}
 @media(prefers-reduced-motion:reduce){
   #kota-suci .city-item,#impak .impact-callout,#objektif .objective-card,#portfolio .portfolio-role-card,#fungsi .function-node{transition:none}
 }
+
+/* Closing page polish: quiet geometry, a framed identity and a luminous WhatsApp action. */
+#hubungi.closing-cta{isolation:isolate;background:radial-gradient(ellipse at 78% 17%,#d8bc6538,transparent 32%),radial-gradient(ellipse at 12% 88%,#07836052,transparent 42%),linear-gradient(135deg,#072722 0%,#102f4d 58%,#123b39 100%)}
+#hubungi.closing-cta::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(45deg,transparent 0 43px,#e8d596 44px,transparent 45px 86px),repeating-linear-gradient(-45deg,transparent 0 43px,#e8d596 44px,transparent 45px 86px);background-size:88px 88px;mask-image:radial-gradient(ellipse at 50% 48%,#000 0%,transparent 76%)}
+#hubungi .closing-cta-inner{overflow:hidden;border:1px solid #e1c66d9c;border-radius:30px 8px 30px 8px;background:linear-gradient(145deg,#ffffff18,#ffffff08 62%,#d6bb5d12);box-shadow:0 30px 90px #00171c65,inset 0 1px #fff5;backdrop-filter:blur(12px)}
+#hubungi .closing-cta-inner::before{content:"";position:absolute;inset:12px;z-index:-1;pointer-events:none;border:1px solid #e2c97832;border-radius:22px 4px 22px 4px}
+#hubungi .closing-final-copy{position:relative;z-index:1}
+#hubungi .closing-final-copy h2{position:relative;padding-bottom:22px;text-shadow:0 3px 24px #00182050}
+#hubungi .closing-final-copy h2::after{content:"";position:absolute;left:50%;bottom:0;width:clamp(70px,10vw,128px);height:2px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,#f0d47e,transparent)}
+#hubungi .closing-identity{padding:12px clamp(16px,2.5vw,28px);border:1px solid #e0c66e70;border-radius:18px 5px 18px 5px;background:linear-gradient(125deg,#ffffff16,#ffffff08);box-shadow:inset 0 1px #fff3,0 12px 30px #001a2630}
+#hubungi .closing-identity img{border:1px solid #e2c978;border-radius:10px;box-shadow:0 6px 18px #0017212b}
+#hubungi .closing-identity p{text-shadow:0 2px 12px #00182055}
+#hubungi .whatsapp-cta{position:relative;isolation:isolate;overflow:hidden;border:1px solid #ffe69a;background:linear-gradient(115deg,#f5da83 0%,#d5b24f 100%);box-shadow:0 12px 30px #00192050,inset 0 1px #fff9;transition:transform .24s ease,box-shadow .24s ease,filter .24s ease}
+#hubungi .whatsapp-cta::before{content:"";position:absolute;inset:1px;z-index:-1;border-radius:inherit;background:linear-gradient(110deg,#fff8d86b,transparent 55%)}
+#hubungi .whatsapp-cta:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 18px 38px #00182066,inset 0 1px #fff}
+#hubungi .whatsapp-arrow{transition:transform .24s ease}
+#hubungi .whatsapp-cta:hover .whatsapp-arrow{transform:translate(3px,-3px)}
+@media(max-width:700px){
+  #hubungi .closing-cta-inner{border-radius:22px 6px 22px 6px}
+  #hubungi .closing-cta-inner::before{inset:9px;border-radius:15px 3px 15px 3px}
+  #hubungi .closing-final-copy h2{padding-bottom:17px}
+  #hubungi .closing-identity{width:100%;box-sizing:border-box;justify-content:flex-start;border-radius:14px 4px 14px 4px}
+}
+@media(prefers-reduced-motion:reduce){#hubungi .whatsapp-cta,#hubungi .whatsapp-arrow{transition:none}}
