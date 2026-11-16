@@ -167,29 +167,46 @@ document.addEventListener('click', (event) => {
   if (city) {
     const firstReveal = cityStory?.classList.contains('is-intro');
     const willOpen = !city.classList.contains('is-open');
-    const previousOpen = cityItems.find((item) => item.classList.contains('is-open'));
-    const beforeRects = new Map(cityItems.map((item) => [item, item.getBoundingClientRect()]));
-    const moving = new Set([city]);
-    if (previousOpen && previousOpen !== city) moving.add(previousOpen);
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const origin = firstReveal ? cityItems[0].getBoundingClientRect() : null;
+
     if (firstReveal) {
       cityStory.classList.remove('is-intro');
       cityStory.classList.add('is-revealed');
     }
     cityItems.forEach((item) => setCityItemOpen(item, willOpen && item === city));
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      requestAnimationFrame(() => {
-        moving.forEach((item) => {
-          const before = beforeRects.get(item);
-          if (!before || !item.classList.contains('is-open') && firstReveal && item !== city) return;
-          const after = item.getBoundingClientRect();
-          const dx = before.left - after.left;
-          const dy = before.top - after.top;
-          if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
-          item.animate(
-            [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'translate(0, 0)' }],
-            { duration: 680, easing: 'cubic-bezier(.2,.7,.2,1)' }
-          );
-        });
+
+    if (firstReveal && !reducedMotion) {
+      // Let the grid settle first, then glide each compact symbol from Alif's
+      // starting position into its own row. The open card expands via CSS.
+      const destinations = cityItems.map((item) => item.getBoundingClientRect());
+      cityItems.forEach((item, index) => {
+        const destination = destinations[index];
+        const start = index === 0 ? origin : origin;
+        if (!start || !destination) return;
+        const dx = start.left - destination.left;
+        const dy = start.top - destination.top;
+        if (index > 0) item.classList.add('is-arriving');
+        const animation = item.animate(
+          [
+            { transform: `translate(${dx}px, ${dy}px)`, opacity: index === 0 ? 1 : 0 },
+            { transform: 'translate(0, 0)', opacity: 1 }
+          ],
+          {
+            duration: index === 0 ? 760 : 820,
+            delay: index === 0 ? 0 : index * 140,
+            easing: 'cubic-bezier(.22,.68,.22,1)',
+            fill: 'both'
+          }
+        );
+        if (index > 0) {
+          animation.finished.then(() => {
+            animation.cancel();
+            item.classList.remove('is-arriving');
+          }).catch(() => {});
+        } else {
+          animation.finished.then(() => animation.cancel()).catch(() => {});
+        }
       });
     }
     return;
