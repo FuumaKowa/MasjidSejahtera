@@ -2231,3 +2231,34 @@ main>.page:not(#utama) .page-inner>h2{
   transition:grid-template-columns .88s cubic-bezier(.2,.7,.2,1),min-height .72s ease,gap .68s ease,padding .58s ease,border-radius .4s ease,background .4s ease,box-shadow .4s ease!important;
   will-change:width,grid-template-columns;
 }
+
+/* GSAP owns layout transitions while a city card is being opened or interrupted. */
+#kota-suci .city-story.is-gsap-layout .city-list,
+#kota-suci .city-story.is-gsap-layout.is-revealed .city-item,
+#kota-suci .city-story.is-gsap-layout.is-revealed .city-item.is-arriving,
+#kota-suci .city-story.is-gsap-layout.is-revealed .city-item.is-open,
+#kota-suci .city-story.is-gsap-layout.is-revealed .city-item .city-letter,
+#kota-suci .city-story.is-gsap-layout.is-revealed .city-item .city-arrow,
+#kota-suci .city-story.is-gsap-layout.is-revealed .city-item .city-panel,
+#kota-suci .city-story.is-gsap-layout.is-revealed .city-item .city-image {
+  transition:none!important;
+}
+#kota-suci .city-story.is-gsap-layout .city-item::before { animation:none!important; }
+#kota-suci .city-story.is-gsap-layout .city-item { will-change:transform,width,height,opacity; }
+
+/* GSAP scroll reveals replace the page's CSS entrance transition while active. */
+.page.is-gsap-revealing .page-inner>h2,
+.page.is-gsap-revealing .page-inner>.title-sub,
+.page.is-gsap-revealing .page-inner>.city-story,
+.page.is-gsap-revealing .page-inner>.impact-layout,
+.page.is-gsap-revealing .page-inner>.objective-network,
+.page.is-gsap-revealing .page-inner>.portfolio-wheel,
+.page.is-gsap-revealing .page-inner>.portfolio-note,
+.page.is-gsap-revealing .page-inner>.function-map,
+.page.is-gsap-revealing .page-inner>.function-caption,
+.page.is-gsap-revealing .page-inner>.stage-list,
+.closing-cta.is-gsap-revealing .closing-final-copy h2,
+.closing-cta.is-gsap-revealing .closing-identity,
+.closing-cta.is-gsap-revealing .whatsapp-cta {
+  transition:none!important;
+}

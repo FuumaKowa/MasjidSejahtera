@@ -32,6 +32,7 @@ const selectDiagramItems = (allItems, selectedItems, controls = []) => {
 };
 const cityItems = [...document.querySelectorAll('#kota-suci .city-item')];
 const cityStory = document.querySelector('#kota-suci .city-story');
+let cityTimeline = null;
 const cityTitle = (item) => item.querySelector('.city-panel strong')?.textContent.trim() || '';
 const setCityItemOpen = (item, open) => {
   item.classList.toggle('is-open', open);
@@ -168,78 +169,102 @@ document.addEventListener('click', (event) => {
     const firstReveal = cityStory?.classList.contains('is-intro');
     const willOpen = !city.classList.contains('is-open');
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const origin = firstReveal ? cityItems[0].getBoundingClientRect() : null;
-    const compactRect = !firstReveal && willOpen ? city.getBoundingClientRect() : null;
+    const oldRects = cityItems.map((item) => item.getBoundingClientRect());
+    const oldOpacity = cityItems.map((item) => Number.parseFloat(getComputedStyle(item).opacity) || 0);
+    const oldOpen = cityItems.find((item) => item.classList.contains('is-open'));
+    const oldOpenParts = oldOpen ? [oldOpen.querySelector('.city-arrow'), oldOpen.querySelector('.city-panel'), oldOpen.querySelector('.city-image')].filter(Boolean) : [];
+    const oldPartOpacity = oldOpenParts.map((part) => Number.parseFloat(getComputedStyle(part).opacity) || 0);
+    const origin = oldRects[0];
+
+    if (cityTimeline) {
+      cityTimeline.kill();
+      cityTimeline = null;
+    }
+
+    if (window.gsap) {
+      // Stop a still-running section entrance too; otherwise its parent
+      // transform can move the cards while their new FLIP targets are measured.
+      gsap.killTweensOf(cityStory);
+      gsap.set(cityStory, { clearProps: 'transform,opacity,visibility' });
+      cityStory.classList.add('is-gsap-layout');
+      if (firstReveal) cityItems.forEach((item) => item.classList.add('is-arriving'));
+      gsap.set(cityItems, { clearProps: 'transform,width,height,opacity,visibility,clipPath,transformOrigin' });
+      cityItems.flatMap((item) => [item.querySelector('.city-arrow'), item.querySelector('.city-panel'), item.querySelector('.city-image')])
+        .filter(Boolean)
+        .forEach((part) => gsap.set(part, { clearProps: 'transform,opacity,visibility' }));
+    }
 
     if (firstReveal) {
-      // Lock the compact symbols before the grid opens so their width and hover
-      // transitions cannot compete with the glide animation.
-      cityItems.forEach((item) => item.classList.add('is-arriving'));
       cityStory.classList.remove('is-intro');
       cityStory.classList.add('is-revealed');
-    } else if (willOpen && !reducedMotion && window.gsap) {
-      city.classList.add('is-gsap-animating');
     }
     cityItems.forEach((item) => setCityItemOpen(item, willOpen && item === city));
 
-    const detailParts = [city.querySelector('.city-arrow'), city.querySelector('.city-panel'), city.querySelector('.city-image')].filter(Boolean);
-    if (firstReveal && !reducedMotion && window.gsap) {
-      city.classList.add('is-gsap-animating');
-      requestAnimationFrame(() => {
-        const destinations = cityItems.map((item) => item.getBoundingClientRect());
-        const reveal = gsap.timeline();
-        reveal.eventCallback('onComplete', () => city.classList.remove('is-gsap-animating'));
-        reveal.eventCallback('onInterrupt', () => city.classList.remove('is-gsap-animating'));
-        cityItems.forEach((item, index) => {
-          const destination = destinations[index];
-          if (!origin || !destination) return;
-          const dx = origin.left - destination.left;
-          const dy = origin.top - destination.top;
-          gsap.set(item, { x: dx, y: dy, scale: index === 0 ? 1 : 0.88, autoAlpha: index === 0 ? 1 : 0 });
-          reveal.to(item, {
-            x: 0,
-            y: 0,
-            scale: 1,
-            autoAlpha: 1,
-            duration: index === 0 ? 0.76 : 0.88,
-            ease: 'power3.out',
-            clearProps: 'opacity,visibility',
-            onComplete: () => item.classList.remove('is-arriving')
-          }, index === 0 ? 0 : 0.13 + index * 0.15);
-        });
-        if (detailParts.length) {
-          reveal.fromTo(detailParts,
-            { x: -14, autoAlpha: 0 },
-            { x: 0, autoAlpha: 1, duration: 0.52, stagger: 0.07, ease: 'power2.out', clearProps: 'transform,opacity,visibility' },
-            0.22
-          );
-        }
-      });
-    } else if (!firstReveal && willOpen && !reducedMotion && window.gsap && detailParts.length) {
-      const clearAnimatingState = () => city.classList.remove('is-gsap-animating');
-      const expandedWidth = city.getBoundingClientRect().width;
-      const expand = gsap.timeline({
-        onComplete: () => {
-          gsap.set(city, { clearProps: 'clipPath' });
-          clearAnimatingState();
-        },
-        onInterrupt: () => {
-          gsap.set(city, { clearProps: 'clipPath' });
-          clearAnimatingState();
-        }
-      });
-      if (compactRect) {
-        const clippedWidth = Math.max(0, expandedWidth - compactRect.width);
-        gsap.set(city, { clipPath: `inset(0px ${clippedWidth}px 0px 0px round 16px)` });
-        gsap.set(detailParts, { x: -20, autoAlpha: 0 });
-        expand.to(city, { clipPath: 'inset(0px 0px 0px 0px round 16px)', duration: 1.28, ease: 'power3.inOut' }, 0);
-        expand.to(detailParts,
-          { x: 0, autoAlpha: 1, duration: 0.62, stagger: 0.1, ease: 'power2.out', clearProps: 'transform,opacity,visibility' },
-          0.72
-        );
-      }
-    } else if (firstReveal) {
+    if (!window.gsap || reducedMotion) {
+      cityStory.classList.remove('is-gsap-layout');
       cityItems.forEach((item) => item.classList.remove('is-arriving'));
+      return;
+    }
+
+    // Lock the destination layout before measuring it. No CSS transition is
+    // allowed to move the target while GSAP builds the FLIP offsets.
+    void cityStory.offsetHeight;
+    const destinations = cityItems.map((item) => item.getBoundingClientRect());
+    const detailParts = [city.querySelector('.city-arrow'), city.querySelector('.city-panel'), city.querySelector('.city-image')].filter(Boolean);
+    const duration = firstReveal ? 1.32 : 0.92;
+    const timeline = gsap.timeline({
+      onComplete: () => {
+        gsap.set(cityItems, { clearProps: 'transform,width,height,opacity,visibility,clipPath,transformOrigin' });
+        cityItems.flatMap((item) => [item.querySelector('.city-arrow'), item.querySelector('.city-panel'), item.querySelector('.city-image')])
+          .filter(Boolean)
+          .forEach((part) => gsap.set(part, { clearProps: 'transform,opacity,visibility' }));
+        cityItems.forEach((item) => item.classList.remove('is-arriving'));
+        cityStory.classList.remove('is-gsap-layout');
+        cityTimeline = null;
+      }
+    });
+    cityTimeline = timeline;
+
+    cityItems.forEach((item, index) => {
+      const start = firstReveal ? origin : oldRects[index];
+      const destination = destinations[index];
+      const startWidth = firstReveal ? origin.width : start.width;
+      const startHeight = firstReveal ? origin.height : Math.max(start.height, 1);
+      const delay = firstReveal ? (index === 0 ? 0 : 0.12 + index * 0.18) : 0;
+      gsap.set(item, {
+        x: start.left - destination.left,
+        y: start.top - destination.top,
+        width: startWidth,
+        height: startHeight,
+        autoAlpha: firstReveal ? (index === 0 ? 1 : 0) : oldOpacity[index],
+        transformOrigin: 'top left'
+      });
+      timeline.to(item, {
+        x: 0,
+        y: 0,
+        width: destination.width,
+        height: destination.height,
+        autoAlpha: 1,
+        duration: firstReveal && index > 0 ? 0.86 : duration,
+        ease: 'power3.inOut'
+      }, delay);
+    });
+
+    if (oldOpen && (oldOpen !== city || !willOpen)) {
+      oldOpenParts.forEach((part, index) => {
+        gsap.set(part, { visibility: 'visible', autoAlpha: oldPartOpacity[index] });
+        timeline.to(part, { autoAlpha: 0, x: -10, duration: 0.24, ease: 'power1.out' }, 0);
+      });
+    }
+    if (willOpen && detailParts.length) {
+      gsap.set(detailParts, { visibility: 'visible', x: -16, autoAlpha: 0 });
+      timeline.to(detailParts, {
+        x: 0,
+        autoAlpha: 1,
+        duration: 0.52,
+        stagger: 0.08,
+        ease: 'power2.out'
+      }, firstReveal ? 0.34 : 0.5);
     }
     return;
   }
@@ -340,12 +365,69 @@ const referenceSections = ['kota-suci', 'impak', 'objektif', 'teras-iman', 'tera
 if ('IntersectionObserver' in window) {
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      if (!entry.isIntersecting || entry.target.classList.contains('is-visible')) return;
+      const section = entry.target;
+      const motionTargets = [...section.querySelectorAll('.page-inner > h2,.page-inner > .title-sub,.page-inner > .city-story,.page-inner > .impact-layout,.page-inner > .objective-network,.page-inner > .portfolio-wheel,.page-inner > .portfolio-note,.page-inner > .function-map,.page-inner > .function-caption,.page-inner > .stage-list')];
+      const useGsap = window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches && motionTargets.length;
+      if (useGsap) section.classList.add('is-gsap-revealing');
+      section.classList.add('is-visible');
+      if (useGsap) gsap.fromTo(motionTargets,
+        { y: 24, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.78,
+          stagger: 0.12,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity,visibility',
+          onComplete: () => section.classList.remove('is-gsap-revealing')
+        }
+      );
     });
   }, { threshold: 0.18 });
   referenceSections.forEach((section) => sectionObserver.observe(section));
 } else {
   referenceSections.forEach((section) => section.classList.add('is-visible'));
+}
+
+const motionReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coverIntro = document.querySelector('.cover');
+if (window.gsap && !motionReduced && coverIntro) {
+  const coverCopy = [...coverIntro.querySelectorAll('.cover-copy h1,.cover-copy .cover-tagline')];
+  const coverMark = coverIntro.querySelector('.cover-mark');
+  gsap.fromTo(coverCopy,
+    { y: 28, autoAlpha: 0 },
+    { y: 0, autoAlpha: 1, duration: 0.86, stagger: 0.18, ease: 'power3.out', clearProps: 'transform,opacity,visibility' }
+  );
+  if (coverMark) gsap.fromTo(coverMark,
+    { scale: 0.88, autoAlpha: 0 },
+    { scale: 1, autoAlpha: 1, duration: 0.9, delay: 0.3, ease: 'back.out(1.4)', clearProps: 'transform,opacity,visibility' }
+  );
+}
+
+const closingCta = document.querySelector('.closing-cta');
+if (window.gsap && !motionReduced && closingCta && 'IntersectionObserver' in window) {
+  const closingObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      closingObserver.disconnect();
+      closingCta.classList.add('is-gsap-revealing');
+      const closingParts = [...closingCta.querySelectorAll('.closing-final-copy h2,.closing-identity,.whatsapp-cta')];
+      gsap.fromTo(closingParts,
+        { y: 24, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.82,
+          stagger: 0.14,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity,visibility',
+          onComplete: () => closingCta.classList.remove('is-gsap-revealing')
+        }
+      );
+    });
+  }, { threshold: 0.35 });
+  closingObserver.observe(closingCta);
 }
 
 const impactVisual = document.querySelector('#impak .impact-visual');
