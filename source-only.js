@@ -475,8 +475,19 @@ if (objectiveNetwork && objectiveSvg) {
   [[0, 2], [2, 4], [4, 1], [1, 3], [3, 0]].forEach(([from, to], index) => {
     addLine(points[from], points[to], 'objective-starline', 560 + index * 110);
   });
-  const leaderEnds = [[600, 88], [846, 244.37], [840, 452], [360, 452], [354, 244.37]];
+  const leaderEnds = [[600, 84], [846, 244.37], [840, 474], [360, 474], [354, 244.37]];
   points.forEach((point, index) => addLine(point, leaderEnds[index], 'objective-leader', 1120 + index * 110));
+
+  const centerAnchor = document.createElementNS(svgNs, 'g');
+  centerAnchor.setAttribute('class', 'objective-center');
+  centerAnchor.setAttribute('aria-hidden', 'true');
+  const anchorRing = document.createElementNS(svgNs, 'circle');
+  anchorRing.setAttribute('cx', center[0]); anchorRing.setAttribute('cy', center[1]); anchorRing.setAttribute('r', '13');
+  const anchorCore = document.createElementNS(svgNs, 'circle');
+  anchorCore.setAttribute('class', 'objective-center-core');
+  anchorCore.setAttribute('cx', center[0]); anchorCore.setAttribute('cy', center[1]); anchorCore.setAttribute('r', '4.5');
+  centerAnchor.append(anchorRing, anchorCore);
+  objectiveSvg.append(centerAnchor);
 
   const starPoints = (cx, cy, outer, inner) => Array.from({ length: 10 }, (_, index) => {
     const angle = -Math.PI / 2 + index * Math.PI / 5;
