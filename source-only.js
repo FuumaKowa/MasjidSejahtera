@@ -163,6 +163,118 @@ stageNodes.forEach((node, index) => {
     column.setAttribute('aria-label',label);
   }
 });
+
+// Keep the selected progress as one continuous position on the SVG route.
+// Retargeting kills only the current tween; its latest distance is retained.
+const stageSvg = document.querySelector('#aliran .aliran-diagram > svg');
+const stageBaseTrack = stageSvg?.querySelector('.stage-track:not(.stage-track-highlight)');
+const stageFlowHead = stageSvg ? document.createElementNS('http://www.w3.org/2000/svg', 'circle') : null;
+const stageProgressTrack = stageBaseTrack?.cloneNode(false) || null;
+const stageRouteLength = stageBaseTrack?.getTotalLength() || 0;
+const stageFlowState = { distance: 0 };
+let stageFlowTween = null;
+let stageCheckpoints = [];
+if (stageSvg && stageBaseTrack && stageProgressTrack && stageFlowHead && stageRouteLength > 0) {
+  stageProgressTrack.setAttribute('class', 'stage-progress-track');
+  stageProgressTrack.setAttribute('stroke', '#f4d77f');
+  stageProgressTrack.setAttribute('stroke-width', '9');
+  stageProgressTrack.setAttribute('stroke-opacity', '1');
+  stageProgressTrack.setAttribute('stroke-dasharray', `${stageRouteLength} ${stageRouteLength}`);
+  stageProgressTrack.setAttribute('stroke-dashoffset', String(stageRouteLength));
+  stageProgressTrack.setAttribute('aria-hidden', 'true');
+  stageSvg.insertBefore(stageProgressTrack, stageNodes[0]?.parentElement || null);
+
+  stageFlowHead.setAttribute('class', 'stage-flow-head');
+  stageFlowHead.setAttribute('r', '8');
+  stageFlowHead.setAttribute('fill', '#fffdf7');
+  stageFlowHead.setAttribute('stroke', '#f0d37a');
+  stageFlowHead.setAttribute('stroke-width', '4');
+  stageFlowHead.setAttribute('aria-hidden', 'true');
+  stageSvg.insertBefore(stageFlowHead, stageNodes[0]?.parentElement || null);
+
+  const localTargetForNode = (node) => {
+    const circle = node.querySelector('circle');
+    const pathMatrix = stageBaseTrack.getCTM();
+    const nodeMatrix = circle?.getCTM();
+    if (!circle || !pathMatrix || !nodeMatrix) return null;
+    const point = stageSvg.createSVGPoint();
+    point.x = Number(circle.getAttribute('cx') || 0);
+    point.y = Number(circle.getAttribute('cy') || 0);
+    const inSvg = point.matrixTransform(nodeMatrix);
+    return inSvg.matrixTransform(pathMatrix.inverse());
+  };
+  stageCheckpoints = stageNodes.map((node) => {
+    const target = localTargetForNode(node);
+    if (!target) return 0;
+    let bestLength = 0;
+    let bestDistance = Infinity;
+    const samples = Math.ceil(stageRouteLength / 2);
+    for (let sample = 0; sample <= samples; sample += 1) {
+      const length = stageRouteLength * sample / samples;
+      const point = stageBaseTrack.getPointAtLength(length);
+      const distance = Math.hypot(point.x - target.x, point.y - target.y);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestLength = length;
+      }
+    }
+    return bestLength;
+  });
+}
+
+const updateStageProgress = (distance) => {
+  if (!stageProgressTrack || !stageFlowHead || !stageBaseTrack) return;
+  stageFlowState.distance = Math.max(0, Math.min(stageRouteLength, distance));
+  stageProgressTrack.setAttribute('stroke-dashoffset', String(stageRouteLength - stageFlowState.distance));
+  const point = stageBaseTrack.getPointAtLength(stageFlowState.distance);
+  stageFlowHead.setAttribute('cx', String(point.x));
+  stageFlowHead.setAttribute('cy', String(point.y));
+};
+const moveStageProgressTo = (index) => {
+  const target = stageCheckpoints[index];
+  if (target == null || !stageProgressTrack) return;
+  if (stageFlowTween) {
+    stageFlowTween.kill();
+    stageFlowTween = null;
+  }
+  if (window.gsap && stageFlowHead) {
+    gsap.killTweensOf(stageFlowHead);
+    gsap.set(stageFlowHead, { autoAlpha: 1 });
+  }
+  const distance = Math.abs(target - stageFlowState.distance);
+  if (distance < 0.5 || !window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    updateStageProgress(target);
+    if (window.gsap && stageFlowHead) gsap.set(stageFlowHead, { autoAlpha: 0 });
+    else if (stageFlowHead) stageFlowHead.setAttribute('opacity', '0');
+    return;
+  }
+  const duration = Math.max(0.48, Math.min(2.6, distance / stageRouteLength * 4.6));
+  stageFlowTween = gsap.to(stageFlowState, {
+    distance: target,
+    duration,
+    ease: 'none',
+    onUpdate: () => updateStageProgress(stageFlowState.distance),
+    onComplete: () => {
+      updateStageProgress(target);
+      stageFlowTween = null;
+      gsap.to(stageFlowHead, { autoAlpha: 0, duration: 0.24, ease: 'power1.out' });
+    }
+  });
+};
+
+const selectStageCheckpoint = (index) => {
+  const all = [...stageNodes, ...stageColumns];
+  const selected = [stageNodes[index], stageColumns[index]].filter(Boolean);
+  clearDiagramSelection();
+  all.forEach((item) => {
+    const active = selected.includes(item);
+    item.classList.add(active ? 'sel' : 'dm');
+    item.classList.toggle('is-active', active);
+  });
+  selectedControls = selected;
+  selectedControls.forEach((item) => item.setAttribute('aria-pressed', 'true'));
+  moveStageProgressTo(index);
+};
 document.addEventListener('click', (event) => {
   const city = event.target.closest('#kota-suci .city-item');
   if (city) {
@@ -333,8 +445,7 @@ document.addEventListener('click', (event) => {
   const stageControl = event.target.closest('#aliran .stage-node,#aliran .stage-co');
   if (stageControl) {
     const index = Number(stageControl.dataset.stageIndex);
-    const linked = [stageNodes[index],stageColumns[index]];
-    selectDiagramItems([...stageNodes,...stageColumns],linked,[...stageNodes,...stageColumns]);
+    selectStageCheckpoint(index);
     return;
   }
   clearDiagramSelection();
