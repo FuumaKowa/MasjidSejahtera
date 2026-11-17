@@ -808,11 +808,14 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Make the selected Page 10 connector visibly glow and pulse. */
 @keyframes function-line-selected-glow{
-  0%,100%{stroke-width:2.2;filter:drop-shadow(0 0 2px #fff6cc) drop-shadow(0 0 7px #e8bf46) drop-shadow(0 0 12px #c5a34d)}
-  50%{stroke-width:3;filter:drop-shadow(0 0 4px #fff7d2) drop-shadow(0 0 12px #f1c94f) drop-shadow(0 0 22px #d6ad3f)}
+  0%,100%{stroke-opacity:.78}
+  50%{stroke-opacity:1}
 }
-#fungsi .function-line.sel{stroke:#f7d76e!important;stroke-width:2.6;stroke-dashoffset:0!important;opacity:1!important;filter:drop-shadow(0 0 3px #fff6cc) drop-shadow(0 0 10px #e8bf46) drop-shadow(0 0 18px #c5a34d);animation:function-line-selected-glow 1.5s ease-in-out infinite!important}
-@media(prefers-reduced-motion:reduce){#fungsi .function-line.sel{animation:none!important;stroke-width:2.8!important;filter:drop-shadow(0 0 3px #fff6cc) drop-shadow(0 0 14px #e8bf46)!important}}
+#fungsi .function-line.sel{stroke:#f7d76e!important;stroke-width:2.6;stroke-dashoffset:0!important;opacity:1!important;filter:none!important;animation:function-line-selected-glow 1.8s ease-in-out infinite!important}
+#fungsi .function-flow-particle.sel{filter:none!important}
+@media(min-width:701px){#fungsi .function-node:hover,#fungsi .function-node[aria-pressed=true],#fungsi .function-node.sel{transform:translate(-50%,-50%)!important}}
+@media(prefers-reduced-motion:reduce){#fungsi .function-line.sel{animation:none!important;stroke-width:2.8!important;filter:none!important}}
+
 
 /* Connector travel lights: pages 5–7 and 10. */
 @keyframes connector-light-x{0%{opacity:0;transform:translate(0,-50%) scale(.6)}14%{opacity:1;transform:translate(0,-50%) scale(1)}84%{opacity:1;transform:translate(var(--connector-distance),-50%) scale(.92)}100%{opacity:0;transform:translate(var(--connector-distance),-50%) scale(.55)}}
