@@ -2246,7 +2246,7 @@ main>.page:not(#utama) .page-inner>h2{
 #kota-suci .city-story.is-gsap-layout.is-revealed .city-item .city-image {
   transition:none!important;
 }
-#kota-suci .city-story.is-gsap-layout .city-item::before { animation:none!important; }
+#kota-suci .city-story.is-gsap-layout .city-item::before { animation:none!important;transform:translateY(-5px)!important; }
 #kota-suci .city-story.is-gsap-layout .city-item { will-change:transform,width,height,opacity; }
 
 /* GSAP scroll reveals replace the page's CSS entrance transition while active. */
