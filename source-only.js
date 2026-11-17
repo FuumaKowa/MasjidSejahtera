@@ -60,24 +60,81 @@ const portfolioRoot = document.querySelector('#portfolio .portfolio-role-map');
 
 const functionRoot = document.getElementById('fungsi');
 const functionLines = [...(functionRoot?.querySelectorAll('.function-line') || [])];
+const functionMap = functionRoot?.querySelector('.function-map');
+const functionSvg = functionMap?.querySelector(':scope > svg');
 const functionFlowParticles = [];
-if (functionRoot && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const svg = functionRoot.querySelector('.function-map > svg');
+const functionEndpoints = [];
+if (functionRoot) {
   const svgNs = 'http://www.w3.org/2000/svg';
   functionLines.forEach((line, index) => {
-    const particle = document.createElementNS(svgNs, 'circle');
-    particle.setAttribute('class', 'function-flow-particle');
-    particle.dataset.connectorIndex = String(index);
-    particle.setAttribute('r', '1.25');
-    particle.setAttribute('aria-hidden', 'true');
-    const motion = document.createElementNS(svgNs, 'animateMotion');
-    motion.setAttribute('dur', `${3.2 + (index % 3) * 0.3}s`);
-    motion.setAttribute('begin', `${index * 0.35}s`);
-    motion.setAttribute('repeatCount', 'indefinite');
-    motion.setAttribute('path', line.getAttribute('d'));
-    particle.append(motion);
-    svg?.append(particle);
-    functionFlowParticles.push(particle);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const particle = document.createElementNS(svgNs, 'circle');
+      particle.setAttribute('class', 'function-flow-particle');
+      particle.dataset.connectorIndex = String(index);
+      particle.setAttribute('r', '1.25');
+      particle.setAttribute('aria-hidden', 'true');
+      const motion = document.createElementNS(svgNs, 'animateMotion');
+      motion.setAttribute('dur', `${3.2 + (index % 3) * 0.3}s`);
+      motion.setAttribute('begin', `${index * 0.35}s`);
+      motion.setAttribute('repeatCount', 'indefinite');
+      motion.setAttribute('path', line.getAttribute('d'));
+      particle.append(motion);
+      functionSvg?.append(particle);
+      functionFlowParticles.push(particle);
+    }
+    const endpoint = document.createElementNS(svgNs, 'circle');
+    endpoint.setAttribute('class', 'function-endpoint');
+    endpoint.setAttribute('r', '0.82');
+    endpoint.setAttribute('aria-hidden', 'true');
+    functionSvg?.append(endpoint);
+    functionEndpoints.push(endpoint);
+  });
+}
+const drawFunctionConnectors = () => {
+  if (!functionMap || !functionSvg || !functionLines.length) return;
+  const mapBox = functionMap.getBoundingClientRect();
+  if (mapBox.width < 1 || mapBox.height < 1) return;
+  const scaleX = 100 / mapBox.width;
+  const scaleY = 56.25 / mapBox.height;
+  const hub = functionSvg.querySelector('circle:not(.function-halo)');
+  const hubX = Number(hub?.getAttribute('cx') || 49.5);
+  const hubY = Number(hub?.getAttribute('cy') || 18.6);
+  const hubRadius = Number(hub?.getAttribute('r') || 8) + .3;
+  const nodeClasses = ['function-knowledge','function-worship','function-education','function-consensus','function-economy'];
+  nodeClasses.forEach((className, index) => {
+    const node = functionMap.querySelector(`.${className}`);
+    const line = functionLines[index];
+    const endpoint = functionEndpoints[index];
+    if (!node || !line || !endpoint) return;
+    const box = node.getBoundingClientRect();
+    const end = {
+      x: (box.left + box.width / 2 - mapBox.left) * scaleX,
+      y: (box.top - mapBox.top) * scaleY
+    };
+    const dx = end.x - hubX;
+    const dy = end.y - hubY;
+    const distance = Math.hypot(dx, dy) || 1;
+    const start = { x: hubX + dx / distance * hubRadius, y: hubY + dy / distance * hubRadius };
+    const verticalReach = Math.min(5, Math.abs(dy) * .35);
+    const control1 = { x: start.x + dx * .42, y: start.y + dy * .08 };
+    const control2 = { x: end.x - dx * .08, y: end.y - Math.sign(dy || 1) * verticalReach };
+    const path = `M${start.x.toFixed(2)} ${start.y.toFixed(2)} C${control1.x.toFixed(2)} ${control1.y.toFixed(2)} ${control2.x.toFixed(2)} ${control2.y.toFixed(2)} ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
+    line.setAttribute('d', path);
+    const motion = functionFlowParticles[index]?.querySelector('animateMotion');
+    motion?.setAttribute('path', path);
+    endpoint.setAttribute('cx', end.x.toFixed(2));
+    endpoint.setAttribute('cy', end.y.toFixed(2));
+  });
+};
+if (functionMap) {
+  drawFunctionConnectors();
+  if (window.ResizeObserver) new ResizeObserver(drawFunctionConnectors).observe(functionMap);
+  window.addEventListener('resize', drawFunctionConnectors, { passive: true });
+  if (document.fonts?.ready) document.fonts.ready.then(drawFunctionConnectors);
+  functionMap.querySelectorAll('.function-node').forEach((node) => {
+    ['pointerenter','pointerleave','focus','blur','transitionend'].forEach((eventName) => {
+      node.addEventListener(eventName, drawFunctionConnectors);
+    });
   });
 }
 
@@ -440,6 +497,7 @@ document.addEventListener('click', (event) => {
     const line = lines[lineIndex];
     const particle = functionFlowParticles[lineIndex];
     selectDiagramItems([...nodes,...lines,...functionFlowParticles],[functionNode,line,particle],nodes);
+    requestAnimationFrame(drawFunctionConnectors);
     return;
   }
   const stageControl = event.target.closest('#aliran .stage-node,#aliran .stage-co');
