@@ -19,10 +19,10 @@ main{display:block}
 .pdf-page h2>span b{font-family:Amiri,serif;font-size:1.15em}
 .pdf-page h3{margin:0 0 18px;color:var(--teal);font-size:clamp(20px,2vw,29px)}
 .pdf-page h4{margin:0 0 12px;color:var(--teal);font-size:clamp(16px,1.5vw,22px)}
-.cover{min-height:100svh;padding:var(--header-height) 0 0;display:grid;grid-template-columns:minmax(360px, .72fr) minmax(0,1fr);background:var(--teal);color:white}
-.cover-copy{position:relative;z-index:1;padding:clamp(36px,7vw,110px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:var(--teal);color:var(--paper)}
+.cover{min-height:100svh;padding:var(--header-height) 0 0;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);background:var(--teal);color:white}
+.cover-copy{position:relative;z-index:1;min-width:0;padding:clamp(32px,5vw,74px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:var(--teal);color:var(--paper)}
 .cover-copy::before{content:"";position:absolute;top:0;bottom:0;left:clamp(18px,2vw,30px);width:5px;background:var(--gold)}
-.cover h1{margin:0 0 20px;font-size:clamp(58px,8vw,112px);line-height:.94;letter-spacing:-.055em}
+.cover h1{margin:0 0 20px;font-size:clamp(48px,5.2vw,86px);line-height:.94;letter-spacing:-.055em}
 .cover p{max-width:450px;margin:0;font-size:clamp(17px,1.6vw,24px);line-height:1.45}
 .cover-photo{min-height:calc(100svh - var(--header-height));background:url('assets/experience/courtyard-arrival.jpg') center/cover no-repeat}
 .city-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
