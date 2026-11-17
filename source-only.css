@@ -1068,6 +1068,14 @@ html,body{max-width:100%;overflow-x:clip}
 }
 @media(prefers-reduced-motion:reduce){#hubungi .whatsapp-cta,#hubungi .whatsapp-arrow{transition:none}}
 
+/* Keep the Page 10 diagram and caption inside the viewport, with connectors anchored to card edges. */
+#fungsi.page{padding-top:calc(var(--header) + clamp(14px,2.8vh,30px));padding-bottom:clamp(14px,2vh,22px)}
+#fungsi .function-map{width:min(100%,1500px,calc((100svh - var(--header) - 170px)*1.77778));margin-top:clamp(8px,1.2vh,14px)}
+#fungsi .function-node{padding:clamp(7px,.8vw,14px) 8px;font-size:clamp(15px,1.3vw,22px)}
+#fungsi .function-caption{font-size:clamp(15px,1.35vw,21px)}
+#fungsi .function-endpoint{fill:#fff8dc;stroke:#b88d2e;stroke-width:.22;pointer-events:none}
+@media(max-width:700px){#fungsi.page{padding-top:24px;padding-bottom:28px}#fungsi .function-map{width:100%;margin-top:16px}#fungsi .function-node{padding:12px 10px;font-size:clamp(15px,4.2vw,17px)}#fungsi .function-caption{font-size:16px}}
+
 /* Shared mosque image with a translucent green wash on every middle page. */
 main>.page:not(#utama){
   background-color:#092b26!important;
