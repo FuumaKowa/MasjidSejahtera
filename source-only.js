@@ -62,6 +62,8 @@ const functionRoot = document.getElementById('fungsi');
 const functionLines = [...(functionRoot?.querySelectorAll('.function-line') || [])];
 const functionMap = functionRoot?.querySelector('.function-map');
 const functionSvg = functionMap?.querySelector(':scope > svg');
+const functionNodeClasses = ['function-knowledge','function-worship','function-education','function-consensus','function-economy'];
+const functionNodesByConnector = functionNodeClasses.map((className) => functionMap?.querySelector(`.${className}`));
 const functionFlowParticles = [];
 const functionEndpoints = [];
 if (functionRoot) {
@@ -100,12 +102,11 @@ const drawFunctionConnectors = () => {
   const hubX = Number(hub?.getAttribute('cx') || 49.5);
   const hubY = Number(hub?.getAttribute('cy') || 18.6);
   const hubRadius = Number(hub?.getAttribute('r') || 8) + .3;
-  const nodeClasses = ['function-knowledge','function-worship','function-education','function-consensus','function-economy'];
-  nodeClasses.forEach((className, index) => {
-    const node = functionMap.querySelector(`.${className}`);
+  // Read every card position before writing SVG attributes to avoid repeated layout flushes.
+  const paths = functionNodesByConnector.map((node, index) => {
     const line = functionLines[index];
     const endpoint = functionEndpoints[index];
-    if (!node || !line || !endpoint) return;
+    if (!node || !line || !endpoint) return null;
     const box = node.getBoundingClientRect();
     const end = {
       x: (box.left + box.width / 2 - mapBox.left) * scaleX,
@@ -118,25 +119,43 @@ const drawFunctionConnectors = () => {
     const verticalReach = Math.min(5, Math.abs(dy) * .35);
     const control1 = { x: start.x + dx * .42, y: start.y + dy * .08 };
     const control2 = { x: end.x - dx * .08, y: end.y - Math.sign(dy || 1) * verticalReach };
-    const path = `M${start.x.toFixed(2)} ${start.y.toFixed(2)} C${control1.x.toFixed(2)} ${control1.y.toFixed(2)} ${control2.x.toFixed(2)} ${control2.y.toFixed(2)} ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
-    line.setAttribute('d', path);
-    const motion = functionFlowParticles[index]?.querySelector('animateMotion');
-    motion?.setAttribute('path', path);
-    endpoint.setAttribute('cx', end.x.toFixed(2));
-    endpoint.setAttribute('cy', end.y.toFixed(2));
+    return {
+      line,
+      endpoint,
+      motion: functionFlowParticles[index]?.querySelector('animateMotion'),
+      endX: end.x.toFixed(2),
+      endY: end.y.toFixed(2),
+      path: `M${start.x.toFixed(2)} ${start.y.toFixed(2)} C${control1.x.toFixed(2)} ${control1.y.toFixed(2)} ${control2.x.toFixed(2)} ${control2.y.toFixed(2)} ${end.x.toFixed(2)} ${end.y.toFixed(2)}`
+    };
+  });
+  paths.forEach((geometry) => {
+    if (!geometry) return;
+    const {line,endpoint,motion,path,endX,endY}=geometry;
+    if (line.getAttribute('d') !== path) line.setAttribute('d', path);
+    if (motion?.getAttribute('path') !== path) motion?.setAttribute('path', path);
+    if (endpoint.getAttribute('cx') !== endX) endpoint.setAttribute('cx', endX);
+    if (endpoint.getAttribute('cy') !== endY) endpoint.setAttribute('cy', endY);
   });
 };
 if (functionMap) {
-  drawFunctionConnectors();
-  if (window.ResizeObserver) new ResizeObserver(drawFunctionConnectors).observe(functionMap);
-  window.addEventListener('resize', drawFunctionConnectors, { passive: true });
-  if (document.fonts?.ready) document.fonts.ready.then(drawFunctionConnectors);
-  functionMap.querySelectorAll('.function-node').forEach((node) => {
-    ['pointerenter','pointerleave','focus','blur','transitionend'].forEach((eventName) => {
-      node.addEventListener(eventName, drawFunctionConnectors);
+  let connectorFrame = 0;
+  const scheduleFunctionConnectors = () => {
+    if (connectorFrame) return;
+    connectorFrame = requestAnimationFrame(() => {
+      connectorFrame = 0;
+      drawFunctionConnectors();
     });
-  });
+  };
+  scheduleFunctionConnectors();
+  if (window.ResizeObserver) {
+    const connectorObserver = new ResizeObserver(scheduleFunctionConnectors);
+    connectorObserver.observe(functionMap);
+    functionNodesByConnector.forEach((node) => { if (node) connectorObserver.observe(node); });
+  }
+  window.addEventListener('resize', scheduleFunctionConnectors, { passive: true });
+  if (document.fonts?.ready) document.fonts.ready.then(scheduleFunctionConnectors);
 }
+
 
 const flowMotionReduced = matchMedia('(prefers-reduced-motion: reduce)');
 const flowDiagrams = [
